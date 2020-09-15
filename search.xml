@@ -1087,61 +1087,6 @@
 <td align="center">所有数据都在数据库中</td>
 </tr>
 </tbody></table>
-<h1 id="ETL过程详解"><a href="#ETL过程详解" class="headerlink" title="ETL过程详解"></a>ETL过程详解</h1><p>ETL过程详解转载自：<a href="https://blog.csdn.net/weixin_34220179/article/details/85952403" target="_blank" rel="noopener">https://blog.csdn.net/weixin_34220179/article/details/85952403</a></p>
-<h2 id="数据抽取"><a href="#数据抽取" class="headerlink" title="数据抽取"></a>数据抽取</h2><p>这一部分需要在调研阶段做大量的工作，首先要搞清楚数据是从几个业务系统中来,各个业务系统的数据库服务器运行什么DBMS,是否存在手工数据，手工数据量有多大，是否存在非结构化的数据等等，当收集完这些信息之后才可以进行数据抽取的设计。</p>
-<p><strong>1、对于与存放DW的数据库系统相同的数据源处理方法</strong></p>
-<p>这一类数据源在设计上比较容易。一般情况下，DBMS(SQLServer、Oracle)都会提供数据库链接功能，在DW数据库服务器和原业务系统之间建立直接的链接关系就可以写Select 语句直接访问。</p>
-<p><strong>2、对于与DW数据库系统不同的数据源的处理方法</strong></p>
-<p>对于这一类数据源，一般情况下也可以通过ODBC的方式建立数据库链接——如SQL Server和Oracle之间。如果不能建立数据库链接，可以有两种方式完成，一种是通过工具将源数据导出成.txt或者是.xls文件，然后再将这些源系统文件导入到ODS中。另外一种方法是通过程序接口来完成。</p>
-<p><strong>3、对于文件类型数据源(.txt,.xls)</strong>，可以培训业务人员利用数据库工具将这些数据导入到指定的数据库，然后从指定的数据库中抽取。或者还可以借助工具实现。</p>
-<p><strong>4、增量更新的问题</strong></p>
-<p>对于数据量大的系统，必须考虑增量抽取。一般情况下，业务系统会记录业务发生的时间，我们可以用来做增量的标志,每次抽取之前首先判断ODS中记录最大的时间，然后根据这个时间去业务系统取大于这个时间所有的记录。利用业务系统的时间戳，一般情况下，业务系统没有或者部分有时间戳。</p>
-<h2 id="数据的清洗转换"><a href="#数据的清洗转换" class="headerlink" title="数据的清洗转换"></a>数据的清洗转换</h2><p>ETL在转化的过程中，主要体现在：</p>
-<p><strong>空值处理</strong>：可捕获字段空值，进行加载或替换为其他含义数据，并可根据字段空值实现分流加载到不同目标库。</p>
-<p><strong>规范化数据格式</strong>：可实现字段格式约束定义，对于数据源中时间、数值、字符等数据，可自定义加载格式。</p>
-<p><strong>拆分数据</strong>：依据业务需求对字段可进行分解。例，主叫号 861082585313-8148，可进行区域码和电话号码分解。</p>
-<p><strong>验证数据正确性</strong>：可利用Lookup及拆分功能进行数据验证。例如，主叫号861082585313-8148，进行区域码和电话号码分解后，可利用Lookup返回主叫网关或交换机记载的主叫地区，进行数据验证。</p>
-<p><strong>数据替换</strong>：对于因业务因素，可实现无效数据、缺失数据的替换。<br>Lookup：查获丢失数据 Lookup实现子查询，并返回用其他手段获取的缺失字段，保证字段完整性。</p>
-<p><strong>建立ETL过程的主外键约束</strong>：对无依赖性的非法数据，可替换或导出到错误数据文件中，保证主键唯一记录的加载。</p>
-<p>ETL在转化的体现转载自：<a href="https://www.cnblogs.com/Jesse-Li/p/8821893.html" target="_blank" rel="noopener">https://www.cnblogs.com/Jesse-Li/p/8821893.html</a></p>
-<p>—————————————————————————————————————</p>
-<h3 id="1、数据清洗"><a href="#1、数据清洗" class="headerlink" title="1、数据清洗"></a>1、数据清洗</h3><p>数据清洗的任务是过滤那些不符合要求的数据，将过滤的结果交给业务主管部门，确认是否过滤掉还是由业务单位修正之后再进行抽取。</p>
-<p><strong>不符合要求的数据主要是有不完整的数据、错误的数据、重复的数据三大类。</strong></p>
-<p>(1)不完整的数据：这一类数据主要是一些应该有的信息缺失，如供应商的名称、分公司的名称、客户的区域信息缺失、业务系统中主表与明细表不能匹配等。对于这一类数据过滤出来，按缺失的内容分别写入不同Excel文件向客户提交，要求在规定的时间内补全。补全后才写入数据仓库。</p>
-<p>(2)错误的数据：这一类错误产生的原因是业务系统不够健全，在接收输入后没有进行判断直接写入后台数据库造成的，比如数值数据输成全角数字字符、字符串数据后面有一个回车操作、日期格式不正确、日期越界等。这一类数据也要分类，对于类似于全角字符、数据前后有不可见字符的问题，<strong>只能通过写SQL语句的方式找出来，然后要求客户在业务系统修正之后抽取</strong>。日期格式不正确的或者是日期越界的这一类错误会导致ETL运行失败，这一类错误需要去业务系统数据库用SQL的方式挑出来，交给业务主管部门要求限期修正，修正之后再抽取。</p>
-<p>(3)重复的数据：对于这一类数据——特别是维表中会出现这种情况——将重复数据记录的所有字段导出来，让客户确认并整理。</p>
-<p>数据清洗是一个反复的过程，不可能在几天内完成，只有不断的发现问题，解决问题。对于是否过滤，是否修正一般要求客户确认，对于过滤掉的数据，写入Excel文件或者将过滤数据写入数据表，在ETL开发的初期可以每天向业务单位发送过滤数据的邮件，促使他们尽快地修正错误,同时也可以做为将来验证数据的依据。数据清洗需要注意的是不要将有用的数据过滤掉，对于每个过滤规则认真进行验证，并要用户确认。</p>
-<h3 id="2、数据转换"><a href="#2、数据转换" class="headerlink" title="2、数据转换"></a>2、数据转换</h3><p>数据转换的任务主要进行不一致的数据转换、数据粒度的转换，以及一些商务规则的计算。</p>
-<p>(1)不一致数据转换：这个过程是一个整合的过程，将不同业务系统的相同类型的数据统一，比如同一个供应商在结算系统的编码是XX0001,而在CRM中编码是YY0001，这样在抽取过来之后统一转换成一个编码。</p>
-<p>(2)数据粒度的转换：<strong>业务系统一般存储非常明细的数据，而数据仓库中数据是用来分析的，不需要非常明细的数据。一般情况下，</strong>会将业务系统数据按照数据仓库粒度进行聚合。</p>
-<p>(3)<strong>商务规则的计算</strong>：不同的企业有不同的业务规则、不同的数据指标，这些指标有的时候不是简单的加加减减就能完成，这个时候需要在ETL中将这些数据指标计算好了之后存储在数据仓库中，以供分析使用。</p>
-<h2 id="数据的加载"><a href="#数据的加载" class="headerlink" title="数据的加载"></a>数据的加载</h2><p>暂无</p>
-<h1 id="ETL日志、警告发送"><a href="#ETL日志、警告发送" class="headerlink" title="ETL日志、警告发送"></a>ETL日志、警告发送</h1><h2 id="ETL日志"><a href="#ETL日志" class="headerlink" title="ETL日志"></a>ETL日志</h2><p>记录日志的目的是随时可以知道ETL运行情况，如果出错了，可以知道哪里出错。</p>
-<p>ETL日志分为三类：</p>
-<p>1、执行过程日志，这一部分日志是在ETL执行过程中每执行一步的记录，记录每次运行每一步骤的起始时间，影响了多少行数据，流水账形式。</p>
-<p>2、错误日志，当某个模块出错的时候写错误日志，记录每次出错的时间、出错的模块以及出错的信息等。</p>
-<p>3、日志是总体日志，只记录ETL开始时间、结束时间是否成功信息。如果使用ETL工具,ETL工具会自动产生一些日志，这一类日志也可以作为ETL日志的一部分。</p>
-<h2 id="警告发送"><a href="#警告发送" class="headerlink" title="警告发送"></a>警告发送</h2><p>如果ETL出错了，不仅要形成ETL出错日志，而且要向系统管理员发送警告。发送警告的方式多种，一般常用的就是给系统管理员发送邮件，并附上出错的信息，方便管理员排查错误。</p>
-<h1 id="ELT工具"><a href="#ELT工具" class="headerlink" title="ELT工具"></a>ELT工具</h1><h2 id="选择依据"><a href="#选择依据" class="headerlink" title="选择依据"></a>选择依据</h2><p>对平台的支持程度</p>
-<p>抽取和装载的性能是不是较高，且对业务系统的性能影响大不大，侵入性高不高</p>
-<p>对数据源的支持程度</p>
-<p>是否具有良好的集成性和开放性</p>
-<p>数据转换和加工的功能强不强</p>
-<p>是否具有管理和调度的功能</p>
-<h2 id="常见工具"><a href="#常见工具" class="headerlink" title="常见工具"></a>常见工具</h2><ol>
-<li><p>datastage</p>
-</li>
-<li><p>informatica</p>
-</li>
-<li><p>kettle</p>
-</li>
-<li><p>ODI</p>
-</li>
-<li><p>5.Cognos</p>
-</li>
-<li><p>beeload</p>
-</li>
-</ol>
 ]]></content>
       <categories>
         <category>大数据</category>
@@ -1159,28 +1104,27 @@
   <entry>
     <title>SparkStreaming</title>
     <url>/bigdata/SparkStreaming/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p><img src="/2020/03/11/SparkStreaming/SparkStreaming-logo.jpg" alt="SparkStreaming-logo"></p>
-<h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>Spark Streaming是微批次处理方式，批处理间隔是Spark Streaming是的核心概念和关键参数。</p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>Spark Streaming是微批次处理方式，批处理间隔是Spark Streaming是的核心概念和关键参数。</p>
 <p>Spark Streaming需要单独一个节点来接收数据，所以Spark Streaming 至少需要两个节点才能运行</p>
 <h2 id="Spark-Streaming是什么"><a href="#Spark-Streaming是什么" class="headerlink" title="Spark Streaming是什么"></a>Spark Streaming是什么</h2><p>Spark流使得构建可扩展的容错流应用程序变得更加容易。</p>
 <p>Spark Streaming用于流式数据的处理。Spark Streaming支持的数据输入源很多，例如：Kafka、Flume、Twitter、ZeroMQ和简单的TCP套接字等等。数据输入后可以用Spark的高度抽象原语如：map、reduce、join、window等进行运算。而结果也能保存在很多地方，如HDFS，数据库等。</p>
-<p><img src="/2020/03/11/SparkStreaming/SparkStreaming%E5%9B%BE.jpg" alt="SparkStreaming图"></p>
+<p><img src="/bigdata/SparkStreaming/SparkStreaming%E5%9B%BE.jpg" alt="SparkStreaming图"></p>
 <p>和Spark基于RDD的概念很相似，Spark Streaming使用离散化流(discretized stream)作为抽象表示，叫作DStream。DStream 是随时间推移而收到的数据的序列。<strong>在内部，每个时间区间收到的数据都作为 RDD 存在，而DStream是由这些RDD所组成的序列(因此得名“离散化”)。</strong></p>
 <p>离散流反义词就是连续流。</p>
-<p><img src="/2020/03/11/SparkStreaming/SparkStreaming%E5%9B%BE%E8%A7%A3.png" alt="SparkStreaming图解"></p>
+<p><img src="/bigdata/SparkStreaming/SparkStreaming%E5%9B%BE%E8%A7%A3.png" alt="SparkStreaming图解"></p>
 <h2 id="Spark-Streaming的特点"><a href="#Spark-Streaming的特点" class="headerlink" title="Spark Streaming的特点"></a>Spark Streaming的特点</h2><p><strong>易用</strong></p>
-<p><img src="/2020/03/11/SparkStreaming/SparkStreaming5.jpg" alt="SparkStreaming5"></p>
+<p><img src="/bigdata/SparkStreaming/SparkStreaming5.jpg" alt="SparkStreaming5"></p>
 <p><strong>容错</strong></p>
-<p><img src="/2020/03/11/SparkStreaming/SparkStreaming6.jpg" alt="SparkStreaming6"></p>
-<p> <strong>易整合到Spark体系</strong><img src="/2020/03/11/SparkStreaming/SparkStreaming7.jpg" alt="SparkStreaming7"></p>
+<p><img src="/bigdata/SparkStreaming/SparkStreaming6.jpg" alt="SparkStreaming6"></p>
+<p> <strong>易整合到Spark体系</strong><img src="/bigdata/SparkStreaming/SparkStreaming7.jpg" alt="SparkStreaming7"></p>
 <h2 id="Spark-Streaming架构"><a href="#Spark-Streaming架构" class="headerlink" title="Spark Streaming架构"></a>Spark Streaming架构</h2><p>最基本的架构：底层就是spark-core。数据采集和封装之后传给Driver，Driver拿到相应的RDD，再形成一个一个Task然后传给Executor执行。。</p>
 <h3 id="架构图"><a href="#架构图" class="headerlink" title="架构图"></a>架构图</h3><p> 整体架构图</p>
-<p><img src="/2020/03/11/SparkStreaming/SparkStreaming8.jpg" alt="SparkStreaming8"></p>
+<p><img src="/bigdata/SparkStreaming/SparkStreaming8.jpg" alt="SparkStreaming8"></p>
 <p>​                                        spark1.5之前</p>
-<p><img src="/2020/03/11/SparkStreaming/spark1.5%E4%B9%8B%E5%90%8E%E6%9E%B6%E6%9E%84.png" alt="spark1.5之后架构"></p>
+<p><img src="/bigdata/SparkStreaming/spark1.5%E4%B9%8B%E5%90%8E%E6%9E%B6%E6%9E%84.png" alt="spark1.5之后架构"></p>
 <p>​                                       spark1.5之后</p>
 <p>SparkStreaming架构图</p>
-<p><img src="/2020/03/11/SparkStreaming/SparkStreaming9.jpg" alt="SparkStreaming9"></p>
+<p><img src="/bigdata/SparkStreaming/SparkStreaming9.jpg" alt="SparkStreaming9"></p>
 <h3 id="背压机制"><a href="#背压机制" class="headerlink" title="背压机制"></a>背压机制</h3><p>背压(back pressure)机制主要用于解决流处理系统中，业务流量在短时间内剧增，造成巨大的流量毛刺，数据流入速度远高于数据处理速度，对流处理系统构成巨大的负载压力的问题。</p>
 <p>如果不能处理流量毛刺或者持续的数据过高速率输入，可能导致Executor端出现OOM的情况或者任务崩溃。</p>
 <h4 id="Spark-1-5以前版本"><a href="#Spark-1-5以前版本" class="headerlink" title="Spark 1.5以前版本"></a>Spark 1.5以前版本</h4><p>用户如果要限制Receiver的数据接收速率，可以通过设置静态配制参数“spark.streaming.receiver.maxRate”的值来实现（限制每个receiver没每秒最大可以接收的数据量）。此举虽然可以通过限制接收速率，来适配当前的处理能力，防止内存溢出，但也会引入其它问题。比如：producer数据生产高于maxRate，当前集群处理能力也高于maxRate，这就会造成资源利用率下降等问题。</p>
@@ -1191,7 +1135,7 @@
 <h4 id="Spark-1-5以后版本"><a href="#Spark-1-5以后版本" class="headerlink" title="Spark 1.5以后版本"></a>Spark 1.5以后版本</h4><p>为了更好的协调数据接收速率与资源处理能力，1.5版本开始Spark Streaming可以动态控制数据接收速率来适配集群数据处理能力（能够根据当前数据量以及集群状态来预估下个批次最优速率）。背压机制（即Spark Streaming Backpressure）: 根据JobScheduler反馈作业的执行信息来动态调整Receiver数据接收率。</p>
 <p>通过属性“spark.streaming.backpressure.enabled”来控制是否启用backpressure机制，默认值false，即不启用。</p>
 <p><strong><u>以下背压机制spark1.5之后流程以及配置均摘抄自：<a href="https://blog.csdn.net/may_fly/article/details/103922862" target="_blank" rel="noopener">https://blog.csdn.net/may_fly/article/details/103922862</a></u></strong></p>
-<p>新版具体流程如下：<img src="/2020/03/11/SparkStreaming/SparkStreaming3.png" alt="SparkStreaming3"></p>
+<p>新版具体流程如下：<img src="/bigdata/SparkStreaming/SparkStreaming3.png" alt="SparkStreaming3"></p>
 <p>新版的背压机制主要通过<code>RateController</code>组件来实现。<code>RateController</code>继承了接口<code>StreamingListener</code>并实现了<code>onBatchCompleted</code>方法。</p>
 <p>结合direct-approach方式的源码来理解</p>
 <ol>
@@ -1267,11 +1211,11 @@
 <p>hello red</p>
 <p>hello world</p>
 </blockquote>
-<h2 id="WordCount解析"><a href="#WordCount解析" class="headerlink" title="WordCount解析"></a>WordCount解析</h2><p>Discretized Stream是Spark Streaming的基础抽象，代表持续性的数据流和经过各种Spark原语操作后的结果数据流。在内部实现上，<strong>DStream是一系列连续的RDD来表示</strong>。<u>每个RDD含有一段时间间隔内的数据（段时间内所有数据在一个RDD里）。</u><img src="/2020/03/11/SparkStreaming/SparkStreaming10.jpg" alt="SparkStreaming10"></p>
+<h2 id="WordCount解析"><a href="#WordCount解析" class="headerlink" title="WordCount解析"></a>WordCount解析</h2><p>Discretized Stream是Spark Streaming的基础抽象，代表持续性的数据流和经过各种Spark原语操作后的结果数据流。在内部实现上，<strong>DStream是一系列连续的RDD来表示</strong>。<u>每个RDD含有一段时间间隔内的数据（段时间内所有数据在一个RDD里）。</u><img src="/bigdata/SparkStreaming/SparkStreaming10.jpg" alt="SparkStreaming10"></p>
 <p>对数据的操作也是按照RDD为单位来进行的</p>
-<p><img src="/2020/03/11/SparkStreaming/SparkStreaming11.jpg" alt="SparkStreaming11"></p>
+<p><img src="/bigdata/SparkStreaming/SparkStreaming11.jpg" alt="SparkStreaming11"></p>
 <p>计算过程由Spark Engine来完成</p>
-<p><img src="/2020/03/11/SparkStreaming/SparkStreaming12.jpg" alt="SparkStreaming12"></p>
+<p><img src="/bigdata/SparkStreaming/SparkStreaming12.jpg" alt="SparkStreaming12"></p>
 <h1 id="DStream创建"><a href="#DStream创建" class="headerlink" title="DStream创建"></a>DStream创建</h1><h2 id="RDD队列"><a href="#RDD队列" class="headerlink" title="RDD队列"></a>RDD队列</h2><h3 id="Queue"><a href="#Queue" class="headerlink" title="Queue()"></a>Queue()</h3><h4 id="用法及说明"><a href="#用法及说明" class="headerlink" title="用法及说明"></a>用法及说明</h4><p><font color="red">测试过程</font>中，可以通过使用ssc.queueStream(queueOfRDDs)来创建DStream，每一个推送到这个队列中的RDD，都会作为一个DStream处理。</p>
 <h4 id="案例实操"><a href="#案例实操" class="headerlink" title="案例实操"></a>案例实操</h4><p>需求：循环创建几个RDD，将RDD放入队列。通过SparkStream创建Dstream，计算WordCount</p>
 <p>1) 编写代码</p>
@@ -1344,7 +1288,7 @@
 
 <h2 id="Kafka数据源"><a href="#Kafka数据源" class="headerlink" title="Kafka数据源"></a>Kafka数据源</h2><h3 id="版本选型"><a href="#版本选型" class="headerlink" title="版本选型"></a>版本选型</h3><p><strong>ReceiverAPI</strong>：需要一个专门的Executor去接收数据，然后发送给其他的Executor做计算。存在的问题，接收数据的Executor和计算的Executor速度会有所不同，特别在接收数据的Executor速度大于计算的Executor速度，会导致计算数据的节点内存溢出。</p>
 <p><strong>DirectAPI</strong>：是由计算的Executor来主动消费Kafka的数据，速度由自身控制。</p>
-<p> <img src="/2020/03/11/SparkStreaming/SparkStreaming13.jpg" alt="SparkStreaming13"></p>
+<p> <img src="/bigdata/SparkStreaming/SparkStreaming13.jpg" alt="SparkStreaming13"></p>
 <h3 id="Kafka-0-8-Receiver模式"><a href="#Kafka-0-8-Receiver模式" class="headerlink" title="Kafka 0-8 Receiver模式"></a>Kafka 0-8 Receiver模式</h3><p>1） 需求：通过SparkStreaming从Kafka读取数据，并将读取过来的数据做简单计算，最终打印到控制台。</p>
 <p>2）导入依赖</p>
 <figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.spark<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spark-streaming-kafka-0-8_2.11<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.4.5<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
@@ -1874,7 +1818,7 @@
     <url>/bigdata/SparkStreaming-2/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h1 id="DStream转换"><a href="#DStream转换" class="headerlink" title="DStream转换"></a>DStream转换</h1><p>DStream上的操作与RDD的类似，分为Transformations（转换）和Output Operations（输出）两种，此外转换操作中还有一些比较特殊的原语，如：updateStateByKey()、transform()以及各种Window相关的原语。</p>
 <h2 id="无状态转化操作"><a href="#无状态转化操作" class="headerlink" title="无状态转化操作"></a>无状态转化操作</h2><p>无状态转化操作就是把简单的RDD转化操作应用到每个批次上，也就是转化DStream中的每一个RDD。部分无状态转化操作列在了下表中。注意，针对键值对的DStream转化操作(比如 reduceByKey())要添加import StreamingContext._才能在Scala中使用。</p>
-<p><img src="/[object%20Object]/SparkStreaming-2/SparkStreaming14.jpg" alt="SparkStreaming14"></p>
+<p><img src="/bigdata/SparkStreaming-2/SparkStreaming14-1600198878207.jpg" alt="SparkStreaming14"></p>
 <p>需要记住的是，尽管这些函数看起来像作用在整个流上一样，但事实上每个DStream在内部是由许多RDD（批次）组成，且无状态转化操作是分别应用到每个RDD上的。</p>
 <p>例如：reduceByKey()会归约每个时间区间中的数据，但不会归约不同区间之间的数据。</p>
 <h3 id="Transform"><a href="#Transform" class="headerlink" title="Transform"></a>Transform</h3><p>Transform允许DStream上执行任意的RDD-to-RDD函数。即使这些函数并没有在DStream的API中暴露出来，通过该函数可以方便的扩展Spark API。该函数每一批次调度一次。其实也就是对DStream中的RDD应用转换。</p>
@@ -1930,8 +1874,8 @@
 <p><font color="red"><strong>注意：这两者都必须为采集周期大小的整数倍。</strong></font></p>
 <figure class="highlight scala"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">object</span> <span class="title">WorldCount</span> </span>&#123;</span><br><span class="line"></span><br><span class="line"> <span class="function"><span class="keyword">def</span> <span class="title">main</span></span>(args: <span class="type">Array</span>[<span class="type">String</span>]) &#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">val</span> conf = <span class="keyword">new</span> <span class="type">SparkConf</span>().setMaster(<span class="string">"local[2]"</span>).setAppName(<span class="string">"NetworkWordCount"</span>)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">val</span> ssc = <span class="keyword">new</span> <span class="type">StreamingContext</span>(conf, <span class="type">Seconds</span>(<span class="number">3</span>))</span><br><span class="line"></span><br><span class="line">  ssc.checkpoint(<span class="string">"./ck"</span>)</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">  <span class="comment">// Create a DStream that will connect to hostname:port, like localhost:9999</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">val</span> lines = ssc.socketTextStream(<span class="string">"linux1"</span>, <span class="number">9999</span>)</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">  <span class="comment">// Split each line into words</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">val</span> words = lines.flatMap(_.split(<span class="string">" "</span>))</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line"><span class="comment">// Count each word in each batch</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">val</span> pairs = words.map(word =&gt; (word, <span class="number">1</span>))</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">  <span class="keyword">val</span> wordCounts = pairs.reduceByKeyAndWindow((a:<span class="type">Int</span>,b:<span class="type">Int</span>) =&gt; (a + b),<span class="type">Seconds</span>(<span class="number">12</span>), <span class="type">Seconds</span>(<span class="number">6</span>))</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">  <span class="comment">// Print the first ten elements of each RDD generated in this DStream to the console</span></span><br><span class="line"></span><br><span class="line">  wordCounts.print()</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">  ssc.start()       <span class="comment">// Start the computation</span></span><br><span class="line"></span><br><span class="line">  ssc.awaitTermination()  <span class="comment">// Wait for the computation to terminate</span></span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h4 id="窗口"><a href="#窗口" class="headerlink" title="窗口"></a>窗口</h4><p><img src="/[object%20Object]/SparkStreaming-2/image-20200914120823766.png" alt="image-20200914120823766"></p>
-<h4 id="滚动窗口"><a href="#滚动窗口" class="headerlink" title="滚动窗口"></a>滚动窗口</h4><p><img src="/[object%20Object]/SparkStreaming-2/image-20200914120922340.png" alt="image-20200914120922340"></p>
+<h4 id="窗口"><a href="#窗口" class="headerlink" title="窗口"></a>窗口</h4><p><img src="/bigdata/SparkStreaming-2/image-20200914120823766-1600198906010.png" alt="image-20200914120823766"></p>
+<h4 id="滚动窗口"><a href="#滚动窗口" class="headerlink" title="滚动窗口"></a>滚动窗口</h4><p><img src="/bigdata/SparkStreaming-2/image-20200914120922340-1600198907495.png" alt="image-20200914120922340"></p>
 <p>关于Window的操作还有如下方法：</p>
 <p>（1）window(windowLength, slideInterval): 基于对源DStream窗化的批次进行计算返回一个新的Dstream；</p>
 <p>（2）countByWindow(windowLength, slideInterval): 返回一个滑动窗口计数流中的元素个数；</p>
@@ -1942,7 +1886,7 @@
 <figure class="highlight scala"><table><tr><td class="code"><pre><span class="line"><span class="comment">//reduceByKeyAndWindow</span></span><br><span class="line"><span class="keyword">val</span> wordToOne: <span class="type">DStream</span>[(<span class="type">String</span>, <span class="type">Int</span>)] = socketDS.flatMap(_.split(<span class="string">" "</span>)).map((_ , <span class="number">1</span>))</span><br><span class="line"><span class="keyword">val</span> reduceByKeyAndWindowDS: <span class="type">DStream</span>[(<span class="type">String</span>, <span class="type">Int</span>)] = wordToOne.reduceByKeyAndWindow(</span><br><span class="line">  (x: <span class="type">Int</span>, y: <span class="type">Int</span>) =&gt; x + y, <span class="type">Seconds</span>(<span class="number">6</span>), <span class="type">Seconds</span>(<span class="number">3</span>)</span><br><span class="line">)</span><br><span class="line">reduceByKeyAndWindowDS.print()</span><br></pre></td></tr></table></figure>
 
 <p>（5）reduceByKeyAndWindow(func, invFunc, windowLength, slideInterval, [numTasks]): 这个函数是上述函数的变化版本，每个窗口的reduce值都是通过用前一个窗的reduce值来递增计算。通过reduce进入到滑动窗口数据并”反向reduce”离开窗口的旧数据来实现这个操作。一个例子是随着窗口滑动对keys的“加”“减”计数。<strong>通过前边介绍可以想到，这个函数只适用于”可逆的reduce函数”，也就是这些reduce函数有相应的”反reduce”函数(以参数invFunc形式传入)。</strong>如前述函数，reduce任务的数量通过可选参数来配置。</p>
-<p><img src="/[object%20Object]/SparkStreaming-2/SparkStreaming15.jpg" alt="SparkStreaming15"></p>
+<p><img src="/bigdata/SparkStreaming-2/SparkStreaming15-1600198926526.jpg" alt="SparkStreaming15"></p>
 <figure class="highlight scala"><table><tr><td class="code"><pre><span class="line"><span class="keyword">val</span> ipDStream = accessLogsDStream.map(logEntry =&gt; (logEntry.getIpAddress(), <span class="number">1</span>))</span><br><span class="line"><span class="keyword">val</span> ipCountDStream = ipDStream.reduceByKeyAndWindow(</span><br><span class="line"> &#123;(x, y) =&gt; x + y&#125;,</span><br><span class="line"> &#123;(x, y) =&gt; x - y&#125;,</span><br><span class="line"> <span class="type">Seconds</span>(<span class="number">30</span>),</span><br><span class="line"> <span class="type">Seconds</span>(<span class="number">10</span>))</span><br></pre></td></tr></table></figure>
 
 
@@ -2026,6 +1970,73 @@
       </categories>
       <tags>
         <tag>软件安装网址</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>ETL系列二</title>
+    <url>/bigdata/ETL%E7%B3%BB%E5%88%97%E4%BA%8C/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h1 id="ETL过程详解"><a href="#ETL过程详解" class="headerlink" title="ETL过程详解"></a>ETL过程详解</h1><p>ETL过程详解转载自：<a href="https://blog.csdn.net/weixin_34220179/article/details/85952403" target="_blank" rel="noopener">https://blog.csdn.net/weixin_34220179/article/details/85952403</a></p>
+<h2 id="数据抽取"><a href="#数据抽取" class="headerlink" title="数据抽取"></a>数据抽取</h2><p>这一部分需要在调研阶段做大量的工作，首先要搞清楚数据是从几个业务系统中来,各个业务系统的数据库服务器运行什么DBMS,是否存在手工数据，手工数据量有多大，是否存在非结构化的数据等等，当收集完这些信息之后才可以进行数据抽取的设计。</p>
+<p><strong>1、对于与存放DW的数据库系统相同的数据源处理方法</strong></p>
+<p>这一类数据源在设计上比较容易。一般情况下，DBMS(SQLServer、Oracle)都会提供数据库链接功能，在DW数据库服务器和原业务系统之间建立直接的链接关系就可以写Select 语句直接访问。</p>
+<p><strong>2、对于与DW数据库系统不同的数据源的处理方法</strong></p>
+<p>对于这一类数据源，一般情况下也可以通过ODBC的方式建立数据库链接——如SQL Server和Oracle之间。如果不能建立数据库链接，可以有两种方式完成，一种是通过工具将源数据导出成.txt或者是.xls文件，然后再将这些源系统文件导入到ODS中。另外一种方法是通过程序接口来完成。</p>
+<p><strong>3、对于文件类型数据源(.txt,.xls)</strong>，可以培训业务人员利用数据库工具将这些数据导入到指定的数据库，然后从指定的数据库中抽取。或者还可以借助工具实现。</p>
+<p><strong>4、增量更新的问题</strong></p>
+<p>对于数据量大的系统，必须考虑增量抽取。一般情况下，业务系统会记录业务发生的时间，我们可以用来做增量的标志,每次抽取之前首先判断ODS中记录最大的时间，然后根据这个时间去业务系统取大于这个时间所有的记录。利用业务系统的时间戳，一般情况下，业务系统没有或者部分有时间戳。</p>
+<h2 id="数据的清洗转换"><a href="#数据的清洗转换" class="headerlink" title="数据的清洗转换"></a>数据的清洗转换</h2><p>ETL在转化的过程中，主要体现在：</p>
+<p><strong>空值处理</strong>：可捕获字段空值，进行加载或替换为其他含义数据，并可根据字段空值实现分流加载到不同目标库。</p>
+<p><strong>规范化数据格式</strong>：可实现字段格式约束定义，对于数据源中时间、数值、字符等数据，可自定义加载格式。</p>
+<p><strong>拆分数据</strong>：依据业务需求对字段可进行分解。例，主叫号 861082585313-8148，可进行区域码和电话号码分解。</p>
+<p><strong>验证数据正确性</strong>：可利用Lookup及拆分功能进行数据验证。例如，主叫号861082585313-8148，进行区域码和电话号码分解后，可利用Lookup返回主叫网关或交换机记载的主叫地区，进行数据验证。</p>
+<p><strong>数据替换</strong>：对于因业务因素，可实现无效数据、缺失数据的替换。<br>Lookup：查获丢失数据 Lookup实现子查询，并返回用其他手段获取的缺失字段，保证字段完整性。</p>
+<p><strong>建立ETL过程的主外键约束</strong>：对无依赖性的非法数据，可替换或导出到错误数据文件中，保证主键唯一记录的加载。</p>
+<p>ETL在转化的体现转载自：<a href="https://www.cnblogs.com/Jesse-Li/p/8821893.html" target="_blank" rel="noopener">https://www.cnblogs.com/Jesse-Li/p/8821893.html</a></p>
+<p>—————————————————————————————————————</p>
+<h3 id="1、数据清洗"><a href="#1、数据清洗" class="headerlink" title="1、数据清洗"></a>1、数据清洗</h3><p>数据清洗的任务是过滤那些不符合要求的数据，将过滤的结果交给业务主管部门，确认是否过滤掉还是由业务单位修正之后再进行抽取。</p>
+<p><strong>不符合要求的数据主要是有不完整的数据、错误的数据、重复的数据三大类。</strong></p>
+<p>(1)不完整的数据：这一类数据主要是一些应该有的信息缺失，如供应商的名称、分公司的名称、客户的区域信息缺失、业务系统中主表与明细表不能匹配等。对于这一类数据过滤出来，按缺失的内容分别写入不同Excel文件向客户提交，要求在规定的时间内补全。补全后才写入数据仓库。</p>
+<p>(2)错误的数据：这一类错误产生的原因是业务系统不够健全，在接收输入后没有进行判断直接写入后台数据库造成的，比如数值数据输成全角数字字符、字符串数据后面有一个回车操作、日期格式不正确、日期越界等。这一类数据也要分类，对于类似于全角字符、数据前后有不可见字符的问题，<strong>只能通过写SQL语句的方式找出来，然后要求客户在业务系统修正之后抽取</strong>。日期格式不正确的或者是日期越界的这一类错误会导致ETL运行失败，这一类错误需要去业务系统数据库用SQL的方式挑出来，交给业务主管部门要求限期修正，修正之后再抽取。</p>
+<p>(3)重复的数据：对于这一类数据——特别是维表中会出现这种情况——将重复数据记录的所有字段导出来，让客户确认并整理。</p>
+<p>数据清洗是一个反复的过程，不可能在几天内完成，只有不断的发现问题，解决问题。对于是否过滤，是否修正一般要求客户确认，对于过滤掉的数据，写入Excel文件或者将过滤数据写入数据表，在ETL开发的初期可以每天向业务单位发送过滤数据的邮件，促使他们尽快地修正错误,同时也可以做为将来验证数据的依据。数据清洗需要注意的是不要将有用的数据过滤掉，对于每个过滤规则认真进行验证，并要用户确认。</p>
+<h3 id="2、数据转换"><a href="#2、数据转换" class="headerlink" title="2、数据转换"></a>2、数据转换</h3><p>数据转换的任务主要进行不一致的数据转换、数据粒度的转换，以及一些商务规则的计算。</p>
+<p>(1)不一致数据转换：这个过程是一个整合的过程，将不同业务系统的相同类型的数据统一，比如同一个供应商在结算系统的编码是XX0001,而在CRM中编码是YY0001，这样在抽取过来之后统一转换成一个编码。</p>
+<p>(2)数据粒度的转换：<strong>业务系统一般存储非常明细的数据，而数据仓库中数据是用来分析的，不需要非常明细的数据。一般情况下，</strong>会将业务系统数据按照数据仓库粒度进行聚合。</p>
+<p>(3)<strong>商务规则的计算</strong>：不同的企业有不同的业务规则、不同的数据指标，这些指标有的时候不是简单的加加减减就能完成，这个时候需要在ETL中将这些数据指标计算好了之后存储在数据仓库中，以供分析使用。</p>
+<h2 id="数据的加载"><a href="#数据的加载" class="headerlink" title="数据的加载"></a>数据的加载</h2><p>暂无</p>
+<h2 id="ETL日志、警告发送"><a href="#ETL日志、警告发送" class="headerlink" title="ETL日志、警告发送"></a>ETL日志、警告发送</h2><h2 id="ETL日志"><a href="#ETL日志" class="headerlink" title="ETL日志"></a>ETL日志</h2><p>记录日志的目的是随时可以知道ETL运行情况，如果出错了，可以知道哪里出错。</p>
+<p>ETL日志分为三类：</p>
+<p>1、执行过程日志，这一部分日志是在ETL执行过程中每执行一步的记录，记录每次运行每一步骤的起始时间，影响了多少行数据，流水账形式。</p>
+<p>2、错误日志，当某个模块出错的时候写错误日志，记录每次出错的时间、出错的模块以及出错的信息等。</p>
+<p>3、日志是总体日志，只记录ETL开始时间、结束时间是否成功信息。如果使用ETL工具,ETL工具会自动产生一些日志，这一类日志也可以作为ETL日志的一部分。</p>
+<h2 id="警告发送"><a href="#警告发送" class="headerlink" title="警告发送"></a>警告发送</h2><p>如果ETL出错了，不仅要形成ETL出错日志，而且要向系统管理员发送警告。发送警告的方式多种，一般常用的就是给系统管理员发送邮件，并附上出错的信息，方便管理员排查错误。</p>
+<h1 id="ELT工具"><a href="#ELT工具" class="headerlink" title="ELT工具"></a>ELT工具</h1><h2 id="选择依据"><a href="#选择依据" class="headerlink" title="选择依据"></a>选择依据</h2><p>对平台的支持程度</p>
+<p>抽取和装载的性能是不是较高，且对业务系统的性能影响大不大，侵入性高不高</p>
+<p>对数据源的支持程度</p>
+<p>是否具有良好的集成性和开放性</p>
+<p>数据转换和加工的功能强不强</p>
+<p>是否具有管理和调度的功能</p>
+<h2 id="常见工具"><a href="#常见工具" class="headerlink" title="常见工具"></a>常见工具</h2><ol>
+<li><p>datastage</p>
+</li>
+<li><p>informatica</p>
+</li>
+<li><p>kettle</p>
+</li>
+<li><p>ODI</p>
+</li>
+<li><p>5.Cognos</p>
+</li>
+<li><p>beeload</p>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>大数据</category>
+      </categories>
+      <tags>
+        <tag>ETL</tag>
+        <tag>常用名词介绍</tag>
       </tags>
   </entry>
 </search>
