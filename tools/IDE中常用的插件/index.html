@@ -1,0 +1,748 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>IDE中常用的插件 | RedLeavesBlog</title><meta name="keywords" content="IDE中常用的插件 git"><meta name="author" content="Snow Monster"><meta name="copyright" content="Snow Monster"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><meta name="description" content="IDE中常用的插件第1章 在Eclipse中使用Maven1.1 安装Maven核心程序1) 下载地址：http:&#x2F;&#x2F;maven.apache.org&#x2F; 2) 检查JAVA_HOME环境变量。Maven是使用Java开发的，所以必须知道当前系统环境中JDK的安装目录。 C:\Users\red&gt;echo %JAVA_HOME%D:\Java\jdk1.8.0_111 3) 解压Maven的核">
+<meta property="og:type" content="article">
+<meta property="og:title" content="IDE中常用的插件">
+<meta property="og:url" content="http://www.red0819.top/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/index.html">
+<meta property="og:site_name" content="RedLeavesBlog">
+<meta property="og:description" content="IDE中常用的插件第1章 在Eclipse中使用Maven1.1 安装Maven核心程序1) 下载地址：http:&#x2F;&#x2F;maven.apache.org&#x2F; 2) 检查JAVA_HOME环境变量。Maven是使用Java开发的，所以必须知道当前系统环境中JDK的安装目录。 C:\Users\red&gt;echo %JAVA_HOME%D:\Java\jdk1.8.0_111 3) 解压Maven的核">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://www.red0819.top/wordPic/tool-logo.jpg">
+<meta property="article:published_time" content="2020-03-28T11:27:06.000Z">
+<meta property="article:modified_time" content="2020-09-17T11:55:34.439Z">
+<meta property="article:author" content="Snow Monster">
+<meta property="article:tag" content="IDE中常用的插件 git">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://www.red0819.top/wordPic/tool-logo.jpg"><link rel="shortcut icon" href="/img/logo.png"><link rel="canonical" href="http://www.red0819.top/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="yandex-verification" content="{&quot;theme_color&quot;:{&quot;enable&quot;:true,&quot;main&quot;:&quot;\t#191970&quot;,&quot;paginator&quot;:&quot;#00c4b6&quot;,&quot;button_hover&quot;:&quot;#FF7242&quot;,&quot;text_selection&quot;:&quot;#00c4b6&quot;,&quot;link_color&quot;:&quot;#99a9bf&quot;,&quot;meta_color&quot;:&quot;#858585&quot;,&quot;hr_color&quot;:&quot;#A4D8FA&quot;,&quot;code_foreground&quot;:&quot;#F47466&quot;,&quot;code_background&quot;:&quot;rgba(27, 31, 35, .05)&quot;,&quot;toc_color&quot;:&quot;#00c4b6&quot;,&quot;blockquote_padding_color&quot;:&quot;#49b1f5&quot;,&quot;blockquote_background_color&quot;:&quot;#49b1f5&quot;}}"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  hexoversion: '4.2.1',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  ClickShowText: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  justifiedGallery: {
+    js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+    css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+  },
+  baiduPush: false,
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+};
+
+var saveToLocal = {
+  set: function setWithExpiry(key, value, ttl) {
+    const now = new Date()
+    const expiryDay = ttl * 86400000
+    const item = {
+      value: value,
+      expiry: now.getTime() + expiryDay,
+    }
+    localStorage.setItem(key, JSON.stringify(item))
+  },
+
+  get: function getWithExpiry(key) {
+    const itemStr = localStorage.getItem(key)
+
+    if (!itemStr) {
+      return undefined
+    }
+    const item = JSON.parse(itemStr)
+    const now = new Date()
+
+    if (now.getTime() > item.expiry) {
+      localStorage.removeItem(key)
+      return undefined
+    }
+    return item.value
+  }
+}</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isSidebar: true,
+  postUpdate: '2020-09-17 19:55:34'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>var activateDarkMode = function () {
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+  }
+}
+var activateLightMode = function () {
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+  }
+}
+
+var autoChangeMode = 'false'
+var t = saveToLocal.get('theme')
+if (autoChangeMode === '1') {
+  var isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+  var isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+  var isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+  var hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+  if (t === undefined) {
+    if (isLightMode) activateLightMode()
+    else if (isDarkMode) activateDarkMode()
+    else if (isNotSpecified || hasNoSupport) {
+      var now = new Date()
+      var hour = now.getHours()
+      var isNight = hour <= 6 || hour >= 18
+      isNight ? activateDarkMode() : activateLightMode()
+    }
+    window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+      if (saveToLocal.get('theme') === undefined) {
+        e.matches ? activateDarkMode() : activateLightMode()
+      }
+    })
+  } else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else if (autoChangeMode === '2') {
+  now = new Date()
+  hour = now.getHours()
+  isNight = hour <= 6 || hour >= 18
+  if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else {
+  if (t === 'dark') activateDarkMode()
+  else if (t === 'light') activateLightMode()
+}</script><meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="RedLeavesBlog" type="application/atom+xml">
+</head><body><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" src="/img/AF67D2ECB3B0F647193CD90F94294167.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">34</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">标签</div><div class="length_num">16</div></a></div></div><div class="mobile_data_item is-center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">分类</div><div class="length_num">5</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 娱乐</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div id="body-wrap"><div id="web_bg" data-type="photo"></div><div id="sidebar"><i class="fas fa-arrow-right on" id="toggle-sidebar"></i><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#IDE中常用的插件"><span class="toc-number">1.</span> <span class="toc-text">IDE中常用的插件</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#第1章-在Eclipse中使用Maven"><span class="toc-number">1.1.</span> <span class="toc-text">第1章 在Eclipse中使用Maven</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-安装Maven核心程序"><span class="toc-number">1.1.1.</span> <span class="toc-text">1.1 安装Maven核心程序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-配置本地仓库和阿里云镜像"><span class="toc-number">1.1.2.</span> <span class="toc-text">1.2 配置本地仓库和阿里云镜像</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2-1-配置本地仓库"><span class="toc-number">1.1.2.1.</span> <span class="toc-text">1.2.1 配置本地仓库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2-2-配置阿里云镜像"><span class="toc-number">1.1.2.2.</span> <span class="toc-text">1.2.2 配置阿里云镜像</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-在Eclipse中配置Maven"><span class="toc-number">1.1.3.</span> <span class="toc-text">1.3 在Eclipse中配置Maven</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4-在Eclipse中创建Maven项目"><span class="toc-number">1.1.4.</span> <span class="toc-text">1.4 在Eclipse中创建Maven项目</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-4-1-创建Java工程"><span class="toc-number">1.1.4.1.</span> <span class="toc-text">1.4.1 创建Java工程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-4-2-创建Web工程（了解）"><span class="toc-number">1.1.4.2.</span> <span class="toc-text">1.4.2 创建Web工程（了解）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-4-3-创建父工程"><span class="toc-number">1.1.4.3.</span> <span class="toc-text">1.4.3 创建父工程</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-5-在Eclipse中导入Maven项目"><span class="toc-number">1.1.5.</span> <span class="toc-text">1.5 在Eclipse中导入Maven项目</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第2章-在Idea中使用Maven"><span class="toc-number">1.2.</span> <span class="toc-text">第2章 在Idea中使用Maven</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-在Idea中配置Maven"><span class="toc-number">1.2.1.</span> <span class="toc-text">2.1 在Idea中配置Maven</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-1-配置自带的Maven插件"><span class="toc-number">1.2.1.1.</span> <span class="toc-text">2.1.1 配置自带的Maven插件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-2-配置我们自己安装的Maven"><span class="toc-number">1.2.1.2.</span> <span class="toc-text">2.1.2 配置我们自己安装的Maven</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-在Idea中创建Maven项目"><span class="toc-number">1.2.2.</span> <span class="toc-text">2.2 在Idea中创建Maven项目</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-1-创建Java工程"><span class="toc-number">1.2.2.1.</span> <span class="toc-text">2.2.1 创建Java工程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-2-创建Web工程（了解）"><span class="toc-number">1.2.2.2.</span> <span class="toc-text">2.2.2 创建Web工程（了解）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-在Idea中导入Maven项目"><span class="toc-number">1.2.3.</span> <span class="toc-text">2.3 在Idea中导入Maven项目</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第3章-在Eclipse中使用Git"><span class="toc-number">1.3.</span> <span class="toc-text">第3章 在Eclipse中使用Git</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-全局配置"><span class="toc-number">1.3.1.</span> <span class="toc-text">3.1 全局配置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-1-配置用户名和邮箱"><span class="toc-number">1.3.1.1.</span> <span class="toc-text">3.1.1 配置用户名和邮箱</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-2-配置忽略的文件"><span class="toc-number">1.3.1.2.</span> <span class="toc-text">3.1.2 配置忽略的文件</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-创建本地库"><span class="toc-number">1.3.2.</span> <span class="toc-text">3.2 创建本地库</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-1-新建本地库"><span class="toc-number">1.3.2.1.</span> <span class="toc-text">3.2.1 新建本地库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-2-版本间切换"><span class="toc-number">1.3.2.2.</span> <span class="toc-text">3.2.2 版本间切换</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-3-创建分支"><span class="toc-number">1.3.2.3.</span> <span class="toc-text">3.2.3 创建分支</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-4-合并分支"><span class="toc-number">1.3.2.4.</span> <span class="toc-text">3.2.4 合并分支</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-5-解决冲突"><span class="toc-number">1.3.2.5.</span> <span class="toc-text">3.2.5 解决冲突</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-将本地库上传到GitHub"><span class="toc-number">1.3.3.</span> <span class="toc-text">3.3 将本地库上传到GitHub</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-3-1-注册GitHub账号"><span class="toc-number">1.3.3.1.</span> <span class="toc-text">3.3.1 注册GitHub账号</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-3-2-上传本地库"><span class="toc-number">1.3.3.2.</span> <span class="toc-text">3.3.2 上传本地库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-3-3-更新本地库"><span class="toc-number">1.3.3.3.</span> <span class="toc-text">3.3.3 更新本地库</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4-从GitHub上克隆项目到本地"><span class="toc-number">1.3.4.</span> <span class="toc-text">3.4 从GitHub上克隆项目到本地</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-4-1-克隆项目"><span class="toc-number">1.3.4.1.</span> <span class="toc-text">3.4.1 克隆项目</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-4-2-添加合作伙伴"><span class="toc-number">1.3.4.2.</span> <span class="toc-text">3.4.2 添加合作伙伴</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-4-3-非合作伙伴如何共同开发项目"><span class="toc-number">1.3.4.3.</span> <span class="toc-text">3.4.3 非合作伙伴如何共同开发项目</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第4章-在Idea中使用Git"><span class="toc-number">1.4.</span> <span class="toc-text">第4章 在Idea中使用Git</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-安装Git核心程序"><span class="toc-number">1.4.1.</span> <span class="toc-text">4.1 安装Git核心程序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-全局配置"><span class="toc-number">1.4.2.</span> <span class="toc-text">4.2 全局配置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#4-2-1-配置Git核心程序"><span class="toc-number">1.4.2.1.</span> <span class="toc-text">4.2.1 配置Git核心程序</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-2-2-配置GitHub账户"><span class="toc-number">1.4.2.2.</span> <span class="toc-text">4.2.2 配置GitHub账户</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-创建本地库"><span class="toc-number">1.4.3.</span> <span class="toc-text">4.3 创建本地库</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#4-3-1-新建本地库"><span class="toc-number">1.4.3.1.</span> <span class="toc-text">4.3.1 新建本地库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-3-2-版本间切换"><span class="toc-number">1.4.3.2.</span> <span class="toc-text">4.3.2 版本间切换</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-3-3-创建分支"><span class="toc-number">1.4.3.3.</span> <span class="toc-text">4.3.3 创建分支</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-3-4-合并分支"><span class="toc-number">1.4.3.4.</span> <span class="toc-text">4.3.4 合并分支</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-3-5-解决冲突"><span class="toc-number">1.4.3.5.</span> <span class="toc-text">4.3.5 解决冲突</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-4-将本地库上传到GitHub"><span class="toc-number">1.4.4.</span> <span class="toc-text">4.4 将本地库上传到GitHub</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#4-4-1-上传本地库"><span class="toc-number">1.4.4.1.</span> <span class="toc-text">4.4.1 上传本地库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-4-2-更新本地库"><span class="toc-number">1.4.4.2.</span> <span class="toc-text">4.4.2 更新本地库</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-5-从GitHub上克隆项目到本地"><span class="toc-number">1.4.5.</span> <span class="toc-text">4.5 从GitHub上克隆项目到本地</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第5章-国内的项目托管网站-码云"><span class="toc-number">1.5.</span> <span class="toc-text">第5章 国内的项目托管网站-码云</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-简介"><span class="toc-number">1.5.1.</span> <span class="toc-text">5.1 简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2-配置SSH免密登录"><span class="toc-number">1.5.2.</span> <span class="toc-text">5.2 配置SSH免密登录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-3-在Eclipse中通过SSH模式上传项目"><span class="toc-number">1.5.3.</span> <span class="toc-text">5.3 在Eclipse中通过SSH模式上传项目</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-4-在Idea中通过SSH模式上传项目"><span class="toc-number">1.5.4.</span> <span class="toc-text">5.4 在Idea中通过SSH模式上传项目</span></a></li></ol></li></ol></li></ol></div></div></div><header class="post-bg" id="page-header" style="background-image: url(/wordPic/tool-logo.jpg)"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">RedLeavesBlog</a></span><span id="menus"><div id="search_button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 娱乐</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><span class="close" id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></span></span></nav><div id="post-info"><div id="post-title"><div class="posttitle">IDE中常用的插件</div></div><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="fa-fw post-meta-icon far fa-calendar-alt"></i><span class="post-meta-label">发表于</span><time datetime="2020-03-28T11:27:06.000Z" title="undefined 2020-03-28 19:27:06">2020-03-28</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/tools/">工具集</a></span></div><div class="meta-secondline"> <span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">5.9k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>22分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout_post" id="content-inner"><article id="post"><div class="post-content" id="article-container"><h1 id="IDE中常用的插件"><a href="#IDE中常用的插件" class="headerlink" title="IDE中常用的插件"></a>IDE中常用的插件</h1><h2 id="第1章-在Eclipse中使用Maven"><a href="#第1章-在Eclipse中使用Maven" class="headerlink" title="第1章 在Eclipse中使用Maven"></a>第1章 在Eclipse中使用Maven</h2><h3 id="1-1-安装Maven核心程序"><a href="#1-1-安装Maven核心程序" class="headerlink" title="1.1 安装Maven核心程序"></a>1.1 安装Maven核心程序</h3><p>1) 下载地址：<a href="http://maven.apache.org/" target="_blank" rel="noopener">http://maven.apache.org/</a></p>
+<p>2) 检查JAVA_HOME环境变量。Maven是使用Java开发的，所以必须知道当前系统环境中JDK的安装目录。</p>
+<p>C:\Users\red&gt;echo %JAVA_HOME%D:\Java\jdk1.8.0_111</p>
+<p>3) 解压Maven的核心程序。</p>
+<p>将apache-maven-3.6.3-bin.zip解压到一个非中文无空格的目录下。例如：D:\apache-maven-3.6.3</p>
+<p>4) 配置环境变量。</p>
+<table>
+<thead>
+<tr>
+<th>MAVEN_HOME</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>D:\apache-maven-3.6.3</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>path</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>%MAVEN_HOME%\bin</td>
+</tr>
+</tbody></table>
+<p>5) ④查看Maven版本信息验证安装是否正确</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\red&gt;mvn -vApache Maven 3.6.3 (cecedd343002696d0abb50b32b541b8a6ba2883f)Maven home: D:\apache-maven-3.6.3\bin\..Java version: 1.8.0_111, vendor: Oracle Corporation, runtime: D:\Java\jdk1.8.0_111\jreDefault locale: zh_CN, platform encoding: GBKOS name: &quot;windows 10&quot;, version: &quot;10.0&quot;, arch: &quot;amd64&quot;, family: &quot;windows&quot;</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-2-配置本地仓库和阿里云镜像"><a href="#1-2-配置本地仓库和阿里云镜像" class="headerlink" title="1.2 配置本地仓库和阿里云镜像"></a>1.2 配置本地仓库和阿里云镜像</h3><h4 id="1-2-1-配置本地仓库"><a href="#1-2-1-配置本地仓库" class="headerlink" title="1.2.1 配置本地仓库"></a>1.2.1 配置本地仓库</h4><p>1) Maven的核心程序并不包含具体功能，仅负责宏观调度。具体功能由插件来完成。Maven核心程序会到本地仓库中查找插件。如果本地仓库中没有就会从远程中央仓库下载。此时如果不能上网则无法执行Maven的具体功能。为了解决这个问题，我们可以将Maven的本地仓库指向一个在联网情况下下载好的目录。</p>
+<p>2) Maven默认的本地仓库：~.m2\repository目录。</p>
+<p>Tips：~表示当前用户的家目录。</p>
+<p>3) 找到Maven的核心配置文件settings.xml文件：</p>
+<p>解压目录D:\apache-maven-3.6.3\conf\settings.xml</p>
+<p>4) 设置方式</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">localRepository</span>&gt;</span>本地仓库的路径<span class="tag">&lt;/<span class="name">localRepository</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">localRepository</span>&gt;</span>E:\LocalRepository<span class="tag">&lt;/<span class="name">localRepository</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="1-2-2-配置阿里云镜像"><a href="#1-2-2-配置阿里云镜像" class="headerlink" title="1.2.2 配置阿里云镜像"></a>1.2.2 配置阿里云镜像</h4><p>为了下载jar包方便，在Maven的核心配置文件settings.xml文件的<mirrors></mirrors>标签里面配置以下标签：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mirror</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;<span class="name">id</span>&gt;</span>nexus-aliyun<span class="tag">&lt;/<span class="name">id</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;<span class="name">mirrorOf</span>&gt;</span>central<span class="tag">&lt;/<span class="name">mirrorOf</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>Nexus aliyun<span class="tag">&lt;/<span class="name">name</span>&gt;</span>  <span class="tag">&lt;<span class="name">url</span>&gt;</span>http://maven.aliyun.com/nexus/content/groups/public<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mirror</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="1-3-在Eclipse中配置Maven"><a href="#1-3-在Eclipse中配置Maven" class="headerlink" title="1.3 在Eclipse中配置Maven"></a>1.3 在Eclipse中配置Maven</h3><p>Eclipse中默认自带Maven插件，但是自带的Maven插件不能修改本地仓库，所以通常我们不使用自带的Maven，而是使用自己安装的，在Eclipse中配置Maven的步骤如下：</p>
+<p>1) 点击Eclipse中的Window→Preferences</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps1.jpg" alt="img"> </p>
+<p>2) 点开Maven前面的箭头，选择Installations，点击Add…</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps2.jpg" alt="img"> </p>
+<p>3) 点击Directory…选择我们安装的Maven核心程序的根目录，然后点击Finish</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps3.jpg" alt="img"> </p>
+<p>4) 勾上添加的Maven核心程序</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps4.jpg" alt="img"> </p>
+<p>5) 选择Maven下的User Settings，在全局设置哪儿点击Browse…选择Maven核心程序的配置文件settings.xml，本地仓库会自动变为我们在settings.xml文件中设置的路径</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps5.jpg" alt="img"> </p>
+<h3 id="1-4-在Eclipse中创建Maven项目"><a href="#1-4-在Eclipse中创建Maven项目" class="headerlink" title="1.4 在Eclipse中创建Maven项目"></a>1.4 在Eclipse中创建Maven项目</h3><h4 id="1-4-1-创建Java工程"><a href="#1-4-1-创建Java工程" class="headerlink" title="1.4.1 创建Java工程"></a>1.4.1 创建Java工程</h4><p>1) 点击File→New→Maven Project，弹出如下窗口</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps6.jpg" alt="img"> </p>
+<p>2) 点击Next，配置坐标（GAV）及打包方式，然后点击Finish</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps7.jpg" alt="img"> </p>
+<p>3) 创建完工程之后发现默认的JDK的编译版本是1.5，在Maven的核心配置文件settings.xml文件中添加以下配置将编译版本改为1.8，重启Eclipse即可</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">profile</span>&gt;</span> </span><br><span class="line">    <span class="tag">&lt;<span class="name">id</span>&gt;</span>jdk-1.8<span class="tag">&lt;/<span class="name">id</span>&gt;</span> </span><br><span class="line">    <span class="tag">&lt;<span class="name">activation</span>&gt;</span>	</span><br><span class="line">        <span class="tag">&lt;<span class="name">activeByDefault</span>&gt;</span>true<span class="tag">&lt;/<span class="name">activeByDefault</span>&gt;</span>	</span><br><span class="line">        <span class="tag">&lt;<span class="name">jdk</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">jdk</span>&gt;</span> </span><br><span class="line">    <span class="tag">&lt;/<span class="name">activation</span>&gt;</span> </span><br><span class="line">    <span class="tag">&lt;<span class="name">properties</span>&gt;</span>	 </span><br><span class="line">        <span class="tag">&lt;<span class="name">maven.compiler.source</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">maven.compiler.source</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">maven.compiler.target</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">maven.compiler.target</span>&gt;</span>	</span><br><span class="line">        <span class="tag">&lt;<span class="name">maven.compiler.compilerVersion</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">maven.compiler.compilerVersion</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">profile</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>4) 配置Maven的核心配置文件pom.xml文件</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">project</span> <span class="attr">xmlns</span>=<span class="string">**</span>"<span class="attr">http:</span>//<span class="attr">maven.apache.org</span>/<span class="attr">POM</span>/<span class="attr">4.0.0</span>"** <span class="attr">xmlns:xsi</span>=<span class="string">**</span>"<span class="attr">http:</span>//<span class="attr">www.w3.org</span>/<span class="attr">2001</span>/<span class="attr">XMLSchema-instance</span>"** <span class="attr">xsi:schemaLocation</span>=<span class="string">**</span>"<span class="attr">http:</span>//<span class="attr">maven.apache.org</span>/<span class="attr">POM</span>/<span class="attr">4.0.0</span> <span class="attr">https:</span>//<span class="attr">maven.apache.org</span>/<span class="attr">xsd</span>/<span class="attr">maven-4.0.0.xsd</span>"**&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">modelVersion</span>&gt;</span>4.0.0<span class="tag">&lt;/<span class="name">modelVersion</span>&gt;</span> </span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.red.maven<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>Hello<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span> </span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>0.0.1-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;<span class="name">dependencies</span>&gt;</span> 	</span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span> 		</span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span> 		</span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span> 		</span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>4.12<span class="tag">&lt;/<span class="name">version</span>&gt;</span> 		</span><br><span class="line">            <span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span> 	</span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span> </span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">project</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>5) 编写主代码</p>
+<p>在src/main/java目录下创建包并创建Hello.java文件</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.red.maven; </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Hello</span> </span>&#123;	</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">sayHello</span><span class="params">(String name)</span></span>&#123;	    </span><br><span class="line">        <span class="keyword">return</span> <span class="string">"Hello "</span>+name+<span class="string">"!"</span>;	  </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>6) 编写测试代码</p>
+<p>在src/test/java目录下创建包并创建HelloTest.java文件</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.red.maven; </span><br><span class="line"><span class="keyword">import</span> org.junit.Test; </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloTest</span> </span>&#123; </span><br><span class="line">    <span class="meta">@Test</span>	</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testHello</span><span class="params">()</span> </span>&#123;		</span><br><span class="line">        Hello hello = <span class="keyword">new</span> Hello();		</span><br><span class="line">        String maven = hello.sayHello(<span class="string">"Maven"</span>);	</span><br><span class="line">        System.*out\**\***.println(maven);	</span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>7) 使用Maven的方式运行Maven工程</p>
+<p>在工程名Hello或pom.xml上右键→Run As运行Maven项目</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps8.jpg" alt="img"> </p>
+<h4 id="1-4-2-创建Web工程（了解）"><a href="#1-4-2-创建Web工程（了解）" class="headerlink" title="1.4.2 创建Web工程（了解）"></a>1.4.2 创建Web工程（了解）</h4><p>1) 创建简单的Maven工程，打包方式为war包</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps9.jpg" alt="img"> </p>
+<p>2) 创建完成之后因缺少web.xml文件工程出现小红叉</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps10.jpg" alt="img"> </p>
+<p>3) 在工程上右键→Build Path→Configure Build Path…</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps11.jpg" alt="img"> </p>
+<p>4) 点击Project Facets欺骗Eclipse当前工程不是Web工程，点击应用</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps12.jpg" alt="img"> </p>
+<p>5) 再告诉Eclipse当前工程是一个Web工程，点击应用并关闭</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps13.jpg" alt="img"> </p>
+<p>6) 发现MavenWeb工程小红叉消失，并出现了WebContext目录</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps14.jpg" alt="img"> </p>
+<p>7) 在WebContext下创建index.jsp页面并添加Tomcat库</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps15.jpg" alt="img"> </p>
+<p>8) 在MavenWeb上右键→Run As→Run on Server部署到Tomcat上运行</p>
+<h4 id="1-4-3-创建父工程"><a href="#1-4-3-创建父工程" class="headerlink" title="1.4.3 创建父工程"></a>1.4.3 创建父工程</h4><p>​    父工程的打包方式为pom，父工程只需要保留pom.xml文件即可</p>
+<p>1) 创建简单的Maven工程，打包方式选择pom</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps16.jpg" alt="img"> </p>
+<p>2) 在pom.xml文件中通过<dependencyManagement></dependencyManagement>标签进行依赖管理</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">project</span> <span class="attr">xmlns</span>=<span class="string">**</span>"<span class="attr">http:</span>//<span class="attr">maven.apache.org</span>/<span class="attr">POM</span>/<span class="attr">4.0.0</span>"** <span class="attr">xmlns:xsi</span>=<span class="string">**</span>"<span class="attr">http:</span>//<span class="attr">www.w3.org</span>/<span class="attr">2001</span>/<span class="attr">XMLSchema-instance</span>"** <span class="attr">xsi:schemaLocation</span>=<span class="string">**</span>"<span class="attr">http:</span>//<span class="attr">maven.apache.org</span>/<span class="attr">POM</span>/<span class="attr">4.0.0</span> <span class="attr">https:</span>//<span class="attr">maven.apache.org</span>/<span class="attr">xsd</span>/<span class="attr">maven-4.0.0.xsd</span>"**&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">modelVersion</span>&gt;</span>4.0.0<span class="tag">&lt;/<span class="name">modelVersion</span>&gt;</span> </span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.red.maven<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>Parent<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span> </span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>0.0.1-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">packaging</span>&gt;</span>pom<span class="tag">&lt;/<span class="name">packaging</span>&gt;</span> </span><br><span class="line">    <span class="comment">&lt;!-- 依赖管理 --&gt;</span> </span><br><span class="line">    <span class="tag">&lt;<span class="name">dependencyManagement</span>&gt;</span> </span><br><span class="line">    <span class="tag">&lt;<span class="name">dependencies</span>&gt;</span> 		</span><br><span class="line">        <span class="comment">&lt;!-- 在此配置要管理的依赖 --&gt;</span> 	</span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependencyManagement</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">project</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>3) 在子工程中继承父工程</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 继承 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">parent</span>&gt;</span>     </span><br><span class="line">    <span class="comment">&lt;!-- 在此配置父工程的坐标 --&gt;</span>	</span><br><span class="line"><span class="tag">&lt;/<span class="name">parent</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="1-5-在Eclipse中导入Maven项目"><a href="#1-5-在Eclipse中导入Maven项目" class="headerlink" title="1.5 在Eclipse中导入Maven项目"></a>1.5 在Eclipse中导入Maven项目</h3><p>1) 点击File→Import…</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps17.jpg" alt="img"> </p>
+<p>2) 第一次导入手动创建的Maven项目时，由于项目中没有Eclipse生成的一些文件，使用方式一导入时Eclipse认为它不是一个工程</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps18.jpg" alt="img"> </p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps19.jpg" alt="img"> </p>
+<p>3) 所以必须通过方式二导入到Eclipse中</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps20.jpg" alt="img"> </p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps21.jpg" alt="img"> </p>
+<p>4) 导入到Eclipse中之后就会生成一些Eclipse能识别的文件</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps22.jpg" alt="img"> </p>
+<p>5) 有了这些Eclipse能识别的文件之后以后再往Eclipse中导入的时候选择方式一和方式二都可以</p>
+<h2 id="第2章-在Idea中使用Maven"><a href="#第2章-在Idea中使用Maven" class="headerlink" title="第2章 在Idea中使用Maven"></a>第2章 在Idea中使用Maven</h2><h3 id="2-1-在Idea中配置Maven"><a href="#2-1-在Idea中配置Maven" class="headerlink" title="2.1 在Idea中配置Maven"></a>2.1 在Idea中配置Maven</h3><p>​    Idea中也自带Maven插件，而且我们也可以给自带的Maven插件进行配置，所以我们可以使用自带的Maven，也可以使用我们安装的Maven核心程序</p>
+<h4 id="2-1-1-配置自带的Maven插件"><a href="#2-1-1-配置自带的Maven插件" class="headerlink" title="2.1.1 配置自带的Maven插件"></a>2.1.1 配置自带的Maven插件</h4><p>1) Idea自带的Maven在Idea的安装目录的plugins目录中</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps23.jpg" alt="img"> </p>
+<p>2) 在自带的Maven里配置了本地仓库之后打开Idea之后会发现本地仓库自动变成了我们设置的仓库</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps24.jpg" alt="img"> </p>
+<p>3) 设置Maven自动导包</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps25.jpg" alt="img"> </p>
+<h4 id="2-1-2-配置我们自己安装的Maven"><a href="#2-1-2-配置我们自己安装的Maven" class="headerlink" title="2.1.2 配置我们自己安装的Maven"></a>2.1.2 配置我们自己安装的Maven</h4><p>1) 点击工具栏中的Settings</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps26.jpg" alt="img"> </p>
+<p>2) 点击OK保存即可</p>
+<h3 id="2-2-在Idea中创建Maven项目"><a href="#2-2-在Idea中创建Maven项目" class="headerlink" title="2.2 在Idea中创建Maven项目"></a>2.2 在Idea中创建Maven项目</h3><h4 id="2-2-1-创建Java工程"><a href="#2-2-1-创建Java工程" class="headerlink" title="2.2.1 创建Java工程"></a>2.2.1 创建Java工程</h4><p>1) 点击File→New→Module…（如果之前没有Project选Project）→Maven</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps27.jpg" alt="img"> </p>
+<p>2) 点击Next，配置要继承的模块（如果直接创建的是Project不存在这一项）、坐标（GAV）、路径。不同的Idea版本可能有所差别，我使用的是2019.3.3的版本</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps28.jpg" alt="img"> </p>
+<p>3) 点击Finish即可创建成功</p>
+<p>4) 配置Maven的核心配置文件pom.xml</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">**<span class="php"><span class="meta">&lt;?</span>**xml version=<span class="string">"1.0"</span> encoding=<span class="string">"UTF-8"</span>**<span class="meta">?&gt;</span></span>**** **</span><br><span class="line"><span class="tag">&lt;<span class="name">project</span> <span class="attr">xmlns</span>=<span class="string">"http://maven.apache.org/POM/4.0.0"</span>      <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span>      <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;<span class="name">modelVersion</span>&gt;</span>4.0.0<span class="tag">&lt;/<span class="name">modelVersion</span>&gt;</span>   </span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.red.maven<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span>   </span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>Hello<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span>   </span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span>    </span><br><span class="line">    <span class="tag">&lt;<span class="name">dependencies</span>&gt;</span>     </span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span>      </span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span>       </span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span>       </span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>4.12<span class="tag">&lt;/<span class="name">version</span>&gt;</span>       </span><br><span class="line">        <span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span>    </span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span>  </span><br><span class="line"><span class="tag">&lt;/<span class="name">project</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>5) 编写主代码</p>
+<p>在src/main/java目录下创建包并创建Hello.java文件</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.red.maven; </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Hello</span> </span>&#123;   </span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">sayHello</span><span class="params">(String name)</span></span>&#123;    </span><br><span class="line">        <span class="keyword">return</span> <span class="string">"Hello "</span>+name+<span class="string">"!"</span>;  </span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>6) 编写测试代码</p>
+<p>​    在/src/test/java目录下创建包并创建HelloTest.java文件</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.red.maven;  </span><br><span class="line"><span class="keyword">import</span> org.junit.Test;  </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloTest</span> </span>&#123;    </span><br><span class="line">    <span class="meta">@Test</span>   </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testHello</span><span class="params">()</span></span>&#123;     </span><br><span class="line">        Hello hello = <span class="keyword">new</span> Hello();    </span><br><span class="line">        String maven = hello.sayHello(<span class="string">"Maven"</span>);    </span><br><span class="line">        System.*out\**\***.println(maven);  </span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>7) 使用Maven的方式运行Maven工程</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps29.jpg" alt="img"> </p>
+<h4 id="2-2-2-创建Web工程（了解）"><a href="#2-2-2-创建Web工程（了解）" class="headerlink" title="2.2.2 创建Web工程（了解）"></a>2.2.2 创建Web工程（了解）</h4><p>1) 创建简单的Maven工程，打包方式为war包</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.red.maven<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>MavenWeb<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">packaging</span>&gt;</span>war<span class="tag">&lt;/<span class="name">packaging</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>2) 点击Project Structure</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps30.jpg" alt="img"> </p>
+<p>3) 选择对应的Module，设置Web目录</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps31.jpg" alt="img"> </p>
+<p>4) 弹出提示框，选择版本后点击OK</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps32.jpg" alt="img"> </p>
+<p>5) 生成web.xml文件</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps33.jpg" alt="img"> </p>
+<p>6) 设置存放web页面文件的目录后点击OK</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps34.jpg" alt="img"> </p>
+<p>7) 点击OK</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps35.jpg" alt="img"> </p>
+<p>8) 发现项目中多了一个web目录，而且目录上有一个蓝点</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps36.jpg" alt="img"> </p>
+<p>9) 在web目录下创建index.jsp页面</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps37.jpg" alt="img"> </p>
+<p>10) 部署到Tomcat上运行</p>
+<h3 id="2-3-在Idea中导入Maven项目"><a href="#2-3-在Idea中导入Maven项目" class="headerlink" title="2.3 在Idea中导入Maven项目"></a>2.3 在Idea中导入Maven项目</h3><p>1) 点击Project Structure</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps38.jpg" alt="img"> </p>
+<p>2) 点击Modules→➕→Import Module</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps39.jpg" alt="img"> </p>
+<p>3) 找到项目所在的位置</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps40.jpg" alt="img"> </p>
+<p>4) 选择Import module from external model（从外部模型导入模块）→Maven→Finish</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps41.jpg" alt="img"> </p>
+<h2 id="第3章-在Eclipse中使用Git"><a href="#第3章-在Eclipse中使用Git" class="headerlink" title="第3章 在Eclipse中使用Git"></a>第3章 在Eclipse中使用Git</h2><p>​    Eclipse中默认自带了Git插件，通过点击Help→About Eclipse IDE可以查看</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps42.jpg" alt="img"> </p>
+<h3 id="3-1-全局配置"><a href="#3-1-全局配置" class="headerlink" title="3.1 全局配置"></a>3.1 全局配置</h3><h4 id="3-1-1-配置用户名和邮箱"><a href="#3-1-1-配置用户名和邮箱" class="headerlink" title="3.1.1 配置用户名和邮箱"></a>3.1.1 配置用户名和邮箱</h4><p>1) 点击Window→Preferences→Team→Git→Configuration</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps43.jpg" alt="img"> </p>
+<p>2) 点击Add Entry…设置全局用户名和邮箱</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps44.jpg" alt="img"> </p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps45.jpg" alt="img"> </p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps46.jpg" alt="img"> </p>
+<p>3) 点击Apply and Close之后在Windows的用户目录下会生成.gitconfig配置文件</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps47.jpg" alt="img"> </p>
+<h4 id="3-1-2-配置忽略的文件"><a href="#3-1-2-配置忽略的文件" class="headerlink" title="3.1.2 配置忽略的文件"></a>3.1.2 配置忽略的文件</h4><p>1) 在用户目录（其他目录也可以）创建Java.gitignore文件，添加以下内容</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># Compiled class file*.class </span><br><span class="line">    # Log file*.log </span><br><span class="line">    # BlueJ files*.ctxt</span><br><span class="line">    # Mobile Tools for Java (J2ME).mtj.tmp/ </span><br><span class="line">        # Package Files #*.jar*.war*.nar*.ear*.zip*.tar.gz*.rar </span><br><span class="line">        # virtual machine crash logs, see</span><br><span class="line">        http:<span class="comment">//www.java.com/en/download/help/error_hotspot.xmlhs_err_pid* .classpath.project.settingstarget</span></span><br></pre></td></tr></table></figure>
+
+<p>2) 在全局的配置文件.gitconfig文件中添加如下内容</p>
+<blockquote>
+<p>[core]    excludesfile = C:/Users/red/Java.gitignore</p>
+</blockquote>
+<p>3) 文件所在位置图</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps48.jpg" alt="img"> </p>
+<p>4) 重启Eclipse忽略文件Java.gitignore即生效</p>
+<h3 id="3-2-创建本地库"><a href="#3-2-创建本地库" class="headerlink" title="3.2 创建本地库"></a>3.2 创建本地库</h3><h4 id="3-2-1-新建本地库"><a href="#3-2-1-新建本地库" class="headerlink" title="3.2.1 新建本地库"></a>3.2.1 新建本地库</h4><p>1) 创建一个普通的Maven工程</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps49.jpg" alt="img"> </p>
+<p>2) 将Maven工程交给Git管理，即生成.git目录</p>
+<p>在工程上右键→Team→Share Project…</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps50.jpg" alt="img"> </p>
+<p>3) 勾选Use or create repository in parent folder of project 并选中工程</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps51.jpg" alt="img"> </p>
+<p>4) 点击Create Repository按钮生成.git目录</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps52.jpg" alt="img"> </p>
+<p>5) 点击Finish之后发现工程已被Git管理</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps53.jpg" alt="img"> </p>
+<p>6) 可以配置当前工程的用户名和邮箱</p>
+<p>点击Window→Preferences→Team→Git→Configuration→Repository Settings</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps54.jpg" alt="img"> </p>
+<p>7) 点击Add Entry…配置当前工程的用户名和邮箱</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps55.jpg" alt="img"> </p>
+<p>8) 在src/main/java目录下创建包并创建HelloGit.java文件，此时文件只存在于工作区，文件的状态如下图：</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps56.jpg" alt="img"> </p>
+<p>9) 在工程上右键→Team→Add to Index将工程添加到暂存区</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps57.jpg" alt="img"> </p>
+<p>10) 添加到暂存区之后文件的状态如下图：</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps58.jpg" alt="img"> </p>
+<p>11) 在工程上右键→Team→Commit…将工程添加到本地库</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps59.jpg" alt="img"> </p>
+<p>12) 添加注释后点击Commit将工程添加到本地库</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps60.jpg" alt="img"> </p>
+<p>13) 也可以直接点击Commit and Push…添加到本地库后开始上传到项目托管的网站</p>
+<p>14) 工程添加到本地库之后文件的状态如下图：</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps61.jpg" alt="img"> </p>
+<h4 id="3-2-2-版本间切换"><a href="#3-2-2-版本间切换" class="headerlink" title="3.2.2 版本间切换"></a>3.2.2 版本间切换</h4><p>1) 查看历史版本</p>
+<p>在工程上右键→Team→Show in History</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps62.jpg" alt="img"> </p>
+<p>2) 当前版本</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps63.jpg" alt="img"> </p>
+<p>3) 在要切换的版本上右键→Reset→Hard</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps64.jpg" alt="img"> </p>
+<p>4) 切换成功</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps65.jpg" alt="img"> </p>
+<h4 id="3-2-3-创建分支"><a href="#3-2-3-创建分支" class="headerlink" title="3.2.3 创建分支"></a>3.2.3 创建分支</h4><p>1) 在工程上右键→Team→Switch To→New Branch…</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps66.jpg" alt="img"> </p>
+<p>2) 给分支命名</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps67.jpg" alt="img"> </p>
+<p>3) 点击Finish之后自动切换到新的分支</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps68.jpg" alt="img"> </p>
+<p>4) 在新的分支上添加新的内容，添加到暂存区，添加到本地库</p>
+<h4 id="3-2-4-合并分支"><a href="#3-2-4-合并分支" class="headerlink" title="3.2.4 合并分支"></a>3.2.4 合并分支</h4><p>1) 切换到主干</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps69.jpg" alt="img"> </p>
+<p>2) 将分支中的内容合并到主干</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps70.jpg" alt="img"> </p>
+<p>3) 选中分支开始合并</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps71.jpg" alt="img"> </p>
+<p>4) 合并成功</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps72.jpg" alt="img"> </p>
+<h4 id="3-2-5-解决冲突"><a href="#3-2-5-解决冲突" class="headerlink" title="3.2.5 解决冲突"></a>3.2.5 解决冲突</h4><p>​    让主干和分支在同一个位置添加一行代码</p>
+<p>1) 分支添加内容，并添加到暂存区和本地库</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps73.jpg" alt="img"> </p>
+<p>2) 主干添加内容，并添加到暂存区和本地库</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps74.jpg" alt="img"> </p>
+<p>3) 在主干上合并分支，出现冲突</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps75.jpg" alt="img"> </p>
+<p>4) 有效沟通后选择保留的代码，重写添加到暂存区、本地库冲突即可解决</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps76.jpg" alt="img"> </p>
+<h3 id="3-3-将本地库上传到GitHub"><a href="#3-3-将本地库上传到GitHub" class="headerlink" title="3.3 将本地库上传到GitHub"></a>3.3 将本地库上传到GitHub</h3><h4 id="3-3-1-注册GitHub账号"><a href="#3-3-1-注册GitHub账号" class="headerlink" title="3.3.1 注册GitHub账号"></a>3.3.1 注册GitHub账号</h4><p>1) 访问GitHub网站<a href="https://github.com/，首页即是注册页面" target="_blank" rel="noopener">https://github.com/，首页即是注册页面</a></p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps77.jpg" alt="img"> </p>
+<p>2) 输入用户名、邮箱、密码点击注册之后登录邮箱激活即可</p>
+<h4 id="3-3-2-上传本地库"><a href="#3-3-2-上传本地库" class="headerlink" title="3.3.2 上传本地库"></a>3.3.2 上传本地库</h4><p>1) 登录GitHub在首页点击Start a project</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps78.jpg" alt="img"> </p>
+<p>2) 指定仓库的名称和类型</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps79.jpg" alt="img"> </p>
+<p>3) 仓库创建成功</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps80.jpg" alt="img"> </p>
+<p>4) 复制仓库地址</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps81.jpg" alt="img"> </p>
+<p>5) 将本地库上传到GitHub上创建的仓库中</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps82.jpg" alt="img"> </p>
+<p>6) 指定仓库地址、用户名和密码</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps83.jpg" alt="img"> </p>
+<p>7) 点击Preview</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps84.jpg" alt="img"> </p>
+<p>8) 点击Preview开始连接GitHub，然后点击Push开始上传</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps85.jpg" alt="img"> </p>
+<p>9) 上传成功</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps86.jpg" alt="img"> </p>
+<p>10) 查看GitHub仓库</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps87.jpg" alt="img"> </p>
+<h4 id="3-3-3-更新本地库"><a href="#3-3-3-更新本地库" class="headerlink" title="3.3.3 更新本地库"></a>3.3.3 更新本地库</h4><p>​    项目在GitHub上被合作伙伴更新之后，我们就需要将GitHub上最新的代码拉到本地库，否则会上传失败！接下来我们以在GitHub上在线添加内容演示如何更新本地库。</p>
+<p>1) 在GitHub上在线修改文件</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps88.jpg" alt="img"> </p>
+<p>2) 在Eclipse如果不更新本地库直接上传会由于不是最新的版本而被拒绝</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps89.jpg" alt="img"> </p>
+<p>3) 将GitHub上最新的内容Pull下来</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps90.jpg" alt="img"> </p>
+<p>4) 更新本地库成功</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps91.jpg" alt="img"> </p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps92.jpg" alt="img"> </p>
+<h3 id="3-4-从GitHub上克隆项目到本地"><a href="#3-4-从GitHub上克隆项目到本地" class="headerlink" title="3.4 从GitHub上克隆项目到本地"></a>3.4 从GitHub上克隆项目到本地</h3><h4 id="3-4-1-克隆项目"><a href="#3-4-1-克隆项目" class="headerlink" title="3.4.1 克隆项目"></a>3.4.1 克隆项目</h4><p>1) 在Eclipse中点击File→Import…→Git</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps93.jpg" alt="img"> </p>
+<p>2) 选中Clone URI</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps94.jpg" alt="img"> </p>
+<p>3) 输入克隆的项目在GitHub上仓库的地址</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps95.jpg" alt="img"> </p>
+<p>4) 选择要克隆的分支</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps96.jpg" alt="img"> </p>
+<p>5) 选择项目存放的路径</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps97.jpg" alt="img"> </p>
+<p>6) 选择作为一个普通工程导入（通过方式二导入没有这一步）</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps98.jpg" alt="img"> </p>
+<p>7) 点击完成</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps99.jpg" alt="img"> </p>
+<p>8) 导入之后并不是一个Maven工程（如果通过方式二导入会自动识别为Maven工程）</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps100.jpg" alt="img"> </p>
+<p>9) 转换为Maven工程</p>
+<p>右键→Configure→Convert to Maven Project</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps101.jpg" alt="img"> </p>
+<p>10) 转换之后</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps102.jpg" alt="img"> </p>
+<h4 id="3-4-2-添加合作伙伴"><a href="#3-4-2-添加合作伙伴" class="headerlink" title="3.4.2 添加合作伙伴"></a>3.4.2 添加合作伙伴</h4><p>在项目的协同开发过程中，如果GitHub上的仓库不是你创建的，你克隆下来的项目完成代码的编辑之后上传会失败，如下图：</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps103.jpg" alt="img"> </p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps104.jpg" alt="img"> </p>
+<p>此时如果想要上传成功，必须让GitHub上仓库的拥有者添加你为合作伙伴，</p>
+<p>添加合作伙伴的步骤：</p>
+<p>1) 让仓库拥有者在仓库上点击settings</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps105.jpg" alt="img"> </p>
+<p>2) 点击Manage Access</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps106.jpg" alt="img"> </p>
+<p>3) 搜索合作伙伴，即搜索你的GitHub账户</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps107.jpg" alt="img"> </p>
+<p>4) 点击邀请</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps108.jpg" alt="img"> </p>
+<p>5) 等待你回复</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps109.jpg" alt="img"> </p>
+<p>6) 仓库拥有者可以将链接发送给你让你确认，当然你的邮箱也会收到等待确认的邮件</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps110.jpg" alt="img"> </p>
+<p>7) 等你接收之后就与仓库拥有者成为了合作伙伴，就可以向仓库上传项目了</p>
+<h4 id="3-4-3-非合作伙伴如何共同开发项目"><a href="#3-4-3-非合作伙伴如何共同开发项目" class="headerlink" title="3.4.3 非合作伙伴如何共同开发项目"></a>3.4.3 非合作伙伴如何共同开发项目</h4><p>GitHub上有好多开源的好的项目，我们可以下载下来查看、借鉴别人的代码。但是如果我们修改了，由于不是对方的合作伙伴，我们无法将代码上传到别人的仓库，此时我们可以选择使用fork和pullrequest操作</p>
+<p>1) 看到喜欢的项目点击fork操作将别人的项目复制一份作为自己的仓库，同时仓库下面会显示当前项目来自于哪里</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps111.jpg" alt="img"> </p>
+<p>2) 修改代码之后如果想合并到作者那里，需要让作者审核，点击Pull requests→New pull request</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps112.jpg" alt="img"> </p>
+<p>3) 点击Create pull request</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps113.jpg" alt="img"> </p>
+<p>4) 填入标题、描述后点击Create pull request</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps114.jpg" alt="img"> </p>
+<p>5) 你创建了pull request之后作者会收到Pull requests信息，作者可以选择拒绝和接受你的请求</p>
+<h2 id="第4章-在Idea中使用Git"><a href="#第4章-在Idea中使用Git" class="headerlink" title="第4章 在Idea中使用Git"></a>第4章 在Idea中使用Git</h2><h3 id="4-1-安装Git核心程序"><a href="#4-1-安装Git核心程序" class="headerlink" title="4.1 安装Git核心程序"></a>4.1 安装Git核心程序</h3><p>根据自己的电脑操作系统从Git官网<a href="https://git-scm.com/下载对应的Git核心程序。" target="_blank" rel="noopener">https://git-scm.com/下载对应的Git核心程序。</a></p>
+<p>以git-2.21.0为例说明安装步骤：</p>
+<p>1) 双击Git-2.21.0-64-bit.exe</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps115.jpg" alt="img"> </p>
+<p>2) 点击Next设置安装路径</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps116.jpg" alt="img"> </p>
+<p>3) 点击Next</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps117.jpg" alt="img"> </p>
+<p>4) 点击Next</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps118.jpg" alt="img"> </p>
+<p>5) 点击Next，选择默认的编辑器</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps119.jpg" alt="img"> </p>
+<p>6) 点击Next，选择第一项</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps120.jpg" alt="img"> </p>
+<p>7) 点击Next</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps121.jpg" alt="img"> </p>
+<p>8) 点击Next</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps122.jpg" alt="img"> </p>
+<p>9) 点击Next</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps123.jpg" alt="img"> </p>
+<p>10) 点击Next</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps124.jpg" alt="img"> </p>
+<p>11) 点击Install开始安装</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps125.jpg" alt="img"> </p>
+<p>12) 点击Finish安装完成</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps126.jpg" alt="img"> </p>
+<h3 id="4-2-全局配置"><a href="#4-2-全局配置" class="headerlink" title="4.2 全局配置"></a>4.2 全局配置</h3><h4 id="4-2-1-配置Git核心程序"><a href="#4-2-1-配置Git核心程序" class="headerlink" title="4.2.1 配置Git核心程序"></a>4.2.1 配置Git核心程序</h4><p>1) 配置git.exe执行文件</p>
+<p>点击工具栏中的settings→Version Control→Git</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps127.jpg" alt="img"> </p>
+<p>2) 点击Test测试</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps128.jpg" alt="img"> </p>
+<h4 id="4-2-2-配置GitHub账户"><a href="#4-2-2-配置GitHub账户" class="headerlink" title="4.2.2 配置GitHub账户"></a>4.2.2 配置GitHub账户</h4><p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps129.jpg" alt="img"> </p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps130.jpg" alt="img"> </p>
+<p>3) 点击OK完成配置</p>
+<h3 id="4-3-创建本地库"><a href="#4-3-创建本地库" class="headerlink" title="4.3 创建本地库"></a>4.3 创建本地库</h3><h4 id="4-3-1-新建本地库"><a href="#4-3-1-新建本地库" class="headerlink" title="4.3.1 新建本地库"></a>4.3.1 新建本地库</h4><p>1) 创建一个Empty Project</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps131.jpg" alt="img"> </p>
+<p>2) 在空工程（Empty Project）中添加模块（Modules）</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps132.jpg" alt="img"> </p>
+<p>3) 添加一个Maven模块</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps133.jpg" alt="img"> </p>
+<p>4) 选择我无论如何都想编辑这个文件</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps134.jpg" alt="img"> </p>
+<p>5) 创建本地库</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps135.jpg" alt="img"> </p>
+<p>6) 选择当前模块的上一级目录</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps136.jpg" alt="img"> </p>
+<p>7) 点击OK本地库创建成功 </p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps137.jpg" alt="img"> </p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps138.jpg" alt="img"> </p>
+<p>8) 同时工具栏会出现Git相关操作</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps139.jpg" alt="img"> </p>
+<p>9) 在src/main/java和src/main/resources目录下创建文件，创建了新文件之后会提示是否添加到暂存区</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps140.jpg" alt="img"> </p>
+<p>10) 如果点击了Cancel，此时文件只存在于工作区，文件的状态如下图：</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps141.jpg" alt="img"> </p>
+<p>11) 设置忽略文件</p>
+<p>在模块上右键，选择一种方式设置忽略的文件</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps142.jpg" alt="img"> </p>
+<p>Tips：方式二只需要修改.git/info目录下的exclude文件即可，不需要创建新的文件，所以建议大家选择这种方式。</p>
+<p>12) 弹出提示框，提示是否在当前工作区创建.gitignore文件</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps143.jpg" alt="img"> </p>
+<p>13) 点击Create，添加如下内容</p>
+<p>.idea *.iml</p>
+<p>14) 创建.gitignore文件之后发现被忽略的文件变成了灰色（有时候可能需要刷新模块或重启Idea才能看到）</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps144.jpg" alt="img"> </p>
+<p>15) 在模块上右键将文件添加到暂存区</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps145.jpg" alt="img"> </p>
+<p>16) 添加到暂存区之后文件的状态如下图：</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps146.jpg" alt="img"> </p>
+<p>17) 在模块上右键或点击工具栏将文件添加到本地库</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps147.jpg" alt="img"> </p>
+<p>工具栏</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps148.jpg" alt="img"> </p>
+<p>18) 添加注释内容后提交</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps149.jpg" alt="img"> </p>
+<p>19) 提交到本地库之后文件的状态如下图：</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps150.jpg" alt="img"> </p>
+<h4 id="4-3-2-版本间切换"><a href="#4-3-2-版本间切换" class="headerlink" title="4.3.2 版本间切换"></a>4.3.2 版本间切换</h4><p>1) 在模块上右键或者点击工具栏查看历史</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps151.jpg" alt="img"> </p>
+<p>2) 选择要切换的版本</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps152.jpg" alt="img"> </p>
+<p>3) 右键→Copy Revision Number</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps153.jpg" alt="img"> </p>
+<p>4) 在模块上右键</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps154.jpg" alt="img"> </p>
+<p>5) 选择Hard并粘贴版本号</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps155.jpg" alt="img"> </p>
+<p>6) 版本切换成功</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps156.jpg" alt="img"> </p>
+<h4 id="4-3-3-创建分支"><a href="#4-3-3-创建分支" class="headerlink" title="4.3.3 创建分支"></a>4.3.3 创建分支</h4><p>1) 在模块上右键</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps157.jpg" alt="img"> </p>
+<p>2) 点击New Branch</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps158.jpg" alt="img"> </p>
+<p>3) 给新分支命名</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps159.jpg" alt="img"> </p>
+<p>4) 点击Create后自动切换到新分支</p>
+<p>5) 在新分支添加新的代码并提交</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps160.jpg" alt="img"> </p>
+<h4 id="4-3-4-合并分支"><a href="#4-3-4-合并分支" class="headerlink" title="4.3.4 合并分支"></a>4.3.4 合并分支</h4><p>1) 在模块上右键切换到主干</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps161.jpg" alt="img"> </p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps162.jpg" alt="img"> </p>
+<p>2) 在模块上右键选择合并改变</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps163.jpg" alt="img"> </p>
+<p>3) 选择要合并的分支</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps164.jpg" alt="img"> </p>
+<p>4) 合并成功</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps165.jpg" alt="img"> </p>
+<h4 id="4-3-5-解决冲突"><a href="#4-3-5-解决冲突" class="headerlink" title="4.3.5 解决冲突"></a>4.3.5 解决冲突</h4><p>​    让主干和分支在同一个位置添加一行代码</p>
+<p>1) 分支添加内容，并添加到暂存区和本地库</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps166.jpg" alt="img"> </p>
+<p>2) 主干添加内容，并添加到暂存区和本地库</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps167.jpg" alt="img"> </p>
+<p>3) 在主干合并分支内容，出现冲突</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps168.jpg" alt="img"> </p>
+<p>4) 选择合并，出现处理窗口</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps169.jpg" alt="img"> </p>
+<p>5) 处理之后</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps170.jpg" alt="img"> </p>
+<p>6) 点击Apply应用</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps171.jpg" alt="img"> </p>
+<h3 id="4-4-将本地库上传到GitHub"><a href="#4-4-将本地库上传到GitHub" class="headerlink" title="4.4 将本地库上传到GitHub"></a>4.4 将本地库上传到GitHub</h3><h4 id="4-4-1-上传本地库"><a href="#4-4-1-上传本地库" class="headerlink" title="4.4.1 上传本地库"></a>4.4.1 上传本地库</h4><p>1) 在GitHub网站上创建仓库</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps172.jpg" alt="img"> </p>
+<p>2) 复制仓库地址</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps173.jpg" alt="img"> </p>
+<p>3) 在Idea中的模块上右键</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps174.jpg" alt="img"> </p>
+<p>4) 设置远程地址别名</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps175.jpg" alt="img"> </p>
+<p>5) 点击Push推送到GitHub仓库</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps176.jpg" alt="img"> </p>
+<p>6) 上传成功</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps177.jpg" alt="img"> </p>
+<h4 id="4-4-2-更新本地库"><a href="#4-4-2-更新本地库" class="headerlink" title="4.4.2 更新本地库"></a>4.4.2 更新本地库</h4><p>​    正常情况下是合作伙伴上传新的代码到GitHub，如果此时本地库不更新将无法上传，为了简单起见，我们直接在GitHub上在线修改文件。</p>
+<p>1) 在GitHub上在线添加一个文件</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps178.jpg" alt="img"> </p>
+<p>2) Idea中的本地库也修改文件、添加到暂存库、添加到本地库，然后上传，发现上传被拒绝</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps179.jpg" alt="img"> </p>
+<p>3) 此时点击Merge或Rebase都可以实现本地库与远程GitHub的同步</p>
+<p>4) 也可以点击Cancel之后通过以下方式更新本地库</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps180.jpg" alt="img"> </p>
+<p>5) 点击Pull将GitHub上最新的代码合并都本地库</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps181.jpg" alt="img"> </p>
+<p>6) 点击Pull之后更新本地库成功</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps182.jpg" alt="img"> </p>
+<h3 id="4-5-从GitHub上克隆项目到本地"><a href="#4-5-从GitHub上克隆项目到本地" class="headerlink" title="4.5 从GitHub上克隆项目到本地"></a>4.5 从GitHub上克隆项目到本地</h3><p>1) 点击Idea中的CVS选项</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps183.jpg" alt="img"> </p>
+<p>2) 输入GitHub中的仓库地址并指定项目的存放路径</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps184.jpg" alt="img"> </p>
+<p>3) 提示是否为克隆的项目创建一个新工程</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps185.jpg" alt="img"> </p>
+<p>4) 点击Yes弹出导入工程的提示框</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps186.jpg" alt="img"> </p>
+<p>5) 点击Finish之后在Idea中显示的是一个空工程</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps187.jpg" alt="img"> </p>
+<p>6) 需要为新工程配置一下JDK、导入Module</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps188.jpg" alt="img"> </p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps189.jpg" alt="img"> </p>
+<p>7) 克隆成功</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps190.jpg" alt="img"> </p>
+<h2 id="第5章-国内的项目托管网站-码云"><a href="#第5章-国内的项目托管网站-码云" class="headerlink" title="第5章 国内的项目托管网站-码云"></a>第5章 国内的项目托管网站-码云</h2><h3 id="5-1-简介"><a href="#5-1-简介" class="headerlink" title="5.1 简介"></a>5.1 简介</h3><p>使用GitHub作为项目托管网站如果网速不好很影响效率，大家也可以使用国内的项目托管网站-码云。网址是<a href="https://gitee.com/" target="_blank" rel="noopener">https://gitee.com/</a> ，使用方式跟GitHub一样，而且它还是一个中文网站，如果你英文不是很好它是最好的选择。</p>
+<h3 id="5-2-配置SSH免密登录"><a href="#5-2-配置SSH免密登录" class="headerlink" title="5.2 配置SSH免密登录"></a>5.2 配置SSH免密登录</h3><p>在码云上通过HTTPS的模式上传项目跟在GitHub上一样，但是在码云上上传项目总是输入用户名和密码，比较麻烦，所以给大家演示一下通过SSH模式免密登录上传项目，使用SSH模式的好处是每次上传项目不需要输入用户名和密码，SSH免密登录同样适用于GitHub。</p>
+<p>使用SSH模式前提是你必须是这个项目的拥有者或者合作者，且配好了SSH Key，配置SSH Key的步骤如下：</p>
+<p>1) 进入电脑的用户目录，在用户目录右键打开Git命令行窗口</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps191.jpg" alt="img"> </p>
+<p>2) 创建SSH Key</p>
+<p>在命令行窗口输入以下命令</p>
+<p>ssh-keygen -t rsa -C 任意内容</p>
+<p>命令参数说明：</p>
+<p>​    -t = The type of the key to generate</p>
+<p>​    密钥的类型</p>
+<p>​    -C = comment to identify the key</p>
+<p>​    用于识别这个密钥的注释</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps192.jpg" alt="img"> </p>
+<p>输入命令后回车，然后再回车、回车、回车</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps193.jpg" alt="img"> </p>
+<p>3) SSH Key创建成功会在用户目录生成.ssh文件夹</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps194.jpg" alt="img"> </p>
+<p>4) 进入.ssh文件夹，查看id_rsa.pub文件，复制全部内容</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps195.jpg" alt="img"> </p>
+<p>5) 找到码云账户的设置</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps196.jpg" alt="img"> </p>
+<p>6) 点击SSH公钥，设置标题，粘贴公钥，点击确定</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps197.jpg" alt="img"> </p>
+<p>Tips：码云账户中可以添加多个SSH公钥，但是一台电脑只能授权一个用户免密登录</p>
+<p>7) 复制码云账户中仓库的SSH地址</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps198.jpg" alt="img"> </p>
+<h3 id="5-3-在Eclipse中通过SSH模式上传项目"><a href="#5-3-在Eclipse中通过SSH模式上传项目" class="headerlink" title="5.3 在Eclipse中通过SSH模式上传项目"></a>5.3 在Eclipse中通过SSH模式上传项目</h3><p>创建了SSH Key之后Eclipse可以自动识别对应的公钥和私钥文件</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps199.jpg" alt="img"> </p>
+<p>通过SSH模式上传项目的步骤：</p>
+<p>1) 在要上传的项目上右键</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps200.jpg" alt="img"> </p>
+<p>2) 点击New Remote…</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps201.jpg" alt="img"> </p>
+<p>3) 复制SSH模式的地址并给远程地址起一个别名</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps202.jpg" alt="img"> </p>
+<p>4) 因为是第一次使用SSH模式，点击Finish之后需要勾选保存key，勾选创建known_hosts文件，以后就不需要这样了</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps203.jpg" alt="img"> </p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps204.jpg" alt="img"> </p>
+<p>5) 点击Preview进入确定上传窗口</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps205.jpg" alt="img"> </p>
+<p>6) 点击Push开始上传，不再需要输入用户名和密码</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps206.jpg" alt="img"> </p>
+<p>7) 上传成功</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps207.jpg" alt="img"> </p>
+<h3 id="5-4-在Idea中通过SSH模式上传项目"><a href="#5-4-在Idea中通过SSH模式上传项目" class="headerlink" title="5.4 在Idea中通过SSH模式上传项目"></a>5.4 在Idea中通过SSH模式上传项目</h3><p>1) 在码云账户中创建一个新的仓库，复制SSH模式的地址</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps208.jpg" alt="img"> </p>
+<p>2) 在Idea中要上传的项目上右键</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps209.jpg" alt="img"> </p>
+<p>3) 在弹出的窗口点击origin→Define Remote</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps210.jpg" alt="img"> </p>
+<p>4) 设置SSH模式远程地址与别名</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps211.jpg" alt="img"> </p>
+<p>5) 选择定义的sshorigin开始上传项目</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps212.jpg" alt="img"> </p>
+<p>6) 点击Push直接上传成功</p>
+<p><img src="/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/wps213.jpg" alt="img"> </p>
+</div><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Snow Monster</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://www.red0819.top/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/">http://www.red0819.top/tools/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://www.red0819.top" target="_blank">RedLeavesBlog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/IDE%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%92%E4%BB%B6-git/">IDE中常用的插件 git</a></div><div class="post_share"><div class="social-share" data-image="/wordPic/tool-logo.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/bigdata/Oozie%E7%AE%80%E4%BB%8B/"><img class="prev-cover" src="/wordPic/oozie-logo.png" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Oozie简介</div></div></a></div><div class="next-post pull-right"><a href="/bigdata/SparkStreaming/"><img class="next-cover" src="/wordPic/spark-logo.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">SparkStreaming</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></article></main><footer id="footer" style="background-image: url(/wordPic/tool-logo.jpg)"><div id="footer-wrap"><div class="copyright">&copy;2017 - 2020 By Snow Monster</div><div class="framework-info"><span>框架 </span><a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a href="https://github.com/jerryc127/hexo-theme-butterfly" target="_blank" rel="noopener">Butterfly</a></div><div class="footer_custom_text">努力充实自己大脑中，欢迎投喂知识！</div></div></footer></div><section id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></section><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>由</span> <a href="https://github.com/wzpan/hexo-generator-search" target="_blank" rel="noopener" style="color:#49B1F5;">hexo-generator-search</a>
+ <span>提供支持</span></div></div></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div><div><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const initData = {
+      el: '#vcomment',
+      appId: 'BlwHhRwsSAJShGHGJeX8d6qB-gzGzoHsz',
+      appKey: 'fGlkNKWjBKmGkMSND7jvpsRI',
+      placeholder: 'Please leave your footprints',
+      avatar: 'monsterid',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'en',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: false,
+      path: window.location.pathname,
+    }
+
+    if (true) { 
+      initData.requiredFields= ('nick,mail'.split(','))
+    }
+
+    const valine = new Valine(initData)
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else $.getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js', initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.querySelector('#vcomment'),loadValine)
+  else setTimeout(() => loadValine(), 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = false;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/click-heart.min.js" async="async" mobile="false"></script></div></body></html>

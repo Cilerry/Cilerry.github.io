@@ -1,0 +1,419 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Redis系列（二） | RedLeavesBlog</title><meta name="keywords" content="Redis"><meta name="author" content="Snow Monster"><meta name="copyright" content="Snow Monster"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><meta name="description" content="Redis持久化机制官网描述 持久化的话是Redis高可用中比较重要的一个环节。工作时数据都存储在内存中，万一服务器断电，则所有数据都会丢失。针对这种情况，Redis采用持久化机制来增强数据安全性。 RDBRDB 持久化机制，是对 Redis 中的数据执行周期性的持久化。 ①机制描述每隔一定的时间把内存中的数据作为一个快照保存到硬盘上的文件中。Redis默认开启RDB机制。 ②触发时机[1]基于默">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Redis系列（二）">
+<meta property="og:url" content="http://www.red0819.top/bigdata/Redis%E7%B3%BB%E5%88%97%EF%BC%88%E4%BA%8C%EF%BC%89/index.html">
+<meta property="og:site_name" content="RedLeavesBlog">
+<meta property="og:description" content="Redis持久化机制官网描述 持久化的话是Redis高可用中比较重要的一个环节。工作时数据都存储在内存中，万一服务器断电，则所有数据都会丢失。针对这种情况，Redis采用持久化机制来增强数据安全性。 RDBRDB 持久化机制，是对 Redis 中的数据执行周期性的持久化。 ①机制描述每隔一定的时间把内存中的数据作为一个快照保存到硬盘上的文件中。Redis默认开启RDB机制。 ②触发时机[1]基于默">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://www.red0819.top/wordPic/redis-logo.jpg">
+<meta property="article:published_time" content="2020-02-15T05:22:38.000Z">
+<meta property="article:modified_time" content="2020-09-17T15:47:36.066Z">
+<meta property="article:author" content="Snow Monster">
+<meta property="article:tag" content="Redis">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://www.red0819.top/wordPic/redis-logo.jpg"><link rel="shortcut icon" href="/img/logo.png"><link rel="canonical" href="http://www.red0819.top/bigdata/Redis%E7%B3%BB%E5%88%97%EF%BC%88%E4%BA%8C%EF%BC%89/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="yandex-verification" content="{&quot;theme_color&quot;:{&quot;enable&quot;:true,&quot;main&quot;:&quot;\t#191970&quot;,&quot;paginator&quot;:&quot;#00c4b6&quot;,&quot;button_hover&quot;:&quot;#FF7242&quot;,&quot;text_selection&quot;:&quot;#00c4b6&quot;,&quot;link_color&quot;:&quot;#99a9bf&quot;,&quot;meta_color&quot;:&quot;#858585&quot;,&quot;hr_color&quot;:&quot;#A4D8FA&quot;,&quot;code_foreground&quot;:&quot;#F47466&quot;,&quot;code_background&quot;:&quot;rgba(27, 31, 35, .05)&quot;,&quot;toc_color&quot;:&quot;#00c4b6&quot;,&quot;blockquote_padding_color&quot;:&quot;#49b1f5&quot;,&quot;blockquote_background_color&quot;:&quot;#49b1f5&quot;}}"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  hexoversion: '4.2.1',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  ClickShowText: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  justifiedGallery: {
+    js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+    css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+  },
+  baiduPush: false,
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+};
+
+var saveToLocal = {
+  set: function setWithExpiry(key, value, ttl) {
+    const now = new Date()
+    const expiryDay = ttl * 86400000
+    const item = {
+      value: value,
+      expiry: now.getTime() + expiryDay,
+    }
+    localStorage.setItem(key, JSON.stringify(item))
+  },
+
+  get: function getWithExpiry(key) {
+    const itemStr = localStorage.getItem(key)
+
+    if (!itemStr) {
+      return undefined
+    }
+    const item = JSON.parse(itemStr)
+    const now = new Date()
+
+    if (now.getTime() > item.expiry) {
+      localStorage.removeItem(key)
+      return undefined
+    }
+    return item.value
+  }
+}</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isSidebar: true,
+  postUpdate: '2020-09-17 23:47:36'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>var activateDarkMode = function () {
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+  }
+}
+var activateLightMode = function () {
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+  }
+}
+
+var autoChangeMode = 'false'
+var t = saveToLocal.get('theme')
+if (autoChangeMode === '1') {
+  var isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+  var isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+  var isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+  var hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+  if (t === undefined) {
+    if (isLightMode) activateLightMode()
+    else if (isDarkMode) activateDarkMode()
+    else if (isNotSpecified || hasNoSupport) {
+      var now = new Date()
+      var hour = now.getHours()
+      var isNight = hour <= 6 || hour >= 18
+      isNight ? activateDarkMode() : activateLightMode()
+    }
+    window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+      if (saveToLocal.get('theme') === undefined) {
+        e.matches ? activateDarkMode() : activateLightMode()
+      }
+    })
+  } else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else if (autoChangeMode === '2') {
+  now = new Date()
+  hour = now.getHours()
+  isNight = hour <= 6 || hour >= 18
+  if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else {
+  if (t === 'dark') activateDarkMode()
+  else if (t === 'light') activateLightMode()
+}</script><meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="RedLeavesBlog" type="application/atom+xml">
+</head><body><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" src="/img/AF67D2ECB3B0F647193CD90F94294167.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">34</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">标签</div><div class="length_num">16</div></a></div></div><div class="mobile_data_item is-center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">分类</div><div class="length_num">5</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 娱乐</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div id="body-wrap"><div id="web_bg" data-type="photo"></div><div id="sidebar"><i class="fas fa-arrow-right on" id="toggle-sidebar"></i><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Redis持久化机制"><span class="toc-number">1.</span> <span class="toc-text">Redis持久化机制</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#RDB"><span class="toc-number">1.1.</span> <span class="toc-text">RDB</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#①机制描述"><span class="toc-number">1.1.1.</span> <span class="toc-text">①机制描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#②触发时机"><span class="toc-number">1.1.2.</span> <span class="toc-text">②触发时机</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-基于默认配置"><span class="toc-number">1.1.2.1.</span> <span class="toc-text">[1]基于默认配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-使用保存命令"><span class="toc-number">1.1.2.2.</span> <span class="toc-text">[2]使用保存命令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-使用flushall命令"><span class="toc-number">1.1.2.3.</span> <span class="toc-text">[3]使用flushall命令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-服务器关闭"><span class="toc-number">1.1.2.4.</span> <span class="toc-text">[4]服务器关闭</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#③相关配置"><span class="toc-number">1.1.3.</span> <span class="toc-text">③相关配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#④思考"><span class="toc-number">1.1.4.</span> <span class="toc-text">④思考</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#AOF"><span class="toc-number">1.2.</span> <span class="toc-text">AOF</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#①机制描述-1"><span class="toc-number">1.2.1.</span> <span class="toc-text">①机制描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#②AOF基本配置"><span class="toc-number">1.2.2.</span> <span class="toc-text">②AOF基本配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#③AOF重写"><span class="toc-number">1.2.3.</span> <span class="toc-text">③AOF重写</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#持久化文件损坏修复"><span class="toc-number">1.3.</span> <span class="toc-text">持久化文件损坏修复</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#扩展阅读：两种持久化机制的取舍"><span class="toc-number">1.4.</span> <span class="toc-text">扩展阅读：两种持久化机制的取舍</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#两种机制对比"><span class="toc-number">1.4.1.</span> <span class="toc-text">两种机制对比</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RDB和AOF并存"><span class="toc-number">1.4.2.</span> <span class="toc-text">RDB和AOF并存</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用建议"><span class="toc-number">1.4.3.</span> <span class="toc-text">使用建议</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Redis事务控制"><span class="toc-number">2.</span> <span class="toc-text">Redis事务控制</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Redis事务控制的相关命令"><span class="toc-number">2.1.</span> <span class="toc-text">Redis事务控制的相关命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-命令队列执行失败的两种情况"><span class="toc-number">2.2.</span> <span class="toc-text">2.命令队列执行失败的两种情况</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#①加入队列时失败"><span class="toc-number">2.2.1.</span> <span class="toc-text">①加入队列时失败</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#②执行队列时失败"><span class="toc-number">2.2.2.</span> <span class="toc-text">②执行队列时失败</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#③Redis为什么不支持回滚"><span class="toc-number">2.2.3.</span> <span class="toc-text">③Redis为什么不支持回滚</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-悲观锁和乐观锁"><span class="toc-number">2.3.</span> <span class="toc-text">3.悲观锁和乐观锁</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#一致性问题"><span class="toc-number">3.</span> <span class="toc-text">一致性问题</span></a></li></ol></div></div></div><header class="post-bg" id="page-header" style="background-image: url(/wordPic/redis-logo.jpg)"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">RedLeavesBlog</a></span><span id="menus"><div id="search_button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 娱乐</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><span class="close" id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></span></span></nav><div id="post-info"><div id="post-title"><div class="posttitle">Redis系列（二）</div></div><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="fa-fw post-meta-icon far fa-calendar-alt"></i><span class="post-meta-label">发表于</span><time datetime="2020-02-15T05:22:38.000Z" title="undefined 2020-02-15 13:22:38">2020-02-15</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/bigdata/">大数据</a></span></div><div class="meta-secondline"> <span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">2.9k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>9分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout_post" id="content-inner"><article id="post"><div class="post-content" id="article-container"><h1 id="Redis持久化机制"><a href="#Redis持久化机制" class="headerlink" title="Redis持久化机制"></a>Redis持久化机制</h1><p><a href="https://redis.io/topics/persistence#snapshotting" target="_blank" rel="noopener">官网描述</a></p>
+<p>持久化的话是<strong>Redis</strong>高可用中比较重要的一个环节。工作时数据都存储在内存中，万一服务器断电，则所有数据都会丢失。针对这种情况，Redis采用持久化机制来增强数据安全性。</p>
+<h2 id="RDB"><a href="#RDB" class="headerlink" title="RDB"></a>RDB</h2><p><strong>RDB</strong> 持久化机制，是对 <strong>Redis</strong> 中的数据执行<strong>周期性</strong>的持久化。</p>
+<h3 id="①机制描述"><a href="#①机制描述" class="headerlink" title="①机制描述"></a>①机制描述</h3><p>每隔一定的时间把内存中的数据作为一个快照保存到硬盘上的文件中。Redis默认开启RDB机制。</p>
+<h3 id="②触发时机"><a href="#②触发时机" class="headerlink" title="②触发时机"></a>②触发时机</h3><h4 id="1-基于默认配置"><a href="#1-基于默认配置" class="headerlink" title="[1]基于默认配置"></a>[1]基于默认配置</h4><figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">save</span> <span class="string">900 1</span></span><br><span class="line"><span class="attr">save</span> <span class="string">300 10</span></span><br><span class="line"><span class="attr">save</span> <span class="string">60 10000</span></span><br></pre></td></tr></table></figure>
+
+<p>含义</p>
+<table>
+<thead>
+<tr>
+<th>配置</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>save 900 1</td>
+<td>900秒内至少有一次修改则触发保存操作</td>
+</tr>
+<tr>
+<td>save 300 10</td>
+<td>300秒内至少有10次修改则触发保存操作</td>
+</tr>
+<tr>
+<td>save 60 10000</td>
+<td>60秒内至少有1万次修改则触发保存操作</td>
+</tr>
+</tbody></table>
+<h4 id="2-使用保存命令"><a href="#2-使用保存命令" class="headerlink" title="[2]使用保存命令"></a>[2]使用保存命令</h4><p>save或bgsave</p>
+<h4 id="3-使用flushall命令"><a href="#3-使用flushall命令" class="headerlink" title="[3]使用flushall命令"></a>[3]使用flushall命令</h4><p>这个命令也会产生dump.rdb文件，但里面是空的，没有意义</p>
+<h4 id="4-服务器关闭"><a href="#4-服务器关闭" class="headerlink" title="[4]服务器关闭"></a>[4]服务器关闭</h4><p>如果执行SHUTDOWN命令让Redis正常退出，那么此前Redis就会执行一次持久化保存。</p>
+<h3 id="③相关配置"><a href="#③相关配置" class="headerlink" title="③相关配置"></a>③相关配置</h3><table>
+<thead>
+<tr>
+<th>配置项</th>
+<th>取值</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>save</td>
+<td>“”</td>
+<td>禁用RDB机制</td>
+</tr>
+<tr>
+<td>dbfilename</td>
+<td>文件名，例如：dump.rdb</td>
+<td>设置RDB机制下，数据存储文件的文件名</td>
+</tr>
+<tr>
+<td>dir</td>
+<td>Redis工作目录路径</td>
+<td>指定存放持久化文件的目录的路径。注意：这里指定的必须是目录不能是文件名</td>
+</tr>
+</tbody></table>
+<h3 id="④思考"><a href="#④思考" class="headerlink" title="④思考"></a>④思考</h3><p>RDB机制能够保证数据的绝对安全吗？</p>
+<h2 id="AOF"><a href="#AOF" class="headerlink" title="AOF"></a>AOF</h2><p><strong>AOF</strong> 机制对每条写入命令作为日志，以 <strong>append-only</strong> 的模式写入一个日志文件中，因为这个模式是只追加的方式，所以没有任何磁盘寻址的开销，所以很快，有点像Mysql中的<strong>binlog</strong>。</p>
+<h3 id="①机制描述-1"><a href="#①机制描述-1" class="headerlink" title="①机制描述"></a>①机制描述</h3><p>根据配置文件中指定的策略，把生成数据的命令保存到硬盘上的文件中。一个AOF文件的内容可以参照下面的例子：</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">*2</span></span><br><span class="line"><span class="attr">$6</span></span><br><span class="line"><span class="attr">SELECT</span></span><br><span class="line"><span class="attr">$1</span></span><br><span class="line"><span class="attr">0</span></span><br><span class="line"><span class="attr">*3</span></span><br><span class="line"><span class="attr">$3</span></span><br><span class="line"><span class="attr">set</span></span><br><span class="line"><span class="attr">$3</span></span><br><span class="line"><span class="attr">num</span></span><br><span class="line"><span class="attr">$2</span></span><br><span class="line"><span class="attr">10</span></span><br><span class="line"><span class="attr">*2</span></span><br><span class="line"><span class="attr">$4</span></span><br><span class="line"><span class="attr">incr</span></span><br><span class="line"><span class="attr">$3</span></span><br><span class="line"><span class="attr">num</span></span><br><span class="line"><span class="attr">*2</span></span><br><span class="line"><span class="attr">$4</span></span><br><span class="line"><span class="attr">incr</span></span><br><span class="line"><span class="attr">$3</span></span><br><span class="line"><span class="attr">num</span></span><br><span class="line"><span class="attr">*2</span></span><br><span class="line"><span class="attr">$4</span></span><br><span class="line"><span class="attr">incr</span></span><br><span class="line"><span class="attr">$3</span></span><br><span class="line"><span class="attr">num</span></span><br></pre></td></tr></table></figure>
+
+<p>生成上面文件内容的Redis命令是：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">set num 10</span><br><span class="line">incr num</span><br><span class="line">incr num</span><br><span class="line">incr num</span><br></pre></td></tr></table></figure>
+
+<h3 id="②AOF基本配置"><a href="#②AOF基本配置" class="headerlink" title="②AOF基本配置"></a>②AOF基本配置</h3><table>
+<thead>
+<tr>
+<th>配置项</th>
+<th>取值</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>appendonly</td>
+<td>yes</td>
+<td>启用AOF持久化机制</td>
+</tr>
+<tr>
+<td></td>
+<td>no</td>
+<td>禁用AOF持久化机制[默认值]</td>
+</tr>
+<tr>
+<td>appendfilename</td>
+<td>“文件名”</td>
+<td>AOF持久化文件名</td>
+</tr>
+<tr>
+<td>dir</td>
+<td>Redis工作目录路径</td>
+<td>指定存放持久化文件的目录的路径。注意：这里指定的必须是目录不能是文件名</td>
+</tr>
+<tr>
+<td>appendfsync</td>
+<td>always</td>
+<td>每一次数据修改后都将执行文件写入操作，缓慢但是最安全。</td>
+</tr>
+<tr>
+<td></td>
+<td>everysec</td>
+<td>每秒执行一次写入操作。折中。</td>
+</tr>
+<tr>
+<td></td>
+<td>no</td>
+<td>由操作系统在适当的时候执行写入操作，最快。</td>
+</tr>
+</tbody></table>
+<h3 id="③AOF重写"><a href="#③AOF重写" class="headerlink" title="③AOF重写"></a>③AOF重写</h3><p>对比下面两组命令：</p>
+<table>
+<thead>
+<tr>
+<th>AOF重写前</th>
+<th>AOF重写后</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>set count 1<br>incr count<br>incr count<br>incr count</td>
+<td>set count 4</td>
+</tr>
+</tbody></table>
+<p>两组命令执行后对于count来说最终的值是一致的，但是进行AOF重写后省略了中间过程，可以让AOF文件体积更小。而Redis会根据AOF文件的体积来决定是否进行AOF重写。参考的配置项如下：</p>
+<table>
+<thead>
+<tr>
+<th>配置项</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>auto-aof-rewrite-percentage 100</td>
+<td>文件体积增大100%时执行AOF重写</td>
+</tr>
+<tr>
+<td>auto-aof-rewrite-min-size 64mb</td>
+<td>文件体积增长到64mb时执行AOF重写</td>
+</tr>
+</tbody></table>
+<p>实际工作中不要进行频繁的AOF重写，因为CPU资源和硬盘资源二者之间肯定是CPU资源更加宝贵，所以不应该过多耗费CPU性能去节省硬盘空间。</p>
+<h2 id="持久化文件损坏修复"><a href="#持久化文件损坏修复" class="headerlink" title="持久化文件损坏修复"></a>持久化文件损坏修复</h2><p>Redis服务器启动时如果读取了损坏的持久化文件会导致启动失败，此时为了让Redis服务器能够正常启动，需要对损坏的持久化文件进行修复。这里以AOF文件为例介绍修复操作的步骤。</p>
+<ul>
+<li><p>第一步：备份要修复的appendonly.aof文件</p>
+</li>
+<li><p>第二步：执行修复程序</p>
+<p>/usr/local/redis/bin/redis-check-aof –fix /usr/local/redis/appendonly.aof</p>
+</li>
+<li><p>第三步：重启Redis</p>
+</li>
+</ul>
+<p>注意：所谓修复持久化文件仅仅是把损坏的部分去掉，而没法把受损的数据找回。</p>
+<h2 id="扩展阅读：两种持久化机制的取舍"><a href="#扩展阅读：两种持久化机制的取舍" class="headerlink" title="扩展阅读：两种持久化机制的取舍"></a>扩展阅读：两种持久化机制的取舍</h2><h3 id="两种机制对比"><a href="#两种机制对比" class="headerlink" title="两种机制对比"></a>两种机制对比</h3><table>
+<thead>
+<tr>
+<th align="center"></th>
+<th align="center">RDB</th>
+<th align="center">AOF</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">优势</td>
+<td align="center">适合大规模的数据恢复、速度较快、对<strong>Redis</strong>的性能影响非常小</td>
+<td align="center">选择appendfsync always方式运行时理论上能够做到数据完整一致（一秒一次），但此时性能不好。文件内容（append-only）具备一定可读性，能够用来分析Redis工作情况。</td>
+</tr>
+<tr>
+<td align="center">劣势</td>
+<td align="center">会丢失最后一次快照后的所有修改，不能绝对保证数据的高度一致性和完整性。Fork的时候，内存中的数据被克隆了一份，大致2倍的膨胀性需要考虑（在生成数据快照的时候，如果文件很大，客户端可能会暂停几毫秒甚至几秒），但上述成立有条件，Linux也有优化手段</td>
+<td align="center">持久化相同的数据，文件体积比RDB大，恢复速度比RDB慢。效率在同步写入时低于RDB，不同步写入时与RDB相同。</td>
+</tr>
+<tr>
+<td align="center">适合场景</td>
+<td align="center">冷备（他会生成多个数据文件，每个数据文件分别都代表了某一时刻<strong>Redis</strong>里面的数据）</td>
+<td align="center">热备（<strong>AOF</strong>的日志是通过一个叫<strong>非常可读</strong>的方式记录的，这样的特性适合做<strong>灾难性数据误删除</strong>）</td>
+</tr>
+</tbody></table>
+<h3 id="RDB和AOF并存"><a href="#RDB和AOF并存" class="headerlink" title="RDB和AOF并存"></a>RDB和AOF并存</h3><p>Redis重启的时候会优先载入AOF文件来恢复原始的数据，因为在通常情况下AOF文件保存的数据集要比RDB文件保存的数据集要完整</p>
+<p>RDB的数据不实时，同时使用两者时服务器重启也只会找AOF文件。那要不要只使用AOF呢？作者建议不要，因为RDB更适合用于备份数据库(AOF在不断变化不好备份)、快速重启，而且不会有AOF可能潜在的bug，留着作为一个万一的手段。</p>
+<h3 id="使用建议"><a href="#使用建议" class="headerlink" title="使用建议"></a>使用建议</h3><p>如果Redis仅仅作为缓存可以不使用任何持久化方式。</p>
+<p>其他应用方式综合考虑性能和完整性、一致性要求。</p>
+<p>RDB文件只用作后备用途，建议只在Slave上持久化RDB文件，而且只要15分钟备份一次就够了，只保留save 900 1这条规则。如果Enalbe AOF，好处是在最恶劣情况下也只会丢失不超过两秒数据，启动脚本较简单只load自己的AOF文件就可以了。代价一是带来了持续的IO，二是AOF rewrite的最后将rewrite过程中产生的新数据写到新文件造成的阻塞几乎是不可避免的。只要硬盘许可，应该尽量减少AOF rewrite的频率，AOF重写的基础大小默认值64M太小了，可以设到5G以上。默认超过原大小100%大小时重写可以改到适当的数值。如果不开启AOF，仅靠Master-Slave Replication 实现高可用性能也不错。能省掉一大笔IO也减少了rewrite时带来的系统波动。代价是如果Master/Slave同时倒掉，会丢失十几分钟的数据，启动脚本也要比较两个Master/Slave中的RDB文件，载入较新的那个。新浪微博就选用了这种架构。</p>
+<h1 id="Redis事务控制"><a href="#Redis事务控制" class="headerlink" title="Redis事务控制"></a>Redis事务控制</h1><h2 id="Redis事务控制的相关命令"><a href="#Redis事务控制的相关命令" class="headerlink" title="Redis事务控制的相关命令"></a>Redis事务控制的相关命令</h2><table>
+<thead>
+<tr>
+<th>命令名</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>MULTI</td>
+<td>表示开始收集命令，后面所有命令都不是马上执行，而是加入到一个队列中。</td>
+</tr>
+<tr>
+<td>EXEC</td>
+<td>执行MULTI后面命令队列中的所有命令。</td>
+</tr>
+<tr>
+<td>DISCARD</td>
+<td>放弃执行队列中的命令。</td>
+</tr>
+<tr>
+<td>WATCH</td>
+<td>“观察“、”监控“一个KEY，在当前队列外的其他命令操作这个KEY时，放弃执行自己队列的命令</td>
+</tr>
+<tr>
+<td>UNWATCH</td>
+<td>放弃监控一个KEY</td>
+</tr>
+</tbody></table>
+<h2 id="2-命令队列执行失败的两种情况"><a href="#2-命令队列执行失败的两种情况" class="headerlink" title="2.命令队列执行失败的两种情况"></a>2.命令队列执行失败的两种情况</h2><h3 id="①加入队列时失败"><a href="#①加入队列时失败" class="headerlink" title="①加入队列时失败"></a>①加入队列时失败</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; multi</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; set age 20</span><br><span class="line">QUEUED</span><br><span class="line">127.0.0.1:6379&gt; incr age</span><br><span class="line">QUEUED</span><br><span class="line">127.0.0.1:6379&gt; incr age www</span><br><span class="line">(error) ERR wrong number of arguments for &#39;incr&#39; command</span><br><span class="line">127.0.0.1:6379&gt; exec</span><br><span class="line">(error) EXECABORT Transaction discarded because of previous errors.</span><br></pre></td></tr></table></figure>
+
+<p>遇到了入队时即可检测到的错误，整个队列都不会执行。</p>
+<h3 id="②执行队列时失败"><a href="#②执行队列时失败" class="headerlink" title="②执行队列时失败"></a>②执行队列时失败</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; multi</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; set age 30</span><br><span class="line">QUEUED</span><br><span class="line">127.0.0.1:6379&gt; incrby age 5</span><br><span class="line">QUEUED</span><br><span class="line">127.0.0.1:6379&gt; incrby age 5</span><br><span class="line">QUEUED</span><br><span class="line">127.0.0.1:6379&gt; incrby age ww</span><br><span class="line">QUEUED</span><br><span class="line">127.0.0.1:6379&gt; incrby age 5</span><br><span class="line">QUEUED</span><br><span class="line">127.0.0.1:6379&gt; EXEC</span><br><span class="line">1) OK</span><br><span class="line">2) (integer) 35</span><br><span class="line">3) (integer) 40</span><br><span class="line">4) (error) ERR value is not an integer or out of range</span><br><span class="line">5) (integer) 45</span><br><span class="line">127.0.0.1:6379&gt; get age</span><br><span class="line">"45"</span><br></pre></td></tr></table></figure>
+
+<p>错误在入队时检测不出来，整个队列执行时有错的命令执行失败，但是其他命令并没有回滚。</p>
+<h3 id="③Redis为什么不支持回滚"><a href="#③Redis为什么不支持回滚" class="headerlink" title="③Redis为什么不支持回滚"></a>③Redis为什么不支持回滚</h3><p>官方解释如下：</p>
+<blockquote>
+<pre><code>    如果你有使用关系式数据库的经验， 那么 “Redis 在事务失败时不进行回滚，而是继续执行余下的命令”这种做法可能会让你觉得有点奇怪。以下是这种做法的优点：
+    1.Redis 命令只会因为错误的语法而失败（并且这些问题不能在入队时发现），或是命令用在了错误类型的键上面：这也就是说，从实用性的角度来说，失败的命令是由编程错误造成的，而这些错误应该在开发的过程中被发现，而不应该出现在生产环境中。
+    2.因为不需要对回滚进行支持，所以 Redis 的内部可以保持简单且快速。
+
+有种观点认为 Redis 处理事务的做法会产生 bug ， 然而需要注意的是， 在通常情况下， 回滚并不能解决编程错误带来的问题。 举个例子， 如果你本来想通过 INCR 命令将键的值加上 1 ， 却不小心加上了 2 ， 又或者对错误类型的键执行了 INCR ， 回滚是没有办法处理这些情况的。</code></pre></blockquote>
+<h2 id="3-悲观锁和乐观锁"><a href="#3-悲观锁和乐观锁" class="headerlink" title="3.悲观锁和乐观锁"></a>3.悲观锁和乐观锁</h2><p>在使用WATCH命令监控一个KEY后，当前队列中的命令会由于外部命令的执行而放弃，这是乐观锁的体现。</p>
+<ul>
+<li><p>悲观锁</p>
+<p>认为当前环境非常容易发生碰撞，所以执行操作前需要把数据锁定，操作完成后释放锁，其他操作才可以继续操作。</p>
+</li>
+<li><p>乐观锁</p>
+<p>认为当前环境不容易发生碰撞，所以执行操作前不锁定数据，万一碰撞真的发生了，那么放弃自己的操作。</p>
+</li>
+</ul>
+<p>redis锁机制：<a href="https://blog.csdn.net/shuangyueliao/article/details/89344256" target="_blank" rel="noopener">https://blog.csdn.net/shuangyueliao/article/details/89344256</a></p>
+<h1 id="一致性问题"><a href="#一致性问题" class="headerlink" title="一致性问题"></a>一致性问题</h1><p>一般来说，如果允许缓存可以稍微的跟数据库偶尔有不一致的情况，也就是说如果你的系统<strong>不是严格要求</strong> “缓存+数据库” 必须保持一致性的话，最好不要做这个方案，即：<strong>读请求和写请求串行化</strong>，串到一个<strong>内存队列</strong>里去。</p>
+<p>串行化可以保证一定不会出现不一致的情况，但是它也会导致系统的吞吐量大幅度降低，用比正常情况下多几倍的机器去支撑线上的一个请求。</p>
+<p>把一些列的操作都放到队列里面，顺序肯定不会乱，但是并发高了，这队列很容易阻塞，反而会成为整个系统的弱点，瓶颈</p>
+<p>本段摘抄自：<a href="https://github.com/AobingJava/JavaFamily/blob/master/docs/redis/%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81%E3%80%81%E5%B9%B6%E5%8F%91%E7%AB%9E%E4%BA%89%E3%80%81%E5%8F%8C%E5%86%99%E4%B8%80%E8%87%B4%E6%80%A7.md" target="_blank" rel="noopener">https://github.com/AobingJava/JavaFamily/blob/master/docs/redis/%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81%E3%80%81%E5%B9%B6%E5%8F%91%E7%AB%9E%E4%BA%89%E3%80%81%E5%8F%8C%E5%86%99%E4%B8%80%E8%87%B4%E6%80%A7.md</a></p>
+</div><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Snow Monster</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://www.red0819.top/bigdata/Redis%E7%B3%BB%E5%88%97%EF%BC%88%E4%BA%8C%EF%BC%89/">http://www.red0819.top/bigdata/Redis%E7%B3%BB%E5%88%97%EF%BC%88%E4%BA%8C%EF%BC%89/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://www.red0819.top" target="_blank">RedLeavesBlog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Redis/">Redis</a></div><div class="post_share"><div class="social-share" data-image="/wordPic/redis-logo.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/bigdata/Redis%E7%B3%BB%E5%88%97%EF%BC%88%E4%B8%89%EF%BC%89/"><img class="prev-cover" src="/wordPic/redis-logo.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Redis系列（三）</div></div></a></div><div class="next-post pull-right"><a href="/bigdata/Redis%E7%B3%BB%E5%88%97%EF%BC%88%E4%B8%80%EF%BC%89/"><img class="next-cover" src="/wordPic/redis-logo.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Redis系列（一）</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/bigdata/Redis系列（一）/" title="Redis系列（一）"><img class="cover" src="/wordPic/redis-logo.jpg"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-02-05</div><div class="title">Redis系列（一）</div></div></a></div><div><a href="/bigdata/Redis系列（三）/" title="Redis系列（三）"><img class="cover" src="/wordPic/redis-logo.jpg"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-02-15</div><div class="title">Redis系列（三）</div></div></a></div><div><a href="/bigdata/Redis系列（四）/" title="Redis系列（四）"><img class="cover" src="/wordPic/redis-logo.jpg"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-02-23</div><div class="title">Redis系列（四）</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></article></main><footer id="footer" style="background-image: url(/wordPic/redis-logo.jpg)"><div id="footer-wrap"><div class="copyright">&copy;2017 - 2020 By Snow Monster</div><div class="framework-info"><span>框架 </span><a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a href="https://github.com/jerryc127/hexo-theme-butterfly" target="_blank" rel="noopener">Butterfly</a></div><div class="footer_custom_text">努力充实自己大脑中，欢迎投喂知识！</div></div></footer></div><section id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></section><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>由</span> <a href="https://github.com/wzpan/hexo-generator-search" target="_blank" rel="noopener" style="color:#49B1F5;">hexo-generator-search</a>
+ <span>提供支持</span></div></div></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div><div><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const initData = {
+      el: '#vcomment',
+      appId: 'BlwHhRwsSAJShGHGJeX8d6qB-gzGzoHsz',
+      appKey: 'fGlkNKWjBKmGkMSND7jvpsRI',
+      placeholder: 'Please leave your footprints',
+      avatar: 'monsterid',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'en',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: false,
+      path: window.location.pathname,
+    }
+
+    if (true) { 
+      initData.requiredFields= ('nick,mail'.split(','))
+    }
+
+    const valine = new Valine(initData)
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else $.getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js', initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.querySelector('#vcomment'),loadValine)
+  else setTimeout(() => loadValine(), 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = false;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/click-heart.min.js" async="async" mobile="false"></script></div></body></html>
