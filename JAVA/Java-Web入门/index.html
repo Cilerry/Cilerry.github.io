@@ -1,0 +1,893 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Java Web入门 | RedLeavesBlog</title><meta name="keywords" content="javaweb"><meta name="author" content="Snow Monster"><meta name="copyright" content="Snow Monster"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><meta name="description" content="简介该阶段的学习目标是了解javaWEB的整个技术体系，熟悉JavaWEB前后台交互的实现方式及相关原理。明确未来大数据所分析数据的来源以及分析完成后的数据如何实现页面可视化. JavaWeb的技术体系 前端三剑客HTMLHTML是什么?HTML指的超文本标记语言(Hyper Text Markup Language)，是一种用来描述网页的语言。超文本指的是除了可以包含文字之外，还可以包含图片、链">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java Web入门">
+<meta property="og:url" content="http://www.red0819.top/JAVA/Java-Web%E5%85%A5%E9%97%A8/index.html">
+<meta property="og:site_name" content="RedLeavesBlog">
+<meta property="og:description" content="简介该阶段的学习目标是了解javaWEB的整个技术体系，熟悉JavaWEB前后台交互的实现方式及相关原理。明确未来大数据所分析数据的来源以及分析完成后的数据如何实现页面可视化. JavaWeb的技术体系 前端三剑客HTMLHTML是什么?HTML指的超文本标记语言(Hyper Text Markup Language)，是一种用来描述网页的语言。超文本指的是除了可以包含文字之外，还可以包含图片、链">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://www.red0819.top/wordPic/timg.jpg">
+<meta property="article:published_time" content="2019-09-23T05:38:48.000Z">
+<meta property="article:modified_time" content="2020-09-23T06:36:28.764Z">
+<meta property="article:author" content="Snow Monster">
+<meta property="article:tag" content="javaweb">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://www.red0819.top/wordPic/timg.jpg"><link rel="shortcut icon" href="/img/logo.png"><link rel="canonical" href="http://www.red0819.top/JAVA/Java-Web%E5%85%A5%E9%97%A8/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="yandex-verification" content="{&quot;theme_color&quot;:{&quot;enable&quot;:true,&quot;main&quot;:&quot;\t#191970&quot;,&quot;paginator&quot;:&quot;#00c4b6&quot;,&quot;button_hover&quot;:&quot;#FF7242&quot;,&quot;text_selection&quot;:&quot;#00c4b6&quot;,&quot;link_color&quot;:&quot;#99a9bf&quot;,&quot;meta_color&quot;:&quot;#858585&quot;,&quot;hr_color&quot;:&quot;#A4D8FA&quot;,&quot;code_foreground&quot;:&quot;#F47466&quot;,&quot;code_background&quot;:&quot;rgba(27, 31, 35, .05)&quot;,&quot;toc_color&quot;:&quot;#00c4b6&quot;,&quot;blockquote_padding_color&quot;:&quot;#49b1f5&quot;,&quot;blockquote_background_color&quot;:&quot;#49b1f5&quot;}}"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  hexoversion: '4.2.1',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  ClickShowText: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  justifiedGallery: {
+    js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+    css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+  },
+  baiduPush: false,
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+};
+
+var saveToLocal = {
+  set: function setWithExpiry(key, value, ttl) {
+    const now = new Date()
+    const expiryDay = ttl * 86400000
+    const item = {
+      value: value,
+      expiry: now.getTime() + expiryDay,
+    }
+    localStorage.setItem(key, JSON.stringify(item))
+  },
+
+  get: function getWithExpiry(key) {
+    const itemStr = localStorage.getItem(key)
+
+    if (!itemStr) {
+      return undefined
+    }
+    const item = JSON.parse(itemStr)
+    const now = new Date()
+
+    if (now.getTime() > item.expiry) {
+      localStorage.removeItem(key)
+      return undefined
+    }
+    return item.value
+  }
+}</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isSidebar: true,
+  postUpdate: '2020-09-23 14:36:28'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>var activateDarkMode = function () {
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+  }
+}
+var activateLightMode = function () {
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+  }
+}
+
+var autoChangeMode = 'false'
+var t = saveToLocal.get('theme')
+if (autoChangeMode === '1') {
+  var isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+  var isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+  var isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+  var hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+  if (t === undefined) {
+    if (isLightMode) activateLightMode()
+    else if (isDarkMode) activateDarkMode()
+    else if (isNotSpecified || hasNoSupport) {
+      var now = new Date()
+      var hour = now.getHours()
+      var isNight = hour <= 6 || hour >= 18
+      isNight ? activateDarkMode() : activateLightMode()
+    }
+    window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+      if (saveToLocal.get('theme') === undefined) {
+        e.matches ? activateDarkMode() : activateLightMode()
+      }
+    })
+  } else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else if (autoChangeMode === '2') {
+  now = new Date()
+  hour = now.getHours()
+  isNight = hour <= 6 || hour >= 18
+  if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else {
+  if (t === 'dark') activateDarkMode()
+  else if (t === 'light') activateLightMode()
+}</script><meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="RedLeavesBlog" type="application/atom+xml">
+</head><body><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" src="/img/AF67D2ECB3B0F647193CD90F94294167.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">27</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">标签</div><div class="length_num">20</div></a></div></div><div class="mobile_data_item is-center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">分类</div><div class="length_num">6</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 娱乐</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div id="body-wrap"><div id="web_bg" data-type="photo"></div><div id="sidebar"><i class="fas fa-arrow-right on" id="toggle-sidebar"></i><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#简介"><span class="toc-number">1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#JavaWeb的技术体系"><span class="toc-number">2.</span> <span class="toc-text">JavaWeb的技术体系</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#前端三剑客"><span class="toc-number">3.</span> <span class="toc-text">前端三剑客</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#HTML"><span class="toc-number">3.1.</span> <span class="toc-text">HTML</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#HTML是什么"><span class="toc-number">3.1.1.</span> <span class="toc-text">HTML是什么?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HTML网页的组成"><span class="toc-number">3.1.2.</span> <span class="toc-text">HTML网页的组成:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常用的HTML标签"><span class="toc-number">3.1.3.</span> <span class="toc-text">常用的HTML标签</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#一个基本结构的HTML页面"><span class="toc-number">3.1.4.</span> <span class="toc-text">一个基本结构的HTML页面</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#登录页面的示例"><span class="toc-number">3.1.5.</span> <span class="toc-text">登录页面的示例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CSS"><span class="toc-number">3.2.</span> <span class="toc-text">CSS</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CSS是什么"><span class="toc-number">3.2.1.</span> <span class="toc-text">CSS是什么</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#编写位置"><span class="toc-number">3.2.2.</span> <span class="toc-text">编写位置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#选择器"><span class="toc-number">3.2.3.</span> <span class="toc-text">选择器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常用样式"><span class="toc-number">3.2.4.</span> <span class="toc-text">常用样式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#布局"><span class="toc-number">3.2.5.</span> <span class="toc-text">布局</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JavaScript"><span class="toc-number">3.3.</span> <span class="toc-text">JavaScript</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是JavaScript"><span class="toc-number">3.3.1.</span> <span class="toc-text">什么是JavaScript</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#编写位置-1"><span class="toc-number">3.3.2.</span> <span class="toc-text">编写位置</span></a></li></ol></li></ol></li></ol></div></div></div><header class="post-bg" id="page-header" style="background-image: url(/wordPic/timg.jpg)"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">RedLeavesBlog</a></span><span id="menus"><div id="search_button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 娱乐</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><span class="close" id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></span></span></nav><div id="post-info"><div id="post-title"><div class="posttitle">Java Web入门</div></div><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="fa-fw post-meta-icon far fa-calendar-alt"></i><span class="post-meta-label">发表于</span><time datetime="2019-09-23T05:38:48.000Z" title="undefined 2019-09-23 13:38:48">2019-09-23</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/JAVA/">JAVA</a></span></div><div class="meta-secondline"> <span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">6.9k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>24分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout_post" id="content-inner"><article id="post"><div class="post-content" id="article-container"><h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>该阶段的学习目标是了解javaWEB的整个技术体系，熟悉JavaWEB前后台交互的实现方式及相关原理。明确未来大数据所分析数据的来源以及分析完成后的数据如何实现页面可视化.</p>
+<h1 id="JavaWeb的技术体系"><a href="#JavaWeb的技术体系" class="headerlink" title="JavaWeb的技术体系"></a>JavaWeb的技术体系</h1><p><img src="/JAVA/Java-Web%E5%85%A5%E9%97%A8/wps1-1600839866149.jpg" alt="wps1"></p>
+<h1 id="前端三剑客"><a href="#前端三剑客" class="headerlink" title="前端三剑客"></a>前端三剑客</h1><h2 id="HTML"><a href="#HTML" class="headerlink" title="HTML"></a>HTML</h2><h3 id="HTML是什么"><a href="#HTML是什么" class="headerlink" title="HTML是什么?"></a>HTML是什么?</h3><p>HTML指的超文本标记语言(Hyper Text Markup Language)，是一种用来描述网页的语言。超文本指的是除了可以包含文字之外，还可以包含图片、链接、音乐、视频、程序等内容。</p>
+<h3 id="HTML网页的组成"><a href="#HTML网页的组成" class="headerlink" title="HTML网页的组成:"></a>HTML网页的组成:</h3><p><img src="/JAVA/Java-Web%E5%85%A5%E9%97%A8/wps2-1600839896755.jpg" alt="wps2"></p>
+<h3 id="常用的HTML标签"><a href="#常用的HTML标签" class="headerlink" title="常用的HTML标签"></a>常用的HTML标签</h3><ol>
+<li><p>html 根标记</p>
+</li>
+<li><p>head 头标记</p>
+</li>
+<li><p>body 体标记</p>
+</li>
+<li><p>a 超链接</p>
+</li>
+<li><p>form 表单</p>
+</li>
+<li><p>table 表格</p>
+</li>
+<li><p>h1~h6 标题</p>
+</li>
+<li><p>br 换行</p>
+</li>
+<li><p>img 图片</p>
+</li>
+</ol>
+<h3 id="一个基本结构的HTML页面"><a href="#一个基本结构的HTML页面" class="headerlink" title="一个基本结构的HTML页面"></a>一个基本结构的HTML页面</h3><p><img src="/JAVA/Java-Web%E5%85%A5%E9%97%A8/wps3-1600839917690.jpg" alt="wps3"></p>
+<h3 id="登录页面的示例"><a href="#登录页面的示例" class="headerlink" title="登录页面的示例"></a>登录页面的示例</h3><p><img src="/JAVA/Java-Web%E5%85%A5%E9%97%A8/wps4-1600839920672.jpg" alt="wps4"></p>
+<h2 id="CSS"><a href="#CSS" class="headerlink" title="CSS"></a>CSS</h2><h3 id="CSS是什么"><a href="#CSS是什么" class="headerlink" title="CSS是什么"></a>CSS是什么</h3><p>CSS 指层叠样式表 (Cascading Style<br>Sheets)。主要用来设置网页中元素的样式。如边框，颜色，位置等…</p>
+<p>CSS即可以写在HTML中，也可以写在元素的style属性里面，还可以写在.css外部文件里然后引入到页面</p>
+<h3 id="编写位置"><a href="#编写位置" class="headerlink" title="编写位置"></a>编写位置</h3><p>1)  写在元素的style属性里面</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;p style="color:red;font-size:16px;"&gt; Hello CSS &lt;/p&gt;</span><br></pre></td></tr></table></figure>
+
+<p>2)  写在HTML head标签中的style标签中</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;style type="text/css"&gt;                            </span><br><span class="line"><span class="selector-tag">p</span> &#123;                                                    </span><br><span class="line"><span class="attribute">color</span>: blue;                                          </span><br><span class="line"><span class="attribute">background-color</span>: yellow;                            </span><br><span class="line">&#125;                                                     </span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>3)  写在外部的CSS文件中</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;link rel="stylesheet" type="text/css" href="style.css" &gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="选择器"><a href="#选择器" class="headerlink" title="选择器"></a>选择器</h3><p>1)  标签(元素)选择器</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">p</span> &#123;                 </span><br><span class="line"><span class="attribute">color</span>:red;          </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>2)  Id选择器</p>
+<p>按照元素的id选中相应的元素，使用#id值</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-id">#abc</span> &#123;                                             </span><br><span class="line"> <span class="attribute">color</span>:red;                                         </span><br><span class="line"> &#125;                                                  </span><br><span class="line"> &lt;p id="abc"&gt;大家好&lt;/p&gt;</span><br></pre></td></tr></table></figure>
+
+<p>3)  class类选择器</p>
+<p>按照元素的类名选中相应的元素，使用.class值</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.foot</span> &#123;                                                   </span><br><span class="line"><span class="attribute">color</span>:red;                                                   </span><br><span class="line">&#125;                                                           </span><br><span class="line">&lt;p class="foot"&gt;你好&lt;/p&gt;                                </span><br><span class="line">&lt;b class="foot"&gt;你也好&lt;/b&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="常用样式"><a href="#常用样式" class="headerlink" title="常用样式"></a>常用样式</h3><table>
+<thead>
+<tr>
+<th>color</th>
+<th>设置颜色</th>
+<th>颜色可以写颜色名如：black, blue, red, green, white, yellow等颜色也可以写rgb值和十六进制表示值：如rgb(255,0,0)，#00F6DE，如果写十六进制值必须加#</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>background-color</td>
+<td>设置背景色</td>
+<td>同上</td>
+</tr>
+<tr>
+<td>width/height</td>
+<td>设置宽度/高度</td>
+<td>可以写像素值：19px；也可以写百分比值：20%；</td>
+</tr>
+<tr>
+<td>font-size</td>
+<td>设置字体大小</td>
+<td>写像素值：19px；</td>
+</tr>
+<tr>
+<td>text-align</td>
+<td>设置文本位置</td>
+<td>左中右  leftcengerright</td>
+</tr>
+<tr>
+<td>border</td>
+<td>设置边框</td>
+<td>例如:黑色1像素实线边框border: 1px solid black;</td>
+</tr>
+<tr>
+<td>margin-left/margin-right/margin-top/margin-bottom</td>
+<td>设置左外边距/右外边距/上外边距/下外边距</td>
+<td>例如: div居中 margin-left: <strong>auto</strong>;margin-right: <strong>auto</strong>;</td>
+</tr>
+</tbody></table>
+<h3 id="布局"><a href="#布局" class="headerlink" title="布局"></a>布局</h3><p>1)  浮动</p>
+<p>浮动的框可以向左或向右移动，直到它的外边缘碰到包含框或另一个浮动框的边框为止</p>
+<ul>
+<li><p>未使用浮动的li</p>
+<p><img src="/JAVA/Java-Web%E5%85%A5%E9%97%A8/wps5-1600840254003.jpg" alt="wps5"></p>
+</li>
+<li><p>向左浮动的li</p>
+</li>
+</ul>
+<p><img src="/JAVA/Java-Web%E5%85%A5%E9%97%A8/wps6-1600840261957.jpg" alt="wps6"></p>
+<ul>
+<li>代码</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"    </span><br><span class="line">"http://www.w3.org/TR/html4/loose.dtd"&gt;                                                                                                </span><br><span class="line">&lt;<span class="selector-tag">html</span>&gt;                                                                                                                               </span><br><span class="line">&lt;<span class="selector-tag">head</span>&gt;                                                                                                                               </span><br><span class="line">&lt;meta http-equiv="Content-Type" content="text/html; charset=UTF-8"&gt;                                      </span><br><span class="line">&lt;title&gt;Insert title here&lt;/title&gt;                                 </span><br><span class="line"></span><br><span class="line">&lt;style type="text/css"&gt;                                          </span><br><span class="line"></span><br><span class="line"><span class="selector-tag">div</span> &#123;                                                               </span><br><span class="line"><span class="attribute">border</span>: <span class="number">1px</span> solid black;                                           </span><br><span class="line"><span class="attribute">width</span>: <span class="number">800px</span>;                                                       </span><br><span class="line"><span class="attribute">height</span>: <span class="number">30px</span>;                                                       </span><br><span class="line">&#125;                                                                    </span><br><span class="line"><span class="selector-tag">ul</span> &#123;                                                                </span><br><span class="line"><span class="attribute">list-style</span>: none;                                                   </span><br><span class="line"><span class="attribute">margin</span>: <span class="number">0px</span>;                                                       </span><br><span class="line">&#125;                                                                   </span><br><span class="line"><span class="selector-tag">li</span> &#123;                                                                </span><br><span class="line"><span class="attribute">float</span>: left;                                                       </span><br><span class="line"><span class="attribute">background-color</span>: <span class="number">#ddffcc</span>;                                         </span><br><span class="line"><span class="attribute">text-align</span>: center;                                                 </span><br><span class="line"><span class="attribute">width </span>: <span class="number">80px</span>;                                                       </span><br><span class="line"><span class="attribute">border</span>: <span class="number">1px</span> solid black;                                           </span><br><span class="line"><span class="attribute">width</span>: <span class="number">80px</span>;                                                       </span><br><span class="line">&#125;                                                                                                                                     </span><br><span class="line">&lt;/style&gt;                                                           </span><br><span class="line">                                                                    </span><br><span class="line">&lt;/head&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="JavaScript"><a href="#JavaScript" class="headerlink" title="JavaScript"></a>JavaScript</h2><h3 id="什么是JavaScript"><a href="#什么是JavaScript" class="headerlink" title="什么是JavaScript"></a>什么是JavaScript</h3><p>JavaScript是一门客户端脚本语言，主要运行在浏览器中，浏览器中负责运行JavaScript脚本代码的程序叫JavaScript引擎</p>
+<h3 id="编写位置-1"><a href="#编写位置-1" class="headerlink" title="编写位置"></a>编写位置</h3><p>js需要包括在<script>标签中，这个标签可以出现在页面的任何位置,一般建议写在HTML<br>head标签中.</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="selector-tag">head</span>&gt;                          </span><br><span class="line">                                  </span><br><span class="line">&lt;script type="text/javascript"&gt; </span><br><span class="line">                                  </span><br><span class="line">//Js 代码                         </span><br><span class="line">                                  </span><br><span class="line">&lt;/script&gt;                       </span><br><span class="line">                                  </span><br><span class="line">&lt;/head&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h3><p>1)  变量</p>
+<ul>
+<li><p>声明：使用var 如：var x=65; var y="你好";</p>
+<p>1.变量的声明不需要指定数据类型，可以接受所有的数据类型</p>
+<p>2.变量名区分大小写，abc和aBc是两个不同的变量</p>
+</li>
+<li><p>赋值：x=44; x="abc"; x=new Date();</p>
+<p>1.变量可以接受任何值</p>
+<p>2.声明和赋值也可同时进行 如var x="abc";</p>
+</li>
+</ul>
+<p>2)  函数</p>
+<ul>
+<li>声明：使用function关键字，没有指定返回值一说！参数列表也没有指定参数类型一说，因为js所有类型都使用var来声明</li>
+</ul>
+<ol>
+<li>函数在js中也是一种对象，可以将函数的引用赋值给变量</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var abc&#x3D;function(a,b)&#123; return a+b;&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>为函数起个名字叫add</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">function add(a,b)&#123; return a+b;&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>调用</li>
+</ul>
+<ol>
+<li><p>如果是声明方式第一种的，使用变量名+()的方式进行调用 abc(1,2);</p>
+</li>
+<li><p>如果是声明方式第二种的，直接使用函数名调用 add(1,2);</p>
+</li>
+</ol>
+<p><strong>注意：js调用函数的时候不会检查参数列表，所以js中没有重载一说，add(1,2)；add(1)；add(1,"abc")；add("abc")；add(1,"666",true);add()；都是调用的同一个方法。</strong></p>
+<p>3)  对象</p>
+<ul>
+<li>创建</li>
+</ul>
+<ol>
+<li><p>var obj = new Object();</p>
+</li>
+<li><p>var obj = {};</p>
+</li>
+</ol>
+<ul>
+<li>为对象的属性赋值</li>
+</ul>
+<ol>
+<li>动态添加</li>
+</ol>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">var obj = new Object();                               </span><br><span class="line">                                                      </span><br><span class="line">obj.name = "张三";                                    </span><br><span class="line">                                                      </span><br><span class="line">obj.age = 18;                                         </span><br><span class="line">                                                      </span><br><span class="line">obj.work = function()&#123; //对象的属性可以赋值为一个函数 </span><br><span class="line">                                                      </span><br><span class="line"><span class="selector-tag">alert</span>("我在工作！");                                  </span><br><span class="line">                                                      </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>创建时指定</li>
+</ol>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">obj = &#123;            </span><br><span class="line">                   </span><br><span class="line"><span class="selector-tag">name</span><span class="selector-pseudo">:"</span>张三",       </span><br><span class="line">                   </span><br><span class="line"><span class="selector-tag">age</span><span class="selector-pseudo">:18</span>,            </span><br><span class="line">                   </span><br><span class="line"><span class="selector-tag">work</span><span class="selector-pseudo">:function()</span>&#123;   </span><br><span class="line">                   </span><br><span class="line">alert("我在工作"); </span><br><span class="line">                   </span><br><span class="line">&#125;                  </span><br><span class="line">                   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>使用对象的属性,直接以.的方式来访问</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">alert</span>(<span class="selector-tag">obj</span><span class="selector-class">.name</span>) </span><br><span class="line">                 </span><br><span class="line"><span class="selector-tag">obj</span><span class="selector-class">.work</span>();</span><br></pre></td></tr></table></figure>
+
+<h3 id="其他语法"><a href="#其他语法" class="headerlink" title="其他语法"></a>其他语法</h3><p>java中的for，while，if-else，switch，try-catch，break，continue，以及各种运算符，在js中也是按照同样的方式使用的。这里不再赘述。</p>
+<h3 id="JavaScript事件"><a href="#JavaScript事件" class="headerlink" title="JavaScript事件"></a>JavaScript事件</h3><p>1)  什么是事件</p>
+<p>事件就是浏览器或者用户交互时触发的行为。比如按钮点击，表单提交，鼠标滑动等等。</p>
+<p>2)  事件的分类</p>
+<ul>
+<li><p>系统事件：如：文档加载完成。</p>
+</li>
+<li><p>用户事件：如：鼠标移入移出，单击双击等。</p>
+</li>
+</ul>
+<p>3)  事件的触发</p>
+<ul>
+<li><p>系统事件会由系统触发，如window.onload事件，用户事件由用户行为触发如click事件。</p>
+</li>
+<li><p>常见的系统事件</p>
+<blockquote>
+<p>window.onload</p>
+</blockquote>
+</li>
+<li><p>常见的用户事件</p>
+<blockquote>
+<p>onclick当用户点击某个对象时调用的事件句柄。</p>
+<p>onblur 元素失去焦点。</p>
+<p>onfocus元素获得焦点。</p>
+<p>onchange 域的内容被改变。</p>
+<p>onkeydown某个键盘按键被按下</p>
+<p>onmouseover 鼠标移入</p>
+<p>onmouseout 鼠标移出</p>
+</blockquote>
+</li>
+</ul>
+<p>4)  事件响应</p>
+<ul>
+<li><p>我们希望某个事件发生的时候我们可以做一些事情。这个称为事件的响应，比如用户点击了一个按钮，我弹出一个框告诉用户，你成功的点击了这个按钮。事件触发后我们要执行的方法称为响应函数。</p>
+</li>
+<li><p>响应函数与事件关联</p>
+</li>
+</ul>
+<ol>
+<li>直接为事件绑定响应函数</li>
+</ol>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">window.onload = function()&#123; </span><br><span class="line">                            </span><br><span class="line"><span class="selector-tag">alert</span>("文档加载完成了！")   </span><br><span class="line">                            </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>使用标签的事件属性</li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;a href=”atbiubiu.com” onclick=”biubiu()”&gt;red0819&lt;/a&gt;</span><br><span class="line"></span><br><span class="line">在&lt;script&gt;&lt;/script&gt;中定义这个函数</span><br><span class="line"></span><br><span class="line">&lt;script type=”text/javascript”&gt;</span><br><span class="line">		<span class="selector-tag">function</span> <span class="selector-tag">gotobiubiu</span>()&#123;</span><br><span class="line">			alert(“biubiubiu”)</span><br><span class="line">        &#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="3-2-6-DOM"><a href="#3-2-6-DOM" class="headerlink" title="3.2.6 DOM"></a>3.2.6 DOM</h3><p>1)  什么是DOM</p>
+<p>Document Object Model(文档对象模型)，我们浏览器把整个网页会当成一个大的对象，利用面向对象的方式操作网页内容。</p>
+<p>2)  DOM模型</p>
+<p><img src="Java-Web%E5%85%A5%E9%97%A8/wps7-1600840978736.jpg" alt="wps7"></p>
+<p>3)  document对象</p>
+<p>document对象是window对象的一个属性，代表当前整个HTML文档，将这个文档抽象成了document对象，包含了整个dom树的所有内容。</p>
+<p>其本质是window.document，而window.可以省略。直接使用document</p>
+<p>4)  DOM操作</p>
+<ul>
+<li><p>查询元素</p>
+<table>
+<thead>
+<tr>
+<th>根据id值查询</th>
+<th>document.getElementById(“id值”)</th>
+<th>一个具体的元素节点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>根据标签名查询</td>
+<td>document.getElementsByTagName(“标签名”)</td>
+<td>元素节点数组</td>
+</tr>
+<tr>
+<td>根据name属性值查询</td>
+<td>document.getElementsByName(“name值”)</td>
+<td>元素节点数组</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>属性操作</p>
+<table>
+<thead>
+<tr>
+<th>读取属性值</th>
+<th>元素对象.属性名</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>修改属性值</td>
+<td>元素对象.属性名=新的属性名</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>文本操作</p>
+<table>
+<thead>
+<tr>
+<th>获取元素内容</th>
+<th>元素.innerHTML</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>给元素内容赋值</td>
+<td>元素.innerHTML=值</td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+<h1 id="服务端技术"><a href="#服务端技术" class="headerlink" title="服务端技术"></a>服务端技术</h1><h2 id="Web服务器"><a href="#Web服务器" class="headerlink" title="Web服务器"></a>Web服务器</h2><h3 id="常见的Web服务器"><a href="#常见的Web服务器" class="headerlink" title="常见的Web服务器"></a>常见的Web服务器</h3><p>1)  Web服务器主要用来接收客户端发送的请求和响应客户端请求。</p>
+<p>2)  <strong>Tomcat（Apache）</strong>：当前应用最广的JavaWeb服务器；</p>
+<p>3)  JBoss（Redhat红帽）：支持JavaEE，应用比较广EJB容器 --><br>    SSH轻量级的框架代替</p>
+<p>4)  GlassFish（Orcale）：Oracle开发JavaWeb服务器，应用不是很广；</p>
+<p>5)  Resin（Caucho）：支持JavaEE，应用越来越广；</p>
+<p>6)  Weblogic（Orcale）：要钱的！支持JavaEE，适合大型项目；</p>
+<p>7)  Websphere（IBM）：要钱的！支持JavaEE，适合大型项目</p>
+<h3 id="Tomcat服务器的安装及配置"><a href="#Tomcat服务器的安装及配置" class="headerlink" title="Tomcat服务器的安装及配置"></a>Tomcat服务器的安装及配置</h3><p>1)  将Tomcat的安装包解压到磁盘的任意位置(非中文无空格)</p>
+<p>2)  Tomcat服务的目录结构</p>
+<p><img src="Java-Web%E5%85%A5%E9%97%A8/wps8-1600841074556.jpg" alt="wps8"></p>
+<h3 id="在IDEA中配置tomcat"><a href="#在IDEA中配置tomcat" class="headerlink" title="在IDEA中配置tomcat"></a>在IDEA中配置tomcat</h3><p><img src="Java-Web%E5%85%A5%E9%97%A8/wps9-1600841080786.jpg" alt="wps9"></p>
+<p><img src="Java-Web%E5%85%A5%E9%97%A8/wps10-1600841090021.jpg" alt="wps10"></p>
+<p><img src="Java-Web%E5%85%A5%E9%97%A8/wps11-1600841100755.jpg" alt="wps11"></p>
+<h2 id="web-Module"><a href="#web-Module" class="headerlink" title="web Module"></a>web Module</h2><h3 id="创建web-Module"><a href="#创建web-Module" class="headerlink" title="创建web Module"></a>创建web Module</h3><p><img src="Java-Web%E5%85%A5%E9%97%A8/wps12-1600841116380.jpg" alt="wps12"></p>
+<h3 id="部署web-Module"><a href="#部署web-Module" class="headerlink" title="部署web Module"></a>部署web Module</h3><p><img src="Java-Web%E5%85%A5%E9%97%A8/wps13-1600841127938.jpg" alt="wps13"></p>
+<p><img src="Java-Web%E5%85%A5%E9%97%A8/wps14-1600841135150.jpg" alt="wps14"></p>
+<p><img src="Java-Web%E5%85%A5%E9%97%A8/wps15-1600841143231.jpg" alt="wps15"></p>
+<h2 id="Servlet"><a href="#Servlet" class="headerlink" title="Servlet"></a>Servlet</h2><h3 id="什么是Servlet"><a href="#什么是Servlet" class="headerlink" title="什么是Servlet"></a>什么是Servlet</h3><p>1)  Servlet是Sun公司制定的一套技术标准，包含与Web应用相关的一系列接口，是Web应用实现方式的宏观解决方案。而具体的Servlet容器负责提供标准的实现。</p>
+<p>2)  Servlet作为服务器端的一个组件，它的本意是"服务器端的小程序"。Servlet的实例对象由Servlet容器负责创建；Servlet的方法由容器在特定情况下调用；Servlet容器会在Web应用卸载时销毁Servlet对象的实例。</p>
+<p>3) <strong><font color="red"> 简单可以理解为Servlet就是用来处理客户端的请求与响应客户端。</font></strong></p>
+<blockquote>
+<p>Tomcat也算是Servlet的容器</p>
+<p>有一个请求就有一个Servlet来处理和响应</p>
+</blockquote>
+<h3 id="Servlet开发规则"><a href="#Servlet开发规则" class="headerlink" title="Servlet开发规则"></a>Servlet开发规则</h3><p>1)  实际编码通过继承HttpServlet来完成Servlet的开发</p>
+<p><img src="Java-Web%E5%85%A5%E9%97%A8/wps16-1600841288466.jpg" alt="wps16"></p>
+<h3 id="Servlet类的相关方法"><a href="#Servlet类的相关方法" class="headerlink" title="Servlet类的相关方法"></a>Servlet类的相关方法</h3><p>1)  doGet方法 Servlet中用于处理get请求的方法</p>
+<blockquote>
+<p>GET:提交的数据会暴露在地址栏中，不安全，还有对提交数据的大小支持比较小（大概4kb？）</p>
+<p>POST:提交的数据不会暴露到地址栏中，比较安全，对提交的数据大小理论上没有限制</p>
+<p>但是不能说post就绝对安全，因为所有传递的信息都有可能被拦截</p>
+</blockquote>
+<p>2)  doPost方法 Servlet中用于处理post请求的方法</p>
+<blockquote>
+<p>常用的请求方式GET和POST</p>
+<p>如果是get方式传来的请求就用doget处理</p>
+</blockquote>
+<p>3)  service方法 </p>
+<ol>
+<li><p>在Servlet的顶层实现中，在service方法中调用的具体的doGet或者是doPost</p>
+</li>
+<li><p>在实际开发Servlet的过程中，可以选择重写doGet以及doPost 或者<br>直接重写service方法来处理请求。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;form action=”地址（http://localhost:8080/Moudle名/文件夹名/网址名）” method=”post”&gt;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<blockquote>
+<p>用来调用doget和dopost方法</p>
+<p>一个请求进入服务器先进入service 然后在service中选择再POST还是GET</p>
+<p>两种方式：</p>
+<ol>
+<li><p>重写get和post方法</p>
+</li>
+<li><p>只重写service</p>
+</li>
+</ol>
+</blockquote>
+<h3 id="Servlet在web-xml中的配置"><a href="#Servlet在web-xml中的配置" class="headerlink" title="Servlet在web.xml中的配置"></a>Servlet在web.xml中的配置</h3><p><img src="Java-Web%E5%85%A5%E9%97%A8/wps17-1600841414434.jpg" alt="wps17"></p>
+<h2 id="获取请求参数值"><a href="#获取请求参数值" class="headerlink" title=" 获取请求参数值"></a> 获取请求参数值</h2><blockquote>
+<p>自定义的Servlet，需要继承HttpServlet（Tomcat）</p>
+<p>目的：处理客户端的响应</p>
+</blockquote>
+<p>1)  HttpServletRequest</p>
+<ol>
+<li><p>该接口是ServletRequest接口的子接口，封装了HTTP请求的相关信息，由Servlet容器创建其实现类对象并传入service(ServletRequest<br>req, ServletResponse<br>res)方法中。以下我们所说的HttpServletRequest对象指的是容器提供的HttpServletRequest实现类对象。</p>
+</li>
+<li><p>HttpServletRequest对象的主要功能有：</p>
+</li>
+</ol>
+<p>​                 获取请求参数</p>
+<p>​                 在请求域中绑定数据</p>
+<p>​                 将请求转发给另外一个URL地址 [转发]</p>
+<blockquote>
+<p>自定义的Servlet，需要继承HttpServlet（Tomcat）</p>
+<p>目的：处理客户端的响应</p>
+</blockquote>
+<h2 id="响应结果"><a href="#响应结果" class="headerlink" title="响应结果"></a>响应结果</h2><p>1)  HttpServletResponse</p>
+<ol>
+<li><p>该接口是ServletResponse接口的子接口，封装了HTTP响应的相关信息，由Servlet容器创建其实现类对象并传入service(ServletRequest req, ServletResponse res)方法中。以下我们所说的HttpServletResponse对象指的是容器提供的HttpServletResponse实现类对象。</p>
+</li>
+<li><p>主要功能:</p>
+<p>使用PrintWriter对象向浏览器输出数据</p>
+<p>实现请求的重定向[重定向]</p>
+</li>
+</ol>
+<h2 id="具体登录功能的实现步骤"><a href="#具体登录功能的实现步骤" class="headerlink" title="具体登录功能的实现步骤"></a>具体登录功能的实现步骤</h2><p>1)  在登录页面中录入用户名和密码，点击登录按钮提交登录请求</p>
+<p><img src="Java-Web%E5%85%A5%E9%97%A8/wps18-1600841515877.jpg" alt="wps18"></p>
+<p>2)  在LoginServlet中通过request对象获取到页面表单提交的用户名和密码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;获取用户输入的用户名和密码</span><br><span class="line">String username &#x3D;  req.getParameter(&quot;username&quot;);</span><br><span class="line">String password &#x3D;  req.getParameter(&quot;password&quot;);</span><br></pre></td></tr></table></figure>
+
+<p>3)  调用Dao对象，将用户提交的用户名和密码与数据库的用户表的数据进行匹配</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">UserDao dao &#x3D; new UserDaoJdbcImpl();</span><br><span class="line">User user &#x3D; dao.findUserByUsernameAndPassword(username, password);</span><br></pre></td></tr></table></figure>
+
+<p>4)  得出结果，完成响应.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;设置响应头信息</span><br><span class="line">resp.setContentType(&quot;text&#x2F;html;charset&#x3D;utf-8&quot;);</span><br><span class="line">&#x2F;&#x2F;获取输出流</span><br><span class="line">PrintWriter  out &#x3D; resp.getWriter();</span><br><span class="line">if(user &#x3D;&#x3D; null ) &#123;</span><br><span class="line">	&#x2F;&#x2F;登录失败</span><br><span class="line">	out.println(&quot;登录失败！！！！&quot;);</span><br><span class="line">&#125;else &#123;</span><br><span class="line">	&#x2F;&#x2F;登录成功</span><br><span class="line">	out.println(&quot;登录成功！！！！&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">out.close();</span><br></pre></td></tr></table></figure>
+
+<h2 id="请求重定向-redirect"><a href="#请求重定向-redirect" class="headerlink" title="请求重定向 redirect"></a>请求重定向 redirect</h2><p>1)  Servlet接收到浏览器端请求并处理完成后，给浏览器端一个特殊的响应，这个特殊的响应要求浏览器去请求一个新的资源，整个过程中浏览器端会发出两次请求，且浏览器地址栏会改变为新资源的地址。</p>
+<p>2)  重定向的情况下，原Servlet和目标资源之间就不能共享请求域数据了</p>
+<p>3)  实现重定向的API</p>
+<p><img src="Java-Web%E5%85%A5%E9%97%A8/wps19-1600841566738.jpg" alt="wps19"></p>
+<p>4) 登录失败后重定向到登录页面</p>
+<h2 id="JSP页面"><a href="#JSP页面" class="headerlink" title="JSP页面"></a>JSP页面</h2><p>1)  JSP全称Java Server<br>    Pages，顾名思义就是运行在java服务器中的页面，也就是在我们JavaWeb中的动态页面，其本质就是一个Servlet。</p>
+<p>2)  其本身是一个动态网页技术标准，它的主要构成有HTML网页代码、Java代码片段、JSP标签几部分组成，后缀是.jsp</p>
+<p>3)  相比于Servlet，JSP更加善于处理显示页面，而Servlet跟擅长处理业务逻辑，两种技术各有专长，所以一般我们会将Servlet和JSP结合使用，Servlet负责业务，JSP负责显示。</p>
+<p>4)  一般情况下，<br>    都是Servlet处理完的数据，转发到JSP，JSP负责显示数据的工作</p>
+<p>5)  JSP的基本语法:</p>
+<p><img src="Java-Web%E5%85%A5%E9%97%A8/wps20-1600841575927.jpg" alt="wps20"></p>
+<p>6)  JSP的脚本元素</p>
+<ol>
+<li>脚本片段是嵌入到JSP中Java代码段，格式以<%开头，%>结尾，两个%号之间就可以编写Java代码了</li>
+</ol>
+<p><img src="Java-Web%E5%85%A5%E9%97%A8/wps21-1600841593811.jpg" alt="wps21"></p>
+<p>7)  JSP的表达式</p>
+<ol>
+<li>JSP表达式用来直接将Java变量输出到页面中，格式以<%=开头，以%>结尾，中间是我们要输出的内容</li>
+</ol>
+<p><img src="Java-Web%E5%85%A5%E9%97%A8/wps22-1600841610339.jpg" alt="wps22"></p>
+<p>8)  JSP的内置对象</p>
+<ol>
+<li><p>out（JspWriter）：相当于response.getWriter()获取的对象，用于在页面中显示信息。</p>
+</li>
+<li><p>config（ServletConfig）：对应Servlet中的ServletConfig对象。</p>
+</li>
+<li><p>page（Object）：对应当前Servlet对象，实际上就是this。</p>
+</li>
+<li><p>pageContext（PageContext）：当前页面的上下文，也是一个域对象。</p>
+</li>
+<li><p>exception（Throwable）：错误页面中异常对象</p>
+</li>
+<li><p>request（HttpServletRequest）：HttpServletRequest对象</p>
+</li>
+<li><p>response（HttpServletResponse）：HttpServletResponse对象</p>
+</li>
+<li><p>application（ServletContext）：ServletContext对象</p>
+</li>
+<li><p>session（HttpSession）：HttpSession对象</p>
+</li>
+</ol>
+<p>9)  EL表达式</p>
+<ol>
+<li><p>EL是JSP内置的表达式语言，用以访问页面的上下文以及不同作用域中的对象<br>，取得对象属性的值，或执行简单的运算或判断操作。EL在得到某个数据时，会自动进行数据类型的转换。</p>
+</li>
+<li><p><strong>EL表达式用于代替JSP表达式(<%= %>)在页面中做输出操作。</strong></p>
+</li>
+<li><p>EL表达式仅仅用来读取数据，而不能对数据进行修改。</p>
+</li>
+<li><p>使用EL表达式输出数据时，<strong>如果有则输出数据，如果为null则什么也不输出。</strong></p>
+</li>
+<li><p><strong>EL表达式的语法:</strong></p>
+</li>
+</ol>
+<p><img src="Java-Web%E5%85%A5%E9%97%A8/wps23-1600841656675.jpg" alt="wps23"></p>
+<ol start="6">
+<li><p>EL取值的四个域:</p>
+<p>pageScope</p>
+<p>requestScope</p>
+<p>sessionScope</p>
+<p>applicationScope</p>
+</li>
+</ol>
+<h2 id="请求转发"><a href="#请求转发" class="headerlink" title="请求转发"></a>请求转发</h2><p>1)  Servlet接收到浏览器端请求后，进行一定的处理，先不进行响应，而是在服务器端内部"转发"给其他Servlet程序继续处理。在这种情况下浏览器端只发出了一次请求，浏览器地址栏不会发生变化，用户也感知不到请求被转发了。</p>
+<p>2)  转发请求的Servlet和目标Servlet共享同一个request对象。</p>
+<p>3)  实现转发的API</p>
+<p><img src="Java-Web%E5%85%A5%E9%97%A8/wps24-1600841687798.jpg" alt="wps24"></p>
+<h2 id="重定向与转发的区别"><a href="#重定向与转发的区别" class="headerlink" title="重定向与转发的区别"></a>重定向与转发的区别</h2><table>
+<thead>
+<tr>
+<th></th>
+<th>转发</th>
+<th>重定向</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>浏览器地址栏</td>
+<td>不改变</td>
+<td>改变</td>
+</tr>
+<tr>
+<td>发送请求次数</td>
+<td>1</td>
+<td>2</td>
+</tr>
+<tr>
+<td>能否共享request对象数据</td>
+<td>能</td>
+<td>否</td>
+</tr>
+<tr>
+<td>目标资源：WEB-INF下的资源</td>
+<td>能访问</td>
+<td>不能访问</td>
+</tr>
+<tr>
+<td>Request中绑定的数据是否可以传递</td>
+<td>能</td>
+<td>不能</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="页面中-错误提示的功能效果"><a href="#页面中-错误提示的功能效果" class="headerlink" title="页面中`错误提示的功能效果"></a>页面中`错误提示的功能效果</h2><p><img src="Java-Web%E5%85%A5%E9%97%A8/wps25-1600841822594.jpg" alt="wps25"></p>
+<h2 id="Cookie-了解"><a href="#Cookie-了解" class="headerlink" title="Cookie[了解]"></a>Cookie[了解]</h2><p>1)  HTTP是无状态协议，服务器不能记录浏览器的访问状态，也就是说服务器不能区分中两次请求是否由一个客户端发出。这样的设计严重阻碍的Web程序的设计。如：在我们进行网购时，买了一条裤子，又买了一个手机。由于http协议是无状态的，如果不通过其他手段，服务器是不能知道用户到底买了什么。而Cookie就是解决方案之一。</p>
+<p>2)  Cookie实际上就是服务器保存在浏览器上的一段信息。浏览器有了Cookie之后，每次向服务器发送请求时都会同时将该信息发送给服务器，服务器收到请求后，就可以根据该信息处理请求。</p>
+<p>3)  Cookie的用途</p>
+<blockquote>
+<p>网上商城购物车</p>
+<p>用户登录状态的保持</p>
+</blockquote>
+<p>4)  Cookie的限制性</p>
+<pre><code>1.  Cookie作为请求或响应报文发送，无形中增加了网络流量。
+
+2.  Cookie是明文传送的安全性差。
+
+3.  各个浏览器对Cookie有限制，使用上有局限</code></pre><p>5)  Cookie的具体使用</p>
+<ol>
+<li>创建cookie</li>
+</ol>
+<p><img src="Java-Web%E5%85%A5%E9%97%A8/wps26-1600841840922.jpg" alt="wps26"></p>
+<ol start="2">
+<li>读取cookie</li>
+</ol>
+<p><img src="Java-Web%E5%85%A5%E9%97%A8/wps27-1600841845047.jpg" alt="wps27"></p>
+<h2 id="Session"><a href="#Session" class="headerlink" title="Session"></a>Session</h2><p>1)  使用Cookie有一个非常大的局限，就是如果Cookie很多，则无形的增加了客户端与服务端的数据传输量。而且由于浏览器对Cookie数量的限制，注定我们不能再Cookie中保存过多的信息，于是Session出现。</p>
+<p>2)  Session的作用就是在服务器端保存一些用户的数据，然后传递给用户一个名字为JSESSIONID的Cookie，这个JESSIONID对应这个服务器中的一个Session对象，通过它就可以获取到保存用户信息的Session。</p>
+<p>3)  Session的工作原理</p>
+<ol>
+<li><p>Session的创建时机是在request.getSession()方法第一次被调用时。</p>
+</li>
+<li><p>Session被创建后，同时还会有一个名为JSESSIONID的Cookie被创建。</p>
+</li>
+<li><p>这个Cookie的默认时效就是当前会话。</p>
+</li>
+<li><p>简单来说，Session机制也是依赖于Cookie来实现的</p>
+</li>
+</ol>
+<p>4)  Session的具体使用</p>
+<p><img src="Java-Web%E5%85%A5%E9%97%A8/wps28-1600841853884.jpg" alt="wps28"></p>
+<p>5)  Session的时效问题</p>
+<p>Session默认有效时间为30分钟，可以在服务器的web.xml配置中修改.</p>
+<h2 id="登录成功跳转主页面显示登录用户"><a href="#登录成功跳转主页面显示登录用户" class="headerlink" title="登录成功跳转主页面显示登录用户"></a>登录成功跳转主页面显示登录用户</h2><h1 id="异步请求Ajax"><a href="#异步请求Ajax" class="headerlink" title="异步请求Ajax"></a>异步请求Ajax</h1><h2 id="什么是Ajax"><a href="#什么是Ajax" class="headerlink" title="什么是Ajax"></a>什么是Ajax</h2><p>1)  AJAX 是 Asynchronous JavaScript And XML<br>    的简称。直译为，异步的JS和XML。</p>
+<p>2)  AJAX的实际意义是，不发生页面跳转、异步载入内容并改写页面内容的技术。</p>
+<p>3)  AJAX也可以简单的理解为通过JS向服务器发送请求。</p>
+<h2 id="异步处理"><a href="#异步处理" class="headerlink" title="异步处理"></a>异步处理</h2><p>1)  同步处理</p>
+<p>AJAX出现之前，我们访问互联网时一般都是同步请求，也就是当我们通过一个页面向<br>服务器发送一个请求时，在服务器响应结束之前，我们的整个页面是不能操作的，也就<br>是直观上来看他是卡主不动的。</p>
+<p>这就带来了非常糟糕的用户体验。首先，同步请求时，用户只能等待服务器的响应，而<br>不能做任何操作。其次，如果请求时间过长可能会给用户一个卡死的感觉。最后，同步<br>请求的最大缺点就是即使整个页面中只有一小部分内容发生改变我们也要刷新整个页<br>面。</p>
+<p>2)  异步处理</p>
+<p>而异步处理指的是我们在浏览网页的同时，通过AJAX向服务器发送请求，发送请求的过程中我们浏览网页的行为并不会收到任何影响，甚至主观上感知不到在向服务器发送请求。当服务器正常响应请求后，响应信息会直接发送到AJAX中，AJAX可以根据服务器响应的内容做一些操作。</p>
+<p>使用AJAX的异步请求基本上完美的解决了同步请求带来的问题。首先，发送请求时不会影响到用户的正常访问。其次，即使请求时间过长，用户不会有任何感知。最后，AJAX可以根据服务器的响应信息局部的修改页面，而不需要整个页面刷新。</p>
+<h2 id="异步请求对象"><a href="#异步请求对象" class="headerlink" title="异步请求对象"></a>异步请求对象</h2><p>1)  XMLHttpRequest对象是AJAX中非常重要的对象，所有的AJAX操作都是基于该对象的。</p>
+<p>XMLHttpRequest对象用来封装请求报文，我们向服务器发送的请求信息全部都需要封装到该对象中。</p>
+<p>这里需要稍微注意一下，XMLHttpRequest对象并没有成为标准，但是现在的主流浏览器都支持该对象，而一些如IE6的老版本浏览器中的创建方式有一些区别，但是问题不大。</p>
+<h3 id="XMLHttpRequest对象的获取"><a href="#XMLHttpRequest对象的获取" class="headerlink" title="XMLHttpRequest对象的获取"></a>XMLHttpRequest对象的获取</h3><p><img src="Java-Web%E5%85%A5%E9%97%A8/wps29-1600841892166.jpg" alt="wps29"></p>
+<h3 id="XMLHttpRequest对象的方法"><a href="#XMLHttpRequest对象的方法" class="headerlink" title="XMLHttpRequest对象的方法"></a>XMLHttpRequest对象的方法</h3><h4 id="open-method-url-async"><a href="#open-method-url-async" class="headerlink" title="open(method,url,async)"></a>open(method,url,async)</h4><p>open()用于设置请求的基本信息，接收三个参数。</p>
+<ol>
+<li><p>method</p>
+<ul>
+<li><p>请求的方法：get或post</p>
+</li>
+<li><p>接收一个字符串</p>
+</li>
+</ul>
+</li>
+<li><p>url</p>
+<ul>
+<li>请求的地址，接收一个字符串</li>
+</ul>
+</li>
+<li><p>Assync</p>
+<ul>
+<li><p>发送的请求是否为异步请求，接收一个布尔值。</p>
+</li>
+<li><p>true 是异步请求</p>
+</li>
+<li><p>false 不是异步请求（同步请求）</p>
+</li>
+</ul>
+</li>
+</ol>
+<h4 id="send-string"><a href="#send-string" class="headerlink" title="send(string)"></a>send(string)</h4><p>send()用于将请求发送给服务器，可以接收一个参数</p>
+<ol>
+<li><p>string参数</p>
+<ul>
+<li><p>该参数只在发送post请求时需要。</p>
+</li>
+<li><p>string参数用于设置请求体</p>
+</li>
+</ul>
+</li>
+</ol>
+<h4 id="setRequestHeader-header-value"><a href="#setRequestHeader-header-value" class="headerlink" title="setRequestHeader(header,value)"></a>setRequestHeader(header,value)</h4><p>用于设置请求头</p>
+<ol>
+<li><p>header参数</p>
+<ul>
+<li>字符串类型，要设置的请求头的名字</li>
+</ul>
+</li>
+<li><p>value参数</p>
+<ul>
+<li>字符串类型，要设置的请求头的值</li>
+</ul>
+</li>
+</ol>
+<h3 id="XMLHttpRequest对象的属性"><a href="#XMLHttpRequest对象的属性" class="headerlink" title="XMLHttpRequest对象的属性"></a>XMLHttpRequest对象的属性</h3><h4 id="readyState"><a href="#readyState" class="headerlink" title="readyState"></a>readyState</h4><ol>
+<li><p>描述XMLHttpRequest的状态</p>
+</li>
+<li><p>一共有五种状态分别对应了五个数字：</p>
+<ul>
+<li><p>0 ：请求尚未初始化，open()尚未被调用</p>
+</li>
+<li><p>1 ：服务器连接已建立，send()尚未被调用</p>
+</li>
+<li><p>2 ：请求已接收，服务器尚未响应</p>
+</li>
+<li><p>3 ：请求已处理，正在接收服务器发送的响应</p>
+</li>
+<li><p>4 ：请求已处理完毕，且响应已就绪。</p>
+</li>
+</ul>
+</li>
+</ol>
+<h4 id="status"><a href="#status" class="headerlink" title="status"></a>status</h4><p> 请求的响应码：</p>
+<p> 200 响应成功</p>
+<p> 404 页面未找到</p>
+<p> 500 服务器内部错误 </p>
+<h4 id="readyState-1"><a href="#readyState-1" class="headerlink" title="readyState"></a>readyState</h4><ol>
+<li><p>请求的响应码</p>
+<ul>
+<li><p>200 响应成功</p>
+</li>
+<li><p>404 页面为找到</p>
+</li>
+<li><p>500 服务器内部错误</p>
+</li>
+</ul>
+</li>
+</ol>
+<h4 id="onreadystatechange"><a href="#onreadystatechange" class="headerlink" title="onreadystatechange"></a>onreadystatechange</h4><p>① 该属性需要指向一个函数</p>
+<p>② 该函数会在readyState属性发生改变时被调用</p>
+<h4 id="responseText"><a href="#responseText" class="headerlink" title="responseText"></a>responseText</h4><p>① 获得字符串形式的响应数据。</p>
+<h4 id="responseXML"><a href="#responseXML" class="headerlink" title="responseXML"></a>responseXML</h4><p>① 获得 XML 形式的响应数据。</p>
+<h4 id="示例代码"><a href="#示例代码" class="headerlink" title="示例代码"></a>示例代码</h4><p><img src="Java-Web%E5%85%A5%E9%97%A8/wps30-1600842323838.jpg" alt="wps30"></p>
+<p><img src="Java-Web%E5%85%A5%E9%97%A8/wps31-1600842396367.jpg" alt="wps31"></p>
+<h2 id="JQuery对异步的支持"><a href="#JQuery对异步的支持" class="headerlink" title="JQuery对异步的支持 "></a>JQuery对异步的支持 </h2><p>1) JQuery是当前比较主流的 JavaScript 库，封装了很多预定义的对象和实现函数，帮助使用者建立有高难度交互的页面，并且兼容大部分主流</p>
+<p>的浏览器.</p>
+<p>JQuery对同样提供了对Ajax的支持，可以更加方便快速的进行Ajax的开发，相关的方法有$.get   $.post  $.ajax等.</p>
+<p>JQuery的对象的本质就是dom对象的数组/集合</p>
+<p>2) JQuery对象与dom对象的相互转换</p>
+<p>JS转JQuery:  var  jObj = $(dObj);</p>
+<p>JQuery转JS:  var  dObj = jObj[0]  或者  var dObj = jObj.get(0) </p>
+<p>3) $.get方法</p>
+<p><img src="Java-Web%E5%85%A5%E9%97%A8/wps32-1600842423552.jpg" alt="wps32"></p>
+<p>4)  $.post方法</p>
+<p><img src="Java-Web%E5%85%A5%E9%97%A8/wps33-1600842429806.jpg" alt="wps33"></p>
+<p>5)  $.ajax方法</p>
+<p>jQuery 底层 AJAX 实现。简单易用的高层实现见 $.get, $.post 等。$.ajax() 返回其创建的 XMLHttpRequest 对象。大多数情况下你无需直接操作该函数，除非你需要操作不常用的选项，以获得更多的灵活性。</p>
+<p><img src="Java-Web%E5%85%A5%E9%97%A8/wps34-1600842450769.jpg" alt="wps34"></p>
+<p>6)  具体的示例代码</p>
+<p><img src="Java-Web%E5%85%A5%E9%97%A8/wps35-1600842459196.jpg" alt="wps35"></p>
+<h2 id="基于异步请求校验用户名"><a href="#基于异步请求校验用户名" class="headerlink" title="基于异步请求校验用户名"></a>基于异步请求校验用户名</h2><h1 id="JSON"><a href="#JSON" class="headerlink" title="JSON"></a>JSON</h1><h2 id="JSON-简介"><a href="#JSON-简介" class="headerlink" title=" JSON 简介"></a> JSON 简介</h2><ol>
+<li><p>1) AJAX一开始使用的时XML的数据格式，XML的数据格式非常简单清晰，容易编写，但是由于XML中包含了过多的标签，以及十分复杂的结构，解析起来也相对复杂，所以目前来讲，AJAX中已经几乎不使用XML来发送数据了。取而代之的是一项新的技术JSON。</p>
+<p>2) JSON是JavaScript Object Notation 的缩写，是JS提供的一种数据交换格式。</p>
+<p>3) JSON对象本质上就是一个JS对象，但是这个对象比较特殊，它可以直接转换为字符串，在不同语言中进行传递，通过工具又可以转换为其他语言中的对象。</p>
+<p>4) 例，有如下一个JSON对象：</p>
+<p>① {“name”:”sunwukong” , ”age”:18 , ”address”:”beijing” }</p>
+<p>② 这个对象中有三个属性name、age和address</p>
+<p>③ 如果将该对象使用单引号引起了，那么他就变成了一个字符串</p>
+<p>④ ‘{“name”:”sunwukong” , ”age”:18 , ”address”:”beijing” }’</p>
+<p>⑤ 变成字符串后有一个好处，就是可以在不同语言之间传递。</p>
+<p>⑥ 比如，将JSON作为一个字符串发送给Servlet，在Java中就可以把JSON字符串转换为一个Java对象。</p>
+</li>
+</ol>
+<h2 id="JSON通过6种数据类型来表示"><a href="#JSON通过6种数据类型来表示" class="headerlink" title="JSON通过6种数据类型来表示"></a>JSON通过6种数据类型来表示</h2><p>1) 字符串</p>
+<blockquote>
+<p>l 例子：”字符串”</p>
+<p>l 注意：不能使用单引号</p>
+</blockquote>
+<p>2) 数字：</p>
+<blockquote>
+<p>l 例子：123.4</p>
+</blockquote>
+<p>3) 布尔值：</p>
+<blockquote>
+<p>l 例子：true、false</p>
+</blockquote>
+<p>4) null值:</p>
+<blockquote>
+<p>l 例子：null</p>
+</blockquote>
+<p>5) 对象</p>
+<blockquote>
+<p>l 例子：{“name”:”sunwukong”, ”age”:18}</p>
+</blockquote>
+<p>6) 数组</p>
+<blockquote>
+<p>l 例子：[1,”str”,true]在JS中操作JSON</p>
+</blockquote>
+<p>1)  创建JSON对象</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-   var json = &#123;"name1":"value1","name2":"value2" ,</span><br><span class="line">    "name3":[1,"str",true]&#125;;</span><br><span class="line"></span><br><span class="line">-   var json = [&#123;"name1":"value1"&#125;,&#123;"name2":"value2"&#125;];</span><br></pre></td></tr></table></figure>
+
+<p>2)  JSON对象转换为JSON字符串</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-   JSON.stringify(JSON对象)</span><br></pre></td></tr></table></figure>
+
+<p>3)  JSON字符串转换为JSON对象</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-   JSON.parse(JSON字符串)</span><br></pre></td></tr></table></figure>
+
+<h2 id="在Java中操作JSON"><a href="#在Java中操作JSON" class="headerlink" title="在Java中操作JSON"></a>在Java中操作JSON</h2><p>1) 在Java中可以从文件中读取JSON字符串，也可以是客户端发送的JSON字符串，所以第一个问题，我们先来看如何将一个JSON字符串转换成一个Java对象。</p>
+<p>2) 首先解析JSON字符串我们需要导入第三方的工具，目前主流的解析JSON的工具大概有三种json-lib、jackson、gson。三种解析工具相比较json-lib的使用复杂，且效率较差。而Jackson和gson解析效率较高。使用简单，这里我们以gson为例讲解。</p>
+<p>3) Gson是Google公司出品的解析JSON工具，使用简单，解析性能好。</p>
+<p>4) Gson中解析JSON的核心是Gson的类，解析操作都是通过该类实例进行。</p>
+<p>5) JSON字符串转换为对象</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">String json &#x3D; &quot;&#123;\&quot;name\&quot;:\&quot;张三\&quot;,\&quot;age\&quot;:18&#125;&quot;;</span><br><span class="line">Gson gson &#x3D; new Gson();</span><br><span class="line">&#x2F;&#x2F;转换为集合</span><br><span class="line">Map&lt;String,Object&gt; stuMap &#x3D; gson.fromJson(json, Map.class);</span><br><span class="line">&#x2F;&#x2F;如果编写了相应的类也可以转换为指定对象</span><br><span class="line">Student fromJson &#x3D; gson.fromJson(json, Student.class);</span><br></pre></td></tr></table></figure>
+
+<p>6)  对象转换为JSON字符串</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">Student stu = <span class="keyword">new</span> Student(<span class="string">"李四"</span>, <span class="number">23</span>);</span><br><span class="line">Gson gson = <span class="keyword">new</span> Gson();</span><br><span class="line"><span class="comment">//&#123;"name":"李四","age":23&#125;</span></span><br><span class="line">String json = gson.toJson(stu);</span><br><span class="line">		</span><br><span class="line">Map&lt;String , Object&gt; map = <span class="keyword">new</span> HashMap&lt;String, Object&gt;();</span><br><span class="line">map.put(<span class="string">"name"</span>, <span class="string">"孙悟空"</span>);</span><br><span class="line">map.put(<span class="string">"age"</span>, <span class="number">30</span>);</span><br><span class="line"><span class="comment">//&#123;"age":30,"name":"孙悟空"&#125;</span></span><br><span class="line">String json2 = gson.toJson(map);</span><br><span class="line">		</span><br><span class="line">List&lt;Student&gt; list = <span class="keyword">new</span> ArrayList&lt;Student&gt;();</span><br><span class="line">list.add(<span class="keyword">new</span> Student(<span class="string">"八戒"</span>, <span class="number">18</span>));</span><br><span class="line">list.add(<span class="keyword">new</span> Student(<span class="string">"沙僧"</span>, <span class="number">28</span>));</span><br><span class="line">list.add(<span class="keyword">new</span> Student(<span class="string">"唐僧"</span>, <span class="number">38</span>));</span><br><span class="line"><span class="comment">//[&#123;"name":"八戒","age":18&#125;,&#123;"name":"沙僧","age":28&#125;,</span></span><br><span class="line">&#123;<span class="string">"name"</span>:<span class="string">"唐僧"</span>,<span class="string">"age"</span>:<span class="number">38</span>&#125;]</span><br><span class="line">String json3 = gson.toJson(list);		</span><br><span class="line">     <span class="comment">// 如果将一个数组格式的json字符串转换成java对象需要用到</span></span><br><span class="line">     <span class="comment">//Gson提供的一个匿名内部类： TypeToken</span></span><br><span class="line">	TypeToken tk= <span class="keyword">new</span> TypeToken&lt;List&lt;User&gt;&gt;()&#123;&#125;;</span><br><span class="line">	List&lt;User&gt; list2 = gson.fromJson(json,tk.getType());</span><br><span class="line">	System.out.println(list2.get(<span class="number">0</span>));</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="JQuery-异步请求返回JSON数据"><a href="#JQuery-异步请求返回JSON数据" class="headerlink" title="JQuery 异步请求返回JSON数据"></a>JQuery 异步请求返回JSON数据</h2><p>1)  Servlet 返回json数据</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doGet</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">		</span><br><span class="line">		List&lt;Employee&gt; emps = <span class="keyword">new</span> EmployeeDaoJdbcImpl().getAllEmps();</span><br><span class="line">		Gson gson = <span class="keyword">new</span> Gson();</span><br><span class="line">		String jsonStr = gson.toJson(emps);</span><br><span class="line">		response.setContentType(<span class="string">"text/html;charset=utf-8"</span>);</span><br><span class="line">		PrintWriter out = response.getWriter();</span><br><span class="line">		out.println(jsonStr);</span><br><span class="line">		out.close();</span><br></pre></td></tr></table></figure>
+
+<p>2)  页面中处理 json数据</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">function <span class="title">getJsonStr</span><span class="params">()</span></span>&#123;</span><br><span class="line">		<span class="comment">//通过JQuery发送异步请求， 将所有的员工信息通过json的格式返回</span></span><br><span class="line"> $.ajax(&#123;</span><br><span class="line">	url:<span class="string">"getEmpsJsonStr"</span>,</span><br><span class="line">	type:<span class="string">"post"</span>,</span><br><span class="line">	dataType:<span class="string">"json"</span>,</span><br><span class="line">	success:function(data)&#123;  <span class="comment">// 会直接将后台返回的json字符串转换成js对象</span></span><br><span class="line">		<span class="keyword">var</span> str = <span class="string">"&lt;tr&gt;&lt;th&gt;Id&lt;/th&gt;&lt;th&gt;LastName&lt;/th&gt;&lt;th&gt;Email&lt;/th&gt;&lt;th&gt;Gender&lt;/th&gt;&lt;/tr&gt;"</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">var</span> i= <span class="number">0</span> ;i &lt;data.length;i++)&#123;</span><br><span class="line">			<span class="keyword">var</span> emp = data[i];</span><br><span class="line">			str+=<span class="string">"&lt;tr align='center'&gt;&lt;td&gt;"</span></span><br><span class="line">                 +emp.id+</span><br><span class="line">                 <span class="string">"&lt;/td&gt;&lt;td&gt;"</span></span><br><span class="line">                 +emp.lastName+</span><br><span class="line">                 <span class="string">"&lt;/td&gt;&lt;td&gt;"</span></span><br><span class="line">                 +emp.email+</span><br><span class="line">                 <span class="string">"&lt;/td&gt;&lt;td&gt;"</span></span><br><span class="line">                 +emp.gender+</span><br><span class="line">                 <span class="string">"&lt;/td&gt;&lt;/tr&gt;"</span>	</span><br><span class="line">		&#125;	</span><br><span class="line">				$(<span class="string">"#tb"</span>).html(str);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;);</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+</script></p></div><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Snow Monster</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://www.red0819.top/JAVA/Java-Web%E5%85%A5%E9%97%A8/">http://www.red0819.top/JAVA/Java-Web%E5%85%A5%E9%97%A8/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://www.red0819.top" target="_blank">RedLeavesBlog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/javaweb/">javaweb</a></div><div class="post_share"><div class="social-share" data-image="/wordPic/timg.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/JAVA/JVM%E5%8E%9F%E7%90%86%E4%BB%A5%E5%8F%8A%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AE%80%E5%8D%95%E4%BB%8B%E7%BB%8D/"><img class="prev-cover" src="/wordPic/timg.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">JVM原理以及垃圾回收简单介绍</div></div></a></div><div class="next-post pull-right"><a href="/bigdata/Hive%E5%85%A5%E9%97%A8/"><img class="next-cover" src="/wordPic/Hive-logo.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Hive入门</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></article></main><footer id="footer" style="background-image: url(/wordPic/timg.jpg)"><div id="footer-wrap"><div class="copyright">&copy;2017 - 2020 By Snow Monster</div><div class="framework-info"><span>框架 </span><a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a href="https://github.com/jerryc127/hexo-theme-butterfly" target="_blank" rel="noopener">Butterfly</a></div><div class="footer_custom_text">努力充实自己大脑中，欢迎投喂知识！</div></div></footer></div><section id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></section><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>由</span> <a href="https://github.com/wzpan/hexo-generator-search" target="_blank" rel="noopener" style="color:#49B1F5;">hexo-generator-search</a>
+ <span>提供支持</span></div></div></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div><div><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const initData = {
+      el: '#vcomment',
+      appId: 'BlwHhRwsSAJShGHGJeX8d6qB-gzGzoHsz',
+      appKey: 'fGlkNKWjBKmGkMSND7jvpsRI',
+      placeholder: 'Please leave your footprints',
+      avatar: 'monsterid',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'en',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: false,
+      path: window.location.pathname,
+    }
+
+    if (true) { 
+      initData.requiredFields= ('nick,mail'.split(','))
+    }
+
+    const valine = new Valine(initData)
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else $.getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js', initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.querySelector('#vcomment'),loadValine)
+  else setTimeout(() => loadValine(), 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = false;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/click-heart.min.js" async="async" mobile="false"></script></div></body></html>
