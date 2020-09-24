@@ -7975,16 +7975,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Kafka基础（二）</title>
-    <url>/uncategorized/Kafka%E5%9F%BA%E7%A1%80%EF%BC%88%E4%BA%8C%EF%BC%89/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script>]]></content>
-  </entry>
-  <entry>
-    <title>Kafka基础（三）</title>
-    <url>/uncategorized/Kafka%E5%9F%BA%E7%A1%80%EF%BC%88%E4%B8%89%EF%BC%89/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script>]]></content>
-  </entry>
-  <entry>
     <title>Kafka基础（一）</title>
     <url>/bigdata/Kafka%E5%9F%BA%E7%A1%80%EF%BC%88%E4%B8%80%EF%BC%89/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h1 id="Kafka概述"><a href="#Kafka概述" class="headerlink" title="Kafka概述"></a>Kafka概述</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>Kafka是一个分布式的基于发布/订阅模式的消息队列（Message Queue），主要应用于大数据实时处理领域。</p>
@@ -8420,6 +8410,64 @@
       </categories>
       <tags>
         <tag>kafka</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>消息中间件</title>
+    <url>/uncategorized/%E6%B6%88%E6%81%AF%E4%B8%AD%E9%97%B4%E4%BB%B6/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h1 id="中间件"><a href="#中间件" class="headerlink" title="中间件"></a>中间件</h1><p>非底层操作系统也非顶层业务系统，不能直接给用户使用也不能为用户带来直接价值。是一类连接软件组件和应用的计算机软件，它包括一组服务。以便于运行在一台或多台机器上的多个软件通过网络进行交互。该技术所提供的互操作性，推动了一致分布式体系架构的演进，该架构通常用于<strong>支持并简化</strong>那些复杂的分布式应用程序，它包括web服务器、事务监控器和消息队列软件。（摘抄至百度百科）</p>
+<p>间件=平台+通信  </p>
+<p>只有用于分布式系统中才能叫中间件，同时也把它与支撑软件和实用软件区分开来。</p>
+<h2 id="基本特点"><a href="#基本特点" class="headerlink" title="基本特点"></a>基本特点</h2><p>1、满足大量应用的需要 </p>
+<p>2、运行于多种硬件和OS平台  </p>
+<p>3、支持分布式计算，提供跨网络、硬件和OS平台的透明性的应用或服务的交互功能  </p>
+<p>4、<strong>支持标准的协议</strong>  </p>
+<p>5、<strong>支持标准的接口</strong></p>
+<p>（摘抄至百度百科）</p>
+<h1 id="消息中间件"><a href="#消息中间件" class="headerlink" title="消息中间件"></a>消息中间件</h1><p>消息中间件是基于队列与消息传递技术，在网络环境中为应用系统提供<strong>同步或异步</strong>、可靠的消息传输的支撑性软件系统。</p>
+<p> 关注于数据的发送和接受，利用高效可靠的异步消息传递机制集成分布式系统。</p>
+<h2 id="JMS"><a href="#JMS" class="headerlink" title="JMS"></a>JMS</h2><p>  Java消息服务（Java Message Service）即JMS，是一个Java平台中关于面向消息中间件的API，用于在两个应用程序之间，或分布式系统中发送消息，进行异步通信。</p>
+<h2 id="AMQP"><a href="#AMQP" class="headerlink" title="AMQP"></a>AMQP</h2><p>  AMQP(advanced message queuing protocol)是一个提供统一消息服务的应用层标准协议，基于此协议的客户端与消息中间件可传递消息，并不受客户端/中间件不同产品，不同开发语言等 条件的限制。</p>
+<h2 id="ActiveMQ"><a href="#ActiveMQ" class="headerlink" title="ActiveMQ"></a>ActiveMQ</h2><p>  ActiveMQ是Apache公司出品，最流行的，能力强劲的开源消息总线。ActiveMQ是一个完全支持JMS1.1和J2EE1.4规范的JMS Provider实现，尽管JMS规范出台已经是很久的事情了，但是JMS在当今的J2EE应用中间仍然扮演者特殊的地位。</p>
+<p> 特性：</p>
+<p>  多种语言和协议编写客户端。语言：Java,C,C++,C#,Rubt,Perl,Python,PHP。应用协议：OpenWire,Stomp REST,WS Notification,XMPP,AMQP</p>
+<p>  完全支持JMS1.1和J2EE 1.4规范（持久化，XA消息，事务）</p>
+<p>  虚拟主题、组合目的、镜像队列</p>
+<p>  消息持久化</p>
+<h2 id="RabbitMQ"><a href="#RabbitMQ" class="headerlink" title="RabbitMQ"></a>RabbitMQ</h2><p>  RabbitMQ是一个开源的AMQP实现，服务端采用Erlang语言编写。用于在分布式系统中存储转发消息，在易用性、扩展性、高可用性等方面表现不俗。</p>
+<p> 特性：</p>
+<p>  支持多种客户端，如：Python、Ruby、.NET、Java、JMS、C、PHP、ActionScript等</p>
+<p>  AMQP的完整实现（vhost、Exchange、Binding、Routing Key等）</p>
+<p>  事务支持/发布确认</p>
+<p>  消息持久化</p>
+<p>  主要用于金融行业，对安全性稳定性要求极高！</p>
+<h2 id="Kafka"><a href="#Kafka" class="headerlink" title="Kafka"></a>Kafka</h2><p><img src="/uncategorized/%E6%B6%88%E6%81%AF%E4%B8%AD%E9%97%B4%E4%BB%B6/20190416142714631.png" alt="img"></p>
+<h1 id="JMS相关概念"><a href="#JMS相关概念" class="headerlink" title="JMS相关概念"></a><strong>JMS相关概念</strong></h1><p> 提供者：实现JMS规范的消息中间件服务器</p>
+<p> 客户端：发送或接收消息的应用程序</p>
+<p> 生产者/发布者：创建并发送消息的客户端</p>
+<p> 消费者/订阅者：接收并处理消息的客户端</p>
+<p> 消息：应用程序之间传递的数据内容</p>
+<p> 消息模式：在客户端之间传递消息的方式，JMS中定义了主题和队列两种模式</p>
+<p><strong>队列模式：</strong></p>
+<p> 客户端包括生产者和消费者</p>
+<p> 队列中的消息只能被一个消费者消费</p>
+<p> 消费者可以随时消费队列中的消息</p>
+<p><img src="/uncategorized/%E6%B6%88%E6%81%AF%E4%B8%AD%E9%97%B4%E4%BB%B6/20190416143704996.png" alt="img"></p>
+<p><strong>主题模型</strong></p>
+<p> 客户端包括发布者和订阅者</p>
+<p> 主题中的消息被所有订阅者消费 </p>
+<p> 消费者不能消费订阅之前就发送到主题中的消息</p>
+<p><img src="/uncategorized/%E6%B6%88%E6%81%AF%E4%B8%AD%E9%97%B4%E4%BB%B6/20190416143934195.png" alt="img"></p>
+<h1 id="JMS编码接口"><a href="#JMS编码接口" class="headerlink" title="JMS编码接口"></a><strong>JMS编码接口</strong></h1><p> ConnectionFactory 用于创建连接到消息中间件的连接工厂</p>
+<p> Connection 代表了应用程序和消息服务器之间的通信链路</p>
+<p> Destination 指消息发布和接收的地点，包括队列或主题</p>
+<p> Session 表示一个但县城的上下文，用于发送和接收消息</p>
+<p> MessageConsumer 由会话创建，用于接收发送到目标的消息</p>
+<p> MessageProducer 由会话创建，用于发送消息到目标</p>
+<p> Message 是在消费者和生产者之间传送的对象，消息头，一组消息属性，一个消息体</p>
+]]></content>
+      <tags>
+        <tag>基础</tag>
       </tags>
   </entry>
 </search>
