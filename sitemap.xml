@@ -2,13 +2,6 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://www.red0819.top/uncategorized/%E6%B6%88%E6%81%AF%E4%B8%AD%E9%97%B4%E4%BB%B6/</loc>
-    
-    <lastmod>2020-09-24</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://www.red0819.top/bigdata/Kafka%E5%9F%BA%E7%A1%80%EF%BC%88%E4%B8%80%EF%BC%89/</loc>
     
     <lastmod>2020-09-23</lastmod>
@@ -418,13 +411,6 @@
   
   <url>
     <loc>http://www.red0819.top/tags/kafka/</loc>
-    <lastmod>2020-09-24</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.red0819.top/tags/%E5%9F%BA%E7%A1%80/</loc>
     <lastmod>2020-09-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
